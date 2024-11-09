@@ -1,0 +1,14 @@
+Exercise: Megaphone
+
+Objective:
+Create a program that takes one or more command-line arguments,
+converts each argument to uppercase, and prints them in a loud,
+continuous format, as if amplifying them through a megaphone.
+If no arguments are provided, the program should print a default message:
+"* LOUD AND UNBEARABLE FEEDBACK NOISE *".
+
+Expected Behavior:
+$ ./megaphone Hello world
+HELLO WORLD
+$ ./megaphone
+* LOUD AND UNBEARABLE FEEDBACK NOISE *
