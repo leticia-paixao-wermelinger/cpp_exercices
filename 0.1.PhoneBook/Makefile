@@ -27,6 +27,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CPP) $(FLAGS) $(OBJS) -o $(NAME)
+	clear
 
 clean:
 	rm -f $(OBJS)
