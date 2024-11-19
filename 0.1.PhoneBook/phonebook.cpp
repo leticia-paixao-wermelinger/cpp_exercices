@@ -1,9 +1,10 @@
-#include "phonebook.hpp"
+#include "Phonebook.hpp"
 #include <iostream>
 
 int	main()
 {
 	std::string cmd;
+	Phonebook	myPhonebook;
 
 	std::cout << "\033[31;1;5mWellcome to your Phonebook.\033[0m" << std::endl;
 	std::cout << "\033[35mPlease, write:" << std::endl;
@@ -17,7 +18,8 @@ int	main()
 		getline(std::cin, cmd);
 		std::cout << "\033[0m";
 		if (cmd == "ADD")
-			std::cout << "Let's add a new contact" << std::endl;
+			myPhonebook.addNewContact();
+//			std::cout << "Let's add a new contact" << std::endl;
 		else if (cmd == "SEARCH")
 			std::cout << "Let's search for an existing contact" << std::endl;
 		else if (cmd == "EXIT")
