@@ -16,6 +16,7 @@ class Phonebook
 		delete[] this->contacts;
 	}
 	void	addNewContact();
+	void	searchContact();
 	private:
 	Contact	*contacts;
 	int		size;
@@ -41,4 +42,24 @@ void Phonebook::addNewContact()
 		this->index++;
 	}
 //	std::cout << "Vai criar um novo contato" << std::endl;
+}
+
+void Phonebook::searchContact()
+{
+	int	i = 0;
+	std::string	name;
+
+	std::cout << "Please, insert the name of the contact you want to search:" << std::endl;
+	getline(std::cin, name);
+	while (i <= this->size)
+	{
+		if (this->contacts[i].checkName(name) == true)
+		{
+			this->contacts[i].printContact();
+//			std::cout << "Nome encontrado na lista no índice " << i << std::endl; // Apenas para teste
+			return ;
+		}
+		i++;
+	}
+	std::cout << "Contact not found" << std::endl;
 }

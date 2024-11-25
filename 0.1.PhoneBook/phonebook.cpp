@@ -21,7 +21,8 @@ int	main()
 			myPhonebook.addNewContact();
 //			std::cout << "Let's add a new contact" << std::endl;
 		else if (cmd == "SEARCH")
-			std::cout << "Let's search for an existing contact" << std::endl;
+			myPhonebook.searchContact();
+//			std::cout << "Let's search for an existing contact" << std::endl;
 		else if (cmd == "EXIT")
 			break ;
 		//std::cout << cmd << std::endl;
