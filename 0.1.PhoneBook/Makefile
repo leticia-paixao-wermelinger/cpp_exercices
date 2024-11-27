@@ -12,7 +12,7 @@
 
 NAME = PhoneBook
 
-CPP = c++
+CPP = g++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 

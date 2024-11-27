@@ -1,6 +1,7 @@
 #include "Contact.hpp"
 #include <iostream>
 #include <ostream>
+#include <string>
 
 class Phonebook
 {

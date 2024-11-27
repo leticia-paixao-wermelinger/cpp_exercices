@@ -17,6 +17,8 @@ int	main()
 		std::cout << "\033[1;32m$ ";
 		getline(std::cin, cmd);
 		std::cout << "\033[0m";
+		if (std::cin.eof())
+			return (0);
 		if (cmd == "ADD")
 			myPhonebook.addNewContact();
 //			std::cout << "Let's add a new contact" << std::endl;
