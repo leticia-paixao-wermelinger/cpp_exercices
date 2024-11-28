@@ -12,7 +12,9 @@
 
 NAME = PhoneBook
 
-CPP = g++
+CPP = c++
+
+42CPP = g++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
@@ -41,4 +43,14 @@ run: re
 	./$(NAME)
 
 val: re
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+
+42re: fclean
+	$(42CPP) $(FLAGS) $(OBJS) -o $(NAME)
+	clear
+
+42run: 42re
+	./$(NAME)
+
+42val: 42re
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
