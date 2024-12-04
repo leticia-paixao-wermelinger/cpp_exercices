@@ -1,14 +1,17 @@
 #include <iostream>
 #include <ostream>
+#include <iomanip>
 
 class Contact
 {
 	public:
 		Contact(/* args */);
 		~Contact();
-		void	createContact();
-		int	checkName(std::string name);
-		void	printContact();
+		void		createContact();
+		int			checkName(std::string name);
+		void		printListContact();
+		void		printTableContact(int index);
+		std::string	printLimitedString(std::string	str);
 	private:
 		std::string	FirstName;
 		std::string	LastName;
@@ -46,7 +49,7 @@ int	Contact::checkName(std::string name)
 	return (false);
 }
 
-void	Contact::printContact()
+void	Contact::printListContact()
 {
 	std::cout << "Here is your contact information:" << std::endl;
 	std::cout << "          ";
@@ -59,4 +62,21 @@ void	Contact::printContact()
 	std::cout << "Nickname: " << this->Nickname << std::endl;
 	std::cout << "          ";
 	std::cout << "Darkest Secret: " << this->DarkestSecret << std::endl;
+}
+
+void	Contact::printTableContact(int index)
+{
+	std::cout << "|" << std::setw(10) << index;
+	std::cout << "|" << std::setw(10) << printLimitedString(this->FirstName);
+	std::cout << "|" << std::setw(10) << printLimitedString(this->LastName);
+	std::cout << "|" << std::setw(10) << printLimitedString(this->Nickname);
+	std::cout << "|";
+}
+
+std::string	Contact::printLimitedString(std::string	str)
+{
+	if (str.size() <= 10)
+		return (str);
+	else
+		return (str.substr(0, 9) + '.');
 }
