@@ -9,11 +9,13 @@ static int	Account::getTotalAmount( void )
 static int	Account::getNbDeposits( void )
 {}
 
-static int	Account::getNbWithdrawals( void )
+Account::getNbWithdrawals( void )
 {}
 
 static void	Account::displayAccountsInfos( void )
-{}
+{
+    
+}
 
 Account::Account(int initial_deposit)
 {
