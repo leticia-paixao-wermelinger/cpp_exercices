@@ -11,15 +11,15 @@ Contact::~Contact()
 void	Contact::createContact()
 {
 	std::cout << "Please, insert the contact's first name:" << std::endl;
-	getline(std::cin, this->FirstName);
+	std::cin >> this->FirstName;
 	std::cout << "Please, insert the contact's last name:" << std::endl;
-	getline(std::cin, this->LastName);
+	std::cin >> this->LastName;
 	std::cout << "Please, insert the contact's phone number in the format (XX) X XXXX XXXX:" << std::endl;
-	getline(std::cin, this->PhoneNumber);
+	std::cin >> this->PhoneNumber;
 	std::cout << "Please, insert the contact's nickname:" << std::endl;
-	getline(std::cin, this->Nickname);
+	std::cin >> this->Nickname;
 	std::cout << "Please, insert the contact's darkest secret:" << std::endl;
-	getline(std::cin, this->DarkestSecret);
+	std::cin >> this->DarkestSecret;
 }
 
 int	Contact::checkName(std::string name)
