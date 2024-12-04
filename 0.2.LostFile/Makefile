@@ -22,8 +22,13 @@ SRCS = tests.cpp Account.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 
+42OBJS = $(SRCS:.cpp=.42o)
+
 %.o: %.cpp
 	$(CPP) $(FLAGS) -c $< -o $@
+
+%.42o: %.cpp
+	$(42CPP) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 
@@ -32,7 +37,7 @@ $(NAME): $(OBJS)
 	clear
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(42OBJS)
 
 fclean: clean
 	rm -f $(NAME)
@@ -45,8 +50,8 @@ run: re
 val: re
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
-42re: fclean
-	$(42CPP) $(FLAGS) $(OBJS) -o $(NAME)
+42re: fclean $(42OBJS)
+	$(42CPP) $(FLAGS) $(42OBJS) -o $(NAME)
 	clear
 
 42run: 42re

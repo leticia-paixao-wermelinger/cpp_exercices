@@ -37,7 +37,7 @@ $(NAME): $(OBJS)
 	clear
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(42OBJS)
 
 fclean: clean
 	rm -f $(NAME)
