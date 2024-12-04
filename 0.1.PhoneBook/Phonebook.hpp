@@ -1,3 +1,6 @@
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
+
 #include "Contact.hpp"
 #include <iostream>
 #include <ostream>
@@ -7,16 +10,8 @@
 class Phonebook
 {
 	public:
-	Phonebook()
-	{
-		this->size = 0;
-		this->index = 0;
-		this->contacts = new Contact[8];
-	}
-	~Phonebook()
-	{
-		delete[] this->contacts;
-	}
+	Phonebook();
+	~Phonebook();
 	void	addNewContact();
 	void	searchContact();
 	private:
@@ -24,3 +19,4 @@ class Phonebook
 	int		size;
 	int		index;
 };
+#endif

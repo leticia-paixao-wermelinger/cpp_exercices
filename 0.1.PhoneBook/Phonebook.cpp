@@ -1,4 +1,17 @@
 #include "Phonebook.hpp"
+#include "Contact.hpp"
+
+Phonebook::Phonebook()
+{
+	this->size = 0;
+	this->index = 0;
+	this->contacts = new Contact[8];
+}
+
+Phonebook::~Phonebook()
+{
+	delete[] this->contacts;
+}
 
 void Phonebook::addNewContact()
 {

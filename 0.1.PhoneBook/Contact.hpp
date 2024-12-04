@@ -1,3 +1,6 @@
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
+
 #include <iostream>
 #include <ostream>
 #include <iomanip>
@@ -5,7 +8,7 @@
 class Contact
 {
 	public:
-		Contact(/* args */);
+		Contact();
 		~Contact();
 		void		createContact();
 		int			checkName(std::string name);
@@ -19,3 +22,4 @@ class Contact
 		std::string	Nickname;
 		std::string	DarkestSecret;
 };
+#endif

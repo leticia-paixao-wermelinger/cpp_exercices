@@ -18,7 +18,7 @@ CPP = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = phonebook.cpp
+SRCS = mainPhonebook.cpp Phonebook.cpp Contact.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 
@@ -53,8 +53,6 @@ val: re
 42re: fclean $(42OBJS)
 	$(42CPP) $(FLAGS) $(42OBJS) -o $(NAME)
 	clear
-
-$(42NAME)
 
 42run: 42re
 	./$(NAME)
