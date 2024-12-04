@@ -17,11 +17,11 @@
  * @param str A null-terminated string to be converted to uppercase and printed.
  */
 
-void	scream(char *str)
+void	scream(std::string str)
 {
-	int	i = 0;
+	size_t	i = 0;
 
-	while (str[i])
+	while (i < str.size())
 	{
 		std::cout << (char)toupper(str[i]);
 		i++;
@@ -47,12 +47,17 @@ void	scream(char *str)
 int	main(int argc, char **argv)
 {
 	int	i = 1;
+	std::string	str;
 
 	if (argc < 2)
+	{
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+		return (0);
+	}
 	while (argv[i])
 	{
-		scream(argv[i]);
+		str = argv[i];
+		scream(str);
 //		std::cout << " ";
 		i++;
 	}
