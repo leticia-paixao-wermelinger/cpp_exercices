@@ -1,22 +1,26 @@
-#include <iostream>
-#include <string>
-#include <ostream>
+#include "Weapon.hpp"
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
 int main ()
 {
-    std::string str = "HI THIS IS BRAIN";
-    std::string &stringREF = str;
-	std::string *stringPTR = &str;
+	{
+		Weapon club = Weapon("crude spiked club");
 
-	std::cout <<  std::endl;
-	std::cout << "Endereço da variável original: " << &str << std::endl;
-	std::cout << "Endereço do Ponteiro: " << &stringPTR << std::endl;
-	std::cout << "Endereço da Referência: " << &stringREF << std::endl;
-	std::cout <<  std::endl;
-	std::cout << "Valor da variável original: " << str << std::endl;
-	std::cout << "Valor apontado por Ponteiro: " << stringPTR << std::endl;
-	std::cout << "Valor apontado pela Referência: " << stringREF << std::endl;
-	std::cout <<  std::endl;
+		HumanA bob("Bob", club);
+		bob.attack();
+		club.setType("some other type of club");
+		bob.attack();
+	}
+	{
+		Weapon club = Weapon("crude spiked club");
+
+		HumanB jim("Jim");
+		jim.setWeapon(club);
+		jim.attack();
+		club.setType("some other type of club");
+		jim.attack();
+	}
+
+	return 0;
 }
-
-// Compilar: c++ -Wall -Wextra -Werror -std=c++98 main.c && ./a.out
