@@ -17,7 +17,7 @@ File::~File()
 {
 }
 
-void	File::setFileName() // Tratar extensão
+void	File::setFileName() // Falta verificar existência do arquivo!
 {
 	std::string cmd;
 
@@ -31,6 +31,7 @@ void	File::setFileName() // Tratar extensão
 	}
 //	LOG("Tamanho de cmd depois de getline: ");
 //	LOG(cmd.size());
+	
 	this->filename = cmd;
 //	LOG("Tamanho de filename: ");
 //	LOG(this->filename.size());
