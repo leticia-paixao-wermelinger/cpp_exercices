@@ -4,9 +4,10 @@ int main ()
 {
 	File	objFile;
 	const char	*filename = "oi";
-	std::fstream	myNewFile(filename);
+	std::ofstream	myNewFile(filename);
 
 	myNewFile.open(filename);
+	myNewFile.close();
 	//Make Replacement
 	//objFile.createNewFile();
 	//objFile.fillNewFile();
