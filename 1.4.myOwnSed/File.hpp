@@ -11,8 +11,7 @@ class File
 {
 private:
 	std::string	filename;
-//	std::string	newFilename;
-//	std::fstream	myNewFile(std::string "oi");
+	std::string	newFilename;
 	std::string	strReplaced;
 	std::string	newStr;
 	void	setFileName();
@@ -22,11 +21,9 @@ private:
 public:
 	File();
 	~File();
-//	std::string	getFileName();
+	const char	*getNewFilename();
+	void	saveAndReplaceToFile(std::ofstream	&myNewFile);
 //	std::string	getStrToBeReplaced();
 //	std::string	getStrToRepĺace();
-	void	createNewFile();
-	//void	fillNewFile();
-//	std::string	getNewFile();
 };
 #endif

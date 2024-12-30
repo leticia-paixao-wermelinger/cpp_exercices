@@ -3,12 +3,12 @@
 File::File()
 {
 	setFileName();
-//	setNewFileName();
+	setNewFileName();
 	setStrToBeReplaced();
 	setStrToRepĺace();
 	LOG("DEBUG:");
 	LOG("filename: " + this->filename);
-//	LOG("newFilename: " + this->newFilename);
+	LOG("newFilename: " + this->newFilename);
 	LOG("s1: " + this->strReplaced);
 	LOG("s2: " + this->newStr);
 }
@@ -17,7 +17,7 @@ File::~File()
 {
 }
 
-void	File::setFileName() // Verificar se existe e extensão
+void	File::setFileName() // Tratar extensão
 {
 	std::string cmd;
 
@@ -35,12 +35,14 @@ void	File::setFileName() // Verificar se existe e extensão
 //	LOG("Tamanho de filename: ");
 //	LOG(this->filename.size());
 }
-/*
-void	File::setNewFileName() // Lidar com extensão?
+
+void	File::setNewFileName() // Seria melhjor usar stem() ?
 {
-	this->newFilename = this->filename + ".replace";
+	size_t	i = this->filename.find_last_of(".");
+
+	this->newFilename = this->filename.substr(0, i) + ".replace";
 }
-*/
+
 void	File::setStrToBeReplaced()
 {
 	std::string cmd;
@@ -67,7 +69,14 @@ void	File::setStrToRepĺace()
 	this->newStr = cmd;
 }
 
-void	File::createNewFile()
+const char	*File::getNewFilename()
 {
-	
+	const char	*name = this->newFilename.c_str();
+	return (name);
+}
+
+void	File::saveAndReplaceToFile(std::ofstream	&myNewFile)
+{
+	//copy from original file
+	myNewFile << "oi" << std::endl;
 }
