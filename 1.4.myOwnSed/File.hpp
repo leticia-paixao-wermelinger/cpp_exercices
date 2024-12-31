@@ -14,7 +14,7 @@ private:
 	std::string	newFilename;
 	std::string	strReplaced;
 	std::string	newStr;
-	void	setFileName();
+	int	setFileName();
 	void	setNewFileName();
 	void	setStrToBeReplaced();
 	void	setStrToRepĺace();

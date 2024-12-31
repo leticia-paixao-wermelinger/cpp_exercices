@@ -2,7 +2,8 @@
 
 File::File()
 {
-	setFileName();
+	if (!setFileName())
+		return ;
 	setNewFileName();
 	setStrToBeReplaced();
 	setStrToRepĺace();
@@ -17,9 +18,10 @@ File::~File()
 {
 }
 
-void	File::setFileName() // Falta verificar existência do arquivo!
+int	File::setFileName() // Falta verificar a existência do arquivo!
 {
 	std::string cmd;
+	std::fstream fs;
 
 //	LOG("Tamanho de cmd antes de getline: ");
 //	LOG(cmd.size());
@@ -31,10 +33,16 @@ void	File::setFileName() // Falta verificar existência do arquivo!
 	}
 //	LOG("Tamanho de cmd depois de getline: ");
 //	LOG(cmd.size());
-	
+	fs.open(cmd.c_str(), std::fstream::in);
+	if (fs.fail())
+	{
+		std::cout << "Erro ao abrir o arquivo " << this->filename << std::endl;
+		return false;
+	}
 	this->filename = cmd;
 //	LOG("Tamanho de filename: ");
 //	LOG(this->filename.size());
+	return true;
 }
 
 void	File::setNewFileName() // Seria melhjor usar stem() ?
@@ -76,8 +84,20 @@ const char	*File::getNewFilename()
 	return (name);
 }
 
-void	File::saveAndReplaceToFile(std::ofstream	&myNewFile)
+void	File::saveAndReplaceToFile(std::ofstream &myNewFile)
 {
+/*	std::fstream fs;
+	fs.open(this->filename.c_str(), std::fstream::in);
+	if (fs.fail())
+	{
+		std::cout << "Erro ao abrir o arquivo " << this->filename << std::endl;
+		return ;
+	}*/
+/*	if (!fs.is_open()) // dica do copilot
+	{
+		std::cout << "Erro ao abrir o arquivo " << this->filename << std::endl;
+		exit(1);
+	}*/
 	//copy from original file
 	myNewFile << "oi" << std::endl;
 }
