@@ -21,6 +21,7 @@ private:
 public:
 	File();
 	~File();
+	int	isThereFile();
 	const char	*getNewFilename();
 	void	saveAndReplaceToFile(std::ofstream	&myNewFile);
 //	std::string	getStrToBeReplaced();

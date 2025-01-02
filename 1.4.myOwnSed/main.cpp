@@ -13,7 +13,11 @@ int main ()
 		//myNewFile << "oi" << std::endl;
 		myNewFile.close();
 	}
+	else if (objFile.isThereFile() == false)
+	{
+		return 0;
+	}
 	else
-		std::cout << "Erro ao criar o arquivo" << std::endl;
+		std::cout << "Erro ao criar o arquivo" << filename << std::endl;
 	return (0);
 }

@@ -18,34 +18,29 @@ File::~File()
 {
 }
 
-int	File::setFileName() // Falta verificar a existência do arquivo!
+int	File::setFileName()
 {
 	std::string cmd;
 	std::fstream fs;
 
-//	LOG("Tamanho de cmd antes de getline: ");
-//	LOG(cmd.size());
 	while (cmd.size() == 0)
 	{
 		std::cout << "Favor inserir o nome de um arquivo existente nessa mesma pasta ou o caminho do arquivo desejado: ";
 		std::getline(std::cin, cmd);
 		std::cout << std::endl;
 	}
-//	LOG("Tamanho de cmd depois de getline: ");
-//	LOG(cmd.size());
 	fs.open(cmd.c_str(), std::fstream::in);
 	if (fs.fail())
 	{
-		std::cout << "Erro ao abrir o arquivo " << this->filename << std::endl;
+		std::cout << "Erro ao abrir o arquivo " << cmd << std::endl;
 		return false;
 	}
+	fs.close();
 	this->filename = cmd;
-//	LOG("Tamanho de filename: ");
-//	LOG(this->filename.size());
 	return true;
 }
 
-void	File::setNewFileName() // Seria melhjor usar stem() ?
+void	File::setNewFileName() // Seria melhor usar stem() ?
 {
 	size_t	i = this->filename.find_last_of(".");
 
@@ -78,6 +73,14 @@ void	File::setStrToRepĺace()
 	this->newStr = cmd;
 }
 
+
+int	File::isThereFile()
+{
+	if (this->filename.size() == 0)
+		return false;
+	return true;
+}
+
 const char	*File::getNewFilename()
 {
 	const char	*name = this->newFilename.c_str();
@@ -86,18 +89,21 @@ const char	*File::getNewFilename()
 
 void	File::saveAndReplaceToFile(std::ofstream &myNewFile)
 {
-/*	std::fstream fs;
-	fs.open(this->filename.c_str(), std::fstream::in);
-	if (fs.fail())
+	std::ifstream	originalFile((this->filename).c_str());
+	std::string	line;
+
+//	originalFile.open(filename.c_str(), std::fstream::in); // Entender pq não pode dar open 2x
+/*	if (!originalFile.is_open())
 	{
-		std::cout << "Erro ao abrir o arquivo " << this->filename << std::endl;
 		return ;
 	}*/
-/*	if (!fs.is_open()) // dica do copilot
+	while (getline(originalFile, line))
 	{
-		std::cout << "Erro ao abrir o arquivo " << this->filename << std::endl;
-		exit(1);
-	}*/
-	//copy from original file
-	myNewFile << "oi" << std::endl;
+		if (line.find(this->strReplaced) != std::string::npos) // entender o que significa npos e o retorno de find()
+		{
+			line.replace(line.find(this->strReplaced), this->strReplaced.size(), this->newStr); // Dica do copilot mas não pode utilizar replace()
+		}
+		myNewFile << line << std::endl;
+	}
+	originalFile.close();
 }
