@@ -99,10 +99,8 @@ void	File::saveAndReplaceToFile(std::ofstream &myNewFile)
 	}*/
 	while (getline(originalFile, line))
 	{
-		if (line.find(this->strReplaced) != std::string::npos) // entender o que significa npos e o retorno de find()
-		{
+		while (line.find(this->strReplaced) != std::string::npos)
 			line.replace(line.find(this->strReplaced), this->strReplaced.size(), this->newStr); // Dica do copilot mas não pode utilizar replace()
-		}
 		myNewFile << line << std::endl;
 	}
 	originalFile.close();
