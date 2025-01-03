@@ -18,6 +18,7 @@ private:
 	void	setNewFileName();
 	void	setStrToBeReplaced();
 	void	setStrToRepĺace();
+	void	replaceInFind(std::string &line);
 public:
 	File();
 	~File();

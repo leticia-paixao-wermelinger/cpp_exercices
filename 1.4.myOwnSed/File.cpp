@@ -7,11 +7,11 @@ File::File()
 	setNewFileName();
 	setStrToBeReplaced();
 	setStrToRepĺace();
-	LOG("DEBUG:");
+/*	LOG("DEBUG:");
 	LOG("filename: " + this->filename);
 	LOG("newFilename: " + this->newFilename);
 	LOG("s1: " + this->strReplaced);
-	LOG("s2: " + this->newStr);
+	LOG("s2: " + this->newStr);*/
 }
 
 File::~File()
@@ -100,8 +100,16 @@ void	File::saveAndReplaceToFile(std::ofstream &myNewFile)
 	while (getline(originalFile, line))
 	{
 		while (line.find(this->strReplaced) != std::string::npos)
-			line.replace(line.find(this->strReplaced), this->strReplaced.size(), this->newStr); // Dica do copilot mas não pode utilizar replace()
+			replaceInFind(line);
 		myNewFile << line << std::endl;
 	}
 	originalFile.close();
+}
+
+void	File::replaceInFind(std::string &line)
+{
+	int start = line.find(this->strReplaced);
+	int end = start + this->strReplaced.size();
+	
+	line = line.substr(0, start) + this->newStr + line.substr(end);
 }
