@@ -13,7 +13,25 @@ twice!
 */
 void	Harl::complain( std::string level )
 {
-	(void)level;
+	std::string levels[4] = {"debug", "info", "warning", "error"}; // Primeiro declaramos o objeto. No caso, um array de 4 abjetos
+
+	void (Harl::*complains[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error}; // Depois declaramos um array de 4 ponteiros para funções membro da classe Harl
+	level = toLower(level);
+	for (int i = 0; i < 4; i++)
+	{
+		if (level == levels[i])
+		{
+			(this->*complains[i])();
+			return ;
+		}
+	}
+}
+
+std::string	Harl::toLower( std::string str )
+{
+	for (size_t i = 0; i < str.size(); i++)
+		str[i] = tolower(str[i]);
+	return str;
 }
 
 void Harl::debug( void )
