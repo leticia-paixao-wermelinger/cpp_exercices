@@ -9,11 +9,8 @@ Zombie* zombieHorde(int N, std::string name)
         return (myZombie);
     while (i < N)
     {
-        std::cout << "Loop em i = " << i << std::endl;
         myZombie[i].setName(name);
-        myZombie[i].announce();
         i++;
     }
-    std::cout << "Vai retornar" << std::endl;
     return (myZombie);
 }
