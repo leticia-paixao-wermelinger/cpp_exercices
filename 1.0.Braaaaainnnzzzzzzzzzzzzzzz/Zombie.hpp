@@ -14,4 +14,8 @@ public:
     void setName(std::string name);
     void announce();
 };
+
+void randomChump(std::string name);
+Zombie* newZombie( std::string name );
+
 #endif
