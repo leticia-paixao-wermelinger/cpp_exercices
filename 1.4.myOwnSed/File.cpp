@@ -1,12 +1,12 @@
 #include "File.hpp"
 
-File::File()
+File::File(char **argv, int av_flag)
 {
-	if (!setFileName())
+	if (!setFileName(argv, av_flag))
 		return ;
 	setNewFileName();
-	setStrToBeReplaced();
-	setStrToRepĺace();
+	setStrToBeReplaced(argv, av_flag);
+	setStrToRepĺace(argv, av_flag);
 /*	LOG("DEBUG:");
 	LOG("filename: " + this->filename);
 	LOG("newFilename: " + this->newFilename);
@@ -18,59 +18,83 @@ File::~File()
 {
 }
 
-int	File::setFileName()
+int	File::setFileName(char **av, int av_flag)
 {
 	std::string cmd;
 	std::fstream fs;
 
-	while (cmd.size() == 0)
+	if (av_flag == 1)
 	{
-		std::cout << "Favor inserir o nome de um arquivo existente nessa mesma pasta ou o caminho do arquivo desejado: ";
-		std::getline(std::cin, cmd);
-		std::cout << std::endl;
+		fs.open(av[1], std::fstream::in);
+		if (fs.fail())
+		{
+			std::cout << "Erro ao abrir o arquivo " << av[1] << std::endl;
+			return false;
+		}
+		fs.close();
+		this->filename = av[1];
 	}
-	fs.open(cmd.c_str(), std::fstream::in);
-	if (fs.fail())
+	else
 	{
-		std::cout << "Erro ao abrir o arquivo " << cmd << std::endl;
-		return false;
+		while (cmd.size() == 0)
+		{
+			std::cout << "Favor inserir o nome de um arquivo existente nessa mesma pasta ou o caminho do arquivo desejado: ";
+			std::getline(std::cin, cmd);
+			std::cout << std::endl;
+		}
+		fs.open(cmd.c_str(), std::fstream::in);
+		if (fs.fail())
+		{
+			std::cout << "Erro ao abrir o arquivo " << cmd << std::endl;
+			return false;
+		}
+		fs.close();
+		this->filename = cmd;
 	}
-	fs.close();
-	this->filename = cmd;
 	return true;
 }
 
-void	File::setNewFileName() // Seria melhor usar stem() ?
+void	File::setNewFileName()
 {
 	size_t	i = this->filename.find_last_of(".");
 
 	this->newFilename = this->filename.substr(0, i) + ".replace";
 }
 
-void	File::setStrToBeReplaced()
+void	File::setStrToBeReplaced(char **av, int av_flag)
 {
 	std::string cmd;
 
-	while (cmd.size() == 0)
+	if (av_flag == 1)
+		this->strReplaced = av[2];
+	else
 	{
-		std::cout << "Favor inserir o que será substituído no arquivo: ";
-		std::getline(std::cin, cmd);
-		std::cout << std::endl;
+		while (cmd.size() == 0)
+		{
+			std::cout << "Favor inserir o que será substituído no arquivo: ";
+			std::getline(std::cin, cmd);
+			std::cout << std::endl;
+		}
+		this->strReplaced = cmd;
 	}
-	this->strReplaced = cmd;
 }
 
-void	File::setStrToRepĺace()
+void	File::setStrToRepĺace(char **av, int av_flag)
 {
 	std::string cmd;
 
-	while (cmd.size() == 0)
+	if (av_flag == 1)
+		this->newStr = av[3];
+	else
 	{
-		std::cout << "Favor inserir o que será incluído no arquivo: ";
-		std::getline(std::cin, cmd);
-		std::cout << std::endl;
+		while (cmd.size() == 0)
+		{
+			std::cout << "Favor inserir o que será incluído no arquivo: ";
+			std::getline(std::cin, cmd);
+			std::cout << std::endl;
+		}
+		this->newStr = cmd;
 	}
-	this->newStr = cmd;
 }
 
 
@@ -92,11 +116,6 @@ void	File::saveAndReplaceToFile(std::ofstream &myNewFile)
 	std::ifstream	originalFile((this->filename).c_str());
 	std::string	line;
 
-//	originalFile.open(filename.c_str(), std::fstream::in); // Entender pq não pode dar open 2x
-/*	if (!originalFile.is_open())
-	{
-		return ;
-	}*/
 	while (getline(originalFile, line))
 	{
 		while (line.find(this->strReplaced) != std::string::npos)

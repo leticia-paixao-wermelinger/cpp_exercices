@@ -24,6 +24,8 @@ OBJS = ${SRCS:.cpp=.o}
 
 42OBJS = $(SRCS:.cpp=.42o)
 
+PARAM = testfile.txt Nevermore CORVO
+
 %.o: %.cpp
 	$(CPP) $(FLAGS) -c $< -o $@
 
@@ -45,17 +47,17 @@ fclean: clean
 re: fclean all
 
 run: re
-	./$(NAME)
+	./$(NAME) $(PARAM)
 
 val: re
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(PARAM)
 
 42re: fclean $(42OBJS)
 	$(42CPP) $(FLAGS) $(42OBJS) -o $(NAME)
 	clear
 
 42run: 42re
-	./$(NAME)
+	./$(NAME) $(PARAM)
 
 42val: 42re
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(PARAM)

@@ -14,13 +14,13 @@ private:
 	std::string	newFilename;
 	std::string	strReplaced;
 	std::string	newStr;
-	int	setFileName();
+	int	setFileName(char **av, int av_flag);
 	void	setNewFileName();
-	void	setStrToBeReplaced();
-	void	setStrToRepĺace();
+	void	setStrToBeReplaced(char **av, int av_flag);
+	void	setStrToRepĺace(char **av, int av_flag);
 	void	replaceInFind(std::string &line);
 public:
-	File();
+	File(char **av, int av_flag);
 	~File();
 	int	isThereFile();
 	const char	*getNewFilename();

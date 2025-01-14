@@ -1,11 +1,26 @@
 #include "File.hpp"
 #include <filesystem>
 
+void	no_args();
 int	fileExists(const char *filename);
 
-int main ()
+int main (int argc, char *argv[])
 {
-	File	objFile;
+	int	av_flag = 0;
+
+	if (argc != 1 && argc != 4)
+	{
+		std::cout << "Entrada inválida. Por favor, passe 3 argumentos:" << std::endl;
+		std::cout << "Primeiro argumento: arquivo a ser copiado;" << std::endl;
+		std::cout << "Segundo argumento: texto a ser substituído;" << std::endl;
+		std::cout << "Terceiro argumento: texto que irá substituir o anterior." << std::endl;
+		return 0;
+	}
+	else if (argc == 4)
+		av_flag = 1;
+
+	File	objFile(argv, av_flag);
+
 	const char	*filename = objFile.getNewFilename();
 	if (fileExists(filename) == true)
 	{
