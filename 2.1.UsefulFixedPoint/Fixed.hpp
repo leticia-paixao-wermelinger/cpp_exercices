@@ -21,7 +21,7 @@ class	Fixed
 		Fixed( Fixed const & src ); // copy constructor
 		~Fixed(); // destructor
 		Fixed &	operator=( Fixed const & rhs ); // copy assignment operator
-		friend std::ostream& operator<<( std::ostream& out, Fixed const value ); // operator<< overload
+		friend std::ostream& operator<<( std::ostream& out, Fixed const & value ); // operator<< overload
 		void	setRawBits( int const raw );
 		int		getRawBits( void ) const;
 		int		toInt( void ) const;
