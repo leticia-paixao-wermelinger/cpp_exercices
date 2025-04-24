@@ -20,28 +20,35 @@ Fixed::Fixed( void ) : _rawBits( 0 )
 
 Fixed::Fixed(int const raw)
 {
-	(void)raw;
 	std::cout << "Int constructor called" << std::endl;
-	std::cout << "Falta fazer a conversão" << std::endl;
+	std::cout << "Int constructor called with value: " << raw << std::endl;
+	setRawBits(raw * (1 << _fractionalBits));
 }
 
 Fixed::Fixed(float const raw)
 {
-	(void)raw;
-	std::cout << "Float constructor called" << std::endl;
-	std::cout << "Falta fazer a conversão" << std::endl;
+	float scaled = raw * (1 << _fractionalBits);
+	//	std::cout << "Float constructor called" << std::endl;
+	std::cout << "Float constructor called with value: " << raw << std::endl;
+	std::cout << "sacled: " << scaled << std::endl;
+	
+	if (raw >= 0)
+		scaled += 0.5f;
+	else
+		scaled -= 0.5f;
+	setRawBits(static_cast<int>(scaled));
 }
 
 Fixed::Fixed(Fixed const & src)// : _rawBits( src.getRawBits() )
 {
-	std::cout << "Copy constructor called" << std::endl;
+//	std::cout << "Copy constructor called" << std::endl;
 //	this->_rawBits = src.getRawBits();
 	*this = src;
 }
 
 Fixed & Fixed::operator=( Fixed const & rhs )
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+//	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &rhs)
 		this->_rawBits = rhs.getRawBits();
 	return *this;
@@ -49,33 +56,36 @@ Fixed & Fixed::operator=( Fixed const & rhs )
 
 Fixed::~Fixed( void )
 {
-	std::cout << "Destructor called" << std::endl;
+//	std::cout << "Destructor called" << std::endl;
 }
 
 void	Fixed::setRawBits( int const raw )
 {
-	std::cout << "setRawBits member function called" << std::endl;
+//	std::cout << "setRawBits member function called" << std::endl;
 	this->_rawBits = raw;
 }
 
 int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+//	std::cout << "getRawBits member function called" << std::endl;
 	return this->_rawBits;
 }
 
 int	Fixed::toInt(void) const
 {
-	std::cout << "toInt member function called" << std::endl;
-	std::cout << "Falta fazer a conversão" << std::endl;
-	return 0;
+	int	integerValue;
+
+//	std::cout << "toInt member function called" << std::endl;
+	integerValue = this->_rawBits / (1 << _fractionalBits);
+	return integerValue;
 }
 
 float	Fixed::toFloat(void) const
 {
-	std::cout << "toFloat member function called" << std::endl;
-	std::cout << "Falta fazer a conversão" << std::endl;
-	return 0.0f;
+	float	floatValue;
+//	std::cout << "toFloat member function called" << std::endl;
+	floatValue = static_cast<float>(this->_rawBits) / (1 << _fractionalBits);
+	return floatValue;
 }
 
 std::ostream& operator<<( std::ostream& out, Fixed const value )
