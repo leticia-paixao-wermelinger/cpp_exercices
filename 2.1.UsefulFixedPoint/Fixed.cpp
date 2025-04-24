@@ -18,6 +18,20 @@ Fixed::Fixed( void ) : _rawBits( 0 )
 	std::cout << "Default constructor called" << std::endl;
 }
 
+Fixed::Fixed(int const raw)
+{
+	(void)raw;
+	std::cout << "Int constructor called" << std::endl;
+	std::cout << "Falta fazer a conversão" << std::endl;
+}
+
+Fixed::Fixed(float const raw)
+{
+	(void)raw;
+	std::cout << "Float constructor called" << std::endl;
+	std::cout << "Falta fazer a conversão" << std::endl;
+}
+
 Fixed::Fixed(Fixed const & src)// : _rawBits( src.getRawBits() )
 {
 	std::cout << "Copy constructor called" << std::endl;
@@ -25,15 +39,6 @@ Fixed::Fixed(Fixed const & src)// : _rawBits( src.getRawBits() )
 	*this = src;
 }
 
-/*
-The copy assignment operator is used to copy the value of one object to another.
-rhs = right-hand side
-          Meaning:
-Fixed a;
-Fixed b;
-b = a;
-a is argument to operator= and b is the object that will be assigned the value of a.
-*/
 Fixed & Fixed::operator=( Fixed const & rhs )
 {
 	std::cout << "Copy assignment operator called" << std::endl;
@@ -57,4 +62,24 @@ int	Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
 	return this->_rawBits;
+}
+
+int	Fixed::toInt(void) const
+{
+	std::cout << "toInt member function called" << std::endl;
+	std::cout << "Falta fazer a conversão" << std::endl;
+	return 0;
+}
+
+float	Fixed::toFloat(void) const
+{
+	std::cout << "toFloat member function called" << std::endl;
+	std::cout << "Falta fazer a conversão" << std::endl;
+	return 0.0f;
+}
+
+std::ostream& operator<<( std::ostream& out, Fixed const value )
+{
+	out << value.toFloat();
+	return out;
 }
