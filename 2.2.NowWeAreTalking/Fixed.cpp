@@ -72,6 +72,60 @@ float	Fixed::toFloat(void) const
 	return floatValue;
 }
 
+bool	Fixed::operator>( Fixed const & rhs) const // operator >
+{
+	if (this->toFloat() > rhs.toFloat())
+		return true;
+	else
+		return false;
+}
+
+bool	Fixed::operator<( Fixed const & rhs) const // operator <
+{
+	if (this->toFloat() < rhs.toFloat())
+		return true;
+	else
+		return false;
+}
+
+bool	Fixed::operator>=( Fixed const & rhs) const // operator >=
+{
+	if (this->toFloat() >= rhs.toFloat())
+		return true;
+	else
+		return false;
+}
+
+bool	Fixed::operator<=( Fixed const & rhs) const // operator <=
+{
+	if (this->toFloat() <= rhs.toFloat())
+		return true;
+	else
+		return false;
+}
+
+bool	Fixed::operator==( Fixed const & rhs) const // operator ==
+{
+	if (this->toFloat() == rhs.toFloat())
+		return true;
+	else
+		return false;
+}
+
+bool	Fixed::operator!=( Fixed const & rhs) const // operator !=
+{
+	if (this->toFloat() != rhs.toFloat())
+		return true;
+	else
+		return false;
+}
+
+Fixed	Fixed::operator+( Fixed const & rhs) const // operator +
+{
+	Fixed result(this->toFloat() + rhs.toFloat());
+	return result;
+}
+
 std::ostream& operator<<( std::ostream& out, Fixed const & value )
 {
 	out << value.toFloat();
