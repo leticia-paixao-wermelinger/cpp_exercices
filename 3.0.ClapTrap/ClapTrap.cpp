@@ -90,4 +90,12 @@ void    ClapTrap::attack(const std::string& target)
     std::cout << "Fazer a função attack" << std::endl;
 }
 
-void
+void    ClapTrap::takeDamage(unsigned int amount)
+{
+    std::cout << "Fazer a função takeDamage" << std::endl;
+}
+
+void    ClapTrap::beRepaired(unsigned int amount)
+{
+    std::cout << "Fazer a função beRepaired" << std::endl;
+}
