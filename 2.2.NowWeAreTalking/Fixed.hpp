@@ -18,6 +18,7 @@ class	Fixed
 		Fixed(); // default constructor
 		Fixed( int const raw ); // constructor with int
 		Fixed( float const raw ); // constructor with float
+		Fixed( double const raw);
 		Fixed( Fixed const & src ); // copy constructor
 		~Fixed(); // destructor
 		Fixed &	operator=( Fixed const & rhs ); // copy assignment operator
@@ -28,11 +29,11 @@ class	Fixed
 		bool	operator==( Fixed const & rhs) const; // operator ==
 		bool	operator!=( Fixed const & rhs) const; // operator !=
 		Fixed	operator+( Fixed const & rhs) const; // operator +
-		// operator -
-		// operator *
-		// operator /
-		// operator ++
-		// operator --
+		Fixed	operator-( Fixed const & rhs) const; // operator -
+		Fixed	operator*( Fixed const & rhs) const; // operator *
+		Fixed	operator/( Fixed const & rhs) const; // operator /
+//		Fixed	operator++( void ); // operator ++
+//		Fixed	operator--( void ); // operator --
 		// operator ++(int)
 		// operator --(int)
 		// (Falta algo de incremento? São 4 mesmo mas é preciso confirmar se são assim realmente. Jogar o texto disso do pdf no gpt)
@@ -45,7 +46,13 @@ class	Fixed
 		int		getRawBits( void ) const;
 		int		toInt( void ) const;
 		float	toFloat( void ) const;
+		double	toDouble( void ) const;
 	private:
-		int					_rawBits;
-		static const int	_fractionalBits = 8;
+		long long				_rawBits;
+		static const int		_smallFractionalBits = 8;
+		static const int		_smallFractionalBitsShift = 1 << _smallFractionalBits;
+		static const int		_floatFractionalBits = 23;
+		static const int		_floatFractionalBitsShift = 1 << _floatFractionalBits;
+		static const int		_doubleFractionalBitsDouble = 52;
+		static const long long	_doubleFractionalBitsShift = 1LL << _doubleFractionalBitsDouble;
 };
