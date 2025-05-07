@@ -16,8 +16,7 @@
 
 Fixed & Fixed::min( Fixed & a, Fixed & b ) // static min
 {
-	std::cout << "static min function" << std::endl;
-	if (a < b)
+	if (a.toDouble() < b.toDouble())
 		return a;
 	else
 		return b;
@@ -25,8 +24,7 @@ Fixed & Fixed::min( Fixed & a, Fixed & b ) // static min
 
 Fixed const & Fixed::min( Fixed const & a, Fixed const & b ) // static min
 {
-	std::cout << "static min const function" << std::endl;
-	if (a < b)
+	if (a.toDouble() < b.toDouble())
 		return a;
 	else
 		return b;
@@ -34,18 +32,16 @@ Fixed const & Fixed::min( Fixed const & a, Fixed const & b ) // static min
 
 Fixed & Fixed::max( Fixed & a, Fixed & b ) // static max
 {
-	std::cout << "static max function" << std::endl;
-	if (a < b)
-		return a;
-	else
+	if (a.toDouble() < b.toDouble())
 		return b;
+	else
+		return a;
 }
 
 Fixed const & Fixed::max( Fixed const & a, Fixed const & b ) // static max
 {
-	std::cout << "static max const function" << std::endl;
-	if (a < b)
-		return a;
-	else
+	if (a.toDouble() < b.toDouble())
 		return b;
+	else
+		return a;
 }

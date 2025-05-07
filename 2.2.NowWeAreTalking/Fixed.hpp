@@ -36,7 +36,6 @@ class	Fixed
 		Fixed					operator--( void ); // operator --
 		Fixed					operator++(int); // operator ++
 		Fixed					operator--(int); // operator --
-		// (Falta algo de incremento? São 4 mesmo mas é preciso confirmar se são assim realmente. Jogar o texto disso do pdf no gpt)
 		static Fixed & 			min( Fixed & a, Fixed & b ); // static min
 		static Fixed const & 	min( Fixed const & a, Fixed const & b ); // static min
 		static Fixed & 			max( Fixed & a, Fixed & b ); // static max

@@ -28,16 +28,17 @@ Fixed	Fixed::operator-( Fixed const & rhs) const // operator -
 
 Fixed	Fixed::operator*( Fixed const & rhs) const // operator *
 {
-	std::cout << "this->toDouble() = " << this->toDouble() << std::endl;
-	std::cout << "rhs.toDouble() = " << rhs.toDouble() << std::endl;
-	std::cout << "this->toDouble() * rhs.toDouble() = " << this->toDouble() * rhs.toDouble() << std::endl;
 	double result(this->toDouble() * rhs.toDouble());
-	std::cout << "result = " << result << std::endl;
 	return result;
 }
 
 Fixed	Fixed::operator/( Fixed const & rhs) const // operator /
 {
+	if (rhs.toDouble() == 0)
+	{
+//		std::cerr << "Error: Division by zero" << std::endl;
+		return Fixed(0);
+	}
 	Fixed result(this->toDouble() / rhs.toDouble());
 	return result;
 }
@@ -50,31 +51,26 @@ the smallest representable ϵ, such that 1 + ϵ > 1:
 
 Fixed	Fixed::operator++( void ) // operator ++
 {
-	std::cout << "operator++" << std::endl;
 	this->_rawBits += 1;
 	return *this;
 }
 
 Fixed	Fixed::operator--( void ) // operator --
 {
-	std::cout << "operator--" << std::endl;
 	this->_rawBits -= 1;
 	return *this;
 }
 
-		// operator ++(int)
-		// operator --(int)
-
-Fixed	Fixed::operator++( int ) // operator ++
+Fixed	Fixed::operator++( int ) // operator ++ (int)
 {
-	std::cout << "operator++(int)" << std::endl;
+	Fixed temp(*this);
 	this->_rawBits += 1;
-	return *this;
+	return temp;
 }
 		
-Fixed	Fixed::operator--( int ) // operator --
+Fixed	Fixed::operator--( int ) // operator -- (int)
 {
-	std::cout << "operator--(int)" << std::endl;
+	Fixed temp(*this);
 	this->_rawBits -= 1;
-	return *this;
+	return temp;
 }
