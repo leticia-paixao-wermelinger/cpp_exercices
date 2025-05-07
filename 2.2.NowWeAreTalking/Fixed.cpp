@@ -19,17 +19,17 @@ Fixed::Fixed( void ) : _rawBits( 0 )
 
 Fixed::Fixed(int const raw)
 {
-	setRawBits(raw * (_smallFractionalBitsShift));
+	setRawBits(raw * _FractionalBitsShift);
 }
 
 Fixed::Fixed(float const raw)
 {
-	setRawBits(static_cast<int>(roundf(raw * (_floatFractionalBitsShift))));
+	setRawBits(roundf(raw * (float)_FractionalBitsShift));
 }
 
 Fixed::Fixed(double const raw)
 {
-	setRawBits(roundf(raw * (_doubleFractionalBitsShift)));
+	setRawBits(roundf(raw * (double)_FractionalBitsShift));
 }
 
 Fixed::Fixed(Fixed const & src)// : _rawBits( src.getRawBits() )
@@ -61,21 +61,21 @@ int	Fixed::toInt(void) const
 {
 	int	integerValue;
 
-	integerValue = this->_rawBits / (_smallFractionalBitsShift);
+	integerValue = this->_rawBits / _FractionalBitsShift;
 	return integerValue;
 }
 
 float	Fixed::toFloat(void) const
 {
 	float	floatValue;
-	floatValue = static_cast<float>(this->_rawBits) / (_floatFractionalBitsShift);
+	floatValue = (float)(this->_rawBits / (float)_FractionalBitsShift);
 	return floatValue;
 }
 
 double	Fixed::toDouble(void) const
 {
 	double	doubleValue;
-	doubleValue = static_cast<double>(this->_rawBits) / (_doubleFractionalBitsShift);
+	doubleValue = (double)(this->_rawBits / (double)_FractionalBitsShift);
 	return doubleValue;
 }
 

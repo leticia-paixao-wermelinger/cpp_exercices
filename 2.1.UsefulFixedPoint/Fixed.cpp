@@ -12,6 +12,7 @@
 
 #include "Fixed.hpp"
 #include <iostream>
+#include <cmath>
 
 Fixed::Fixed( void ) : _rawBits( 0 )
 {
@@ -26,13 +27,7 @@ Fixed::Fixed(int const raw)
 
 Fixed::Fixed(float const raw)
 {
-	float scaled = raw * (1 << _fractionalBits);
-	
-	if (raw >= 0)
-	scaled += 0.5f;
-	else
-	scaled -= 0.5f;
-	setRawBits(static_cast<int>(scaled));
+	setRawBits(roundf(raw * (float)(1 << _fractionalBits)));
 	std::cout << "Float constructor called" << std::endl;
 }
 
@@ -76,7 +71,7 @@ int	Fixed::toInt(void) const
 float	Fixed::toFloat(void) const
 {
 	float	floatValue;
-	floatValue = static_cast<float>(this->_rawBits) / (1 << _fractionalBits);
+	floatValue = (float)(this->_rawBits / (float)(1 << _fractionalBits));
 	return floatValue;
 }
 
