@@ -14,7 +14,7 @@
 #include <iostream>
 
 // subject main
-/*
+
 int main( void ) {
 	Fixed a;
 	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
@@ -26,7 +26,7 @@ int main( void ) {
 	std::cout << b << std::endl;
 	std::cout << Fixed::max( a, b ) << std::endl;
 	return 0;
-}*/
+}
 
 /*
 int	main(void) // main operator>
@@ -166,7 +166,7 @@ int	main(void) // main operator!=
 	return 0;
 }*/
 
-
+/*
 int	main(void) // main operator+
 {
 	Fixed a;
@@ -184,7 +184,7 @@ int	main(void) // main operator+
 	std::cout << "c + d = " << c + d << " ==> Resultado = 4" <<  std::endl;
 	std::cout << "b + e = " << b + e << " ==> Resultado = 8.361557007" <<  std::endl;
 	return 0;
-}
+}*/
 
 /*
 int	main(void) // main operator-

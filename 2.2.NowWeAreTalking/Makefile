@@ -18,7 +18,7 @@ CPP = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp Fixed.cpp
+SRCS = main.cpp Fixed.cpp FixedRelationalOps.cpp FixedArithmeticOps.cpp FixedMinMaxMethods.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 
