@@ -12,6 +12,8 @@
 
 #include "Point.hpp"
 
+bool	isRight(Point const vertex1, Point const vertex2, Point const point);
+
 bool bsp( Point const a, Point const b, Point const c, Point const point)
 {
 	if (isRight(a, b, c) != isRight(a, b, point))

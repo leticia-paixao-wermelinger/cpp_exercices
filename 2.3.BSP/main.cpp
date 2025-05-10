@@ -30,6 +30,14 @@ int main(void)
 	Point const t4("t4", 5, 3);
 	Point const t5("t5", 3, 3);
 
+//	std::cout << "True = " << true << std::endl;
+//	std::cout << "False = " << false << std::endl;
+	std::cout << "t1 = (" << t1.getx() << ", " << t1.gety() << ")" << std::endl;
+	std::cout << "t2 = (" << t2.getx() << ", " << t2.gety() << ")" << std::endl;
+	std::cout << "t3 = (" << t3.getx() << ", " << t3.gety() << ")" << std::endl;
+	std::cout << "t4 = (" << t4.getx() << ", " << t4.gety() << ")" << std::endl;
+	std::cout << "t5 = (" << t5.getx() << ", " << t5.gety() << ")" << std::endl;
+
 	if (bsp(a, b, c, t1) != true)
 		printError(t1);
 	else
@@ -62,6 +70,14 @@ int main(void)
 	Point const t8("t8", 5, 7);
 	Point const t9("t9", 5, 7);
 	Point const t10("t10", 7, 2);
+
+//	bool	ret = bsp(a, b, c, t6);
+//	std::cout << "bsp(a, b, c, t6) = " << ret << std::endl;
+	std::cout << "t6 = (" << t6.getx() << ", " << t6.gety() << ")" << std::endl;
+	std::cout << "t7 = (" << t7.getx() << ", " << t7.gety() << ")" << std::endl;
+	std::cout << "t8 = (" << t8.getx() << ", " << t8.gety() << ")" << std::endl;
+	std::cout << "t9 = (" << t9.getx() << ", " << t9.gety() << ")" << std::endl;
+	std::cout << "t10 = (" << t10.getx() << ", " << t10.gety() << ")" << std::endl;
 
 	if (bsp(a, b, c, t6) == true)
 		printError(t6);

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "Point.hpp"
-#include "Fixed.hpp"
 #include <string>
 
 Point::Point( void ) : _x(Fixed()), _y(Fixed())
@@ -52,12 +51,12 @@ std::string	Point::getName() const
 	return (this->_name);
 }
 
-Fixed const	Point::getx()
+Fixed const	Point::getx() const
 {
 	return this->_x;
 }
 
-Fixed const	Point::gety()
+Fixed const	Point::gety() const
 {
 	return this->_y;
 }
