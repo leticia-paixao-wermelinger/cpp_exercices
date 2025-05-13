@@ -14,7 +14,7 @@
 #include <iostream>
 
 bool bsp( Point const a, Point const b, Point const c, Point const point);
-void printError(Point p);
+void printError(Point const & p);
 void printValidation(std::string name);
 
 int main(void)
@@ -107,7 +107,7 @@ int main(void)
 	return 0;
 }
 
-void printError(Point p)
+void printError(Point const & p)
 {
 	std::cout << "Erro em " << p.getName() << "(" << p.getx() << ", " << p.gety() << ")." << std::endl;
 }
