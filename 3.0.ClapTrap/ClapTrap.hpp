@@ -27,6 +27,7 @@ private:
     int         getHitPoints( void ) const;
     int         getEnergyPoints( void ) const;
     int         getAttackDamage( void ) const;
+    void        loseHitPoints(unsigned int damage);
 public:
     ClapTrap(); // construtor padrão
     ClapTrap(const std::string& name); // construtor com nome
@@ -36,4 +37,9 @@ public:
     void    attack(const std::string& target);
     void    takeDamage(unsigned int amount);
     void    beRepaired(unsigned int amount);
+    void    printName();
+    void    printHitPoints();
+    void    printEnergyPoints();
+    void    printAttackDamage();
+    void    printAllAttributes();
 };

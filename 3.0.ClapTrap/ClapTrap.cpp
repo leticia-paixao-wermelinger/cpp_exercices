@@ -18,6 +18,7 @@ ClapTrap::ClapTrap( void )
     setHitPoints();
     setEnergyPoints();
     setAttackDamage();
+    std::cout << "ClapTrap " << getName() << " has been created with default name." << std::endl;
 }
 
 ClapTrap::ClapTrap( const std::string& name )
@@ -26,11 +27,18 @@ ClapTrap::ClapTrap( const std::string& name )
     setHitPoints();
     setEnergyPoints();
     setAttackDamage();
+    std::cout << "ClapTrap " << getName() << " has been created" << std::endl;
 }
 
 ClapTrap::ClapTrap( const ClapTrap& other )
 {
     *this = other;
+    std::cout << "ClapTrap " << other.getName() << " has been copied with the copy constructor." << std::endl;
+}
+
+ClapTrap::~ClapTrap( void )
+{
+    std::cout << "ClapTrap " << getName() << " has been destroyed." << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=( ClapTrap const & rhs)
@@ -42,63 +50,6 @@ ClapTrap& ClapTrap::operator=( ClapTrap const & rhs)
         setEnergyPoints();
         setAttackDamage();
     }
+    std::cout << "ClapTrap " << rhs.getName() << " has been assigned with the assignment operator." << std::endl;
     return *this;
-}
-
-void ClapTrap::setName( const std::string& name )
-{
-    this->_name = name;
-}
-
-void ClapTrap::setHitPoints( void )
-{
-    this->_hitPoints = 10;
-}
-
-void ClapTrap::setEnergyPoints( void )
-{
-    this->_energyPoints = 10;
-}
-
-void ClapTrap::setAttackDamage( void )
-{
-    this->_attackDamage = 0;
-}
-
-std::string ClapTrap::getName( void ) const
-{
-    return this->_name;
-}
-
-int ClapTrap::getHitPoints( void ) const
-{
-    return this->_hitPoints;
-}
-
-int ClapTrap::getEnergyPoints( void ) const
-{
-    return this->_energyPoints;
-}
-
-int ClapTrap::getAttackDamage( void ) const
-{
-    return this->_attackDamage;
-}
-
-void    ClapTrap::attack(const std::string& target)
-{
-    (void)target;
-    std::cout << "Fazer a função attack" << std::endl;
-}
-
-void    ClapTrap::takeDamage(unsigned int amount)
-{
-    (void)amount;
-    std::cout << "Fazer a função takeDamage" << std::endl;
-}
-
-void    ClapTrap::beRepaired(unsigned int amount)
-{
-    (void)amount;
-    std::cout << "Fazer a função beRepaired" << std::endl;
 }

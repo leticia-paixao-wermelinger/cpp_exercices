@@ -18,7 +18,12 @@ CPP = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp ClapTrap.cpp
+SRCS = \
+main.cpp \
+ClapTrap.cpp \
+ClapTrapActions.cpp \
+ClapTrapGettersAndSetters.cpp \
+ClapTrapPrints.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 
