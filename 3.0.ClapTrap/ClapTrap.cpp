@@ -33,14 +33,14 @@ ClapTrap::ClapTrap( const ClapTrap& other )
     *this = other;
 }
 
-ClapTrap & ClapTrap::ClapTrap( ClapTrap const & rhs)
+ClapTrap& ClapTrap::operator=( ClapTrap const & rhs)
 {
     if (this!= &rhs)
     {
         setName(rhs.getName());
-        setHitPoints(rhs.getHitPoints());
-        setEnergyPoints(rhs.getEnergyPoints());
-        setAttackDamage(rhs.getAttackDamage());
+        setHitPoints();
+        setEnergyPoints();
+        setAttackDamage();
     }
     return *this;
 }
@@ -87,15 +87,18 @@ int ClapTrap::getAttackDamage( void ) const
 
 void    ClapTrap::attack(const std::string& target)
 {
+    (void)target;
     std::cout << "Fazer a função attack" << std::endl;
 }
 
 void    ClapTrap::takeDamage(unsigned int amount)
 {
+    (void)amount;
     std::cout << "Fazer a função takeDamage" << std::endl;
 }
 
 void    ClapTrap::beRepaired(unsigned int amount)
 {
+    (void)amount;
     std::cout << "Fazer a função beRepaired" << std::endl;
 }
