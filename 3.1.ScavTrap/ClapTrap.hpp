@@ -17,15 +17,15 @@
 
 class ClapTrap
 {
-private:
+protected:
     std::string _name;
     unsigned int _hitPoints; // iniciado em 10
     unsigned int _energyPoints; // iniciado em 10
     unsigned int _attackDamage; // iniciado em 0
-    void        setName( const std::string& name );
-    void        setHitPoints( void );
-    void        setEnergyPoints( void );
-    void        setAttackDamage( void );
+    virtual void        setName( const std::string& name );
+    virtual void        setHitPoints( void );
+    virtual void        setEnergyPoints( void );
+    virtual void        setAttackDamage( void );
     std::string getName( void ) const;
     int         getHitPoints( void ) const;
     int         getEnergyPoints( void ) const;
