@@ -10,36 +10,48 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include <iostream>
 
 int main(void)
 {
-    ClapTrap robot("Robozinho");
-
-    std::cout << "\n--- Ação: Ataque ---" << std::endl;
-    robot.attack("Inimigo1");
-
-    std::cout << "\n--- Ação: Tomando dano ---" << std::endl;
-    robot.takeDamage(4);
-
-    std::cout << "\n--- Ação: Reparo ---" << std::endl;
-    robot.beRepaired(3);
-
-    std::cout << "\n--- Ação: Tomando muito dano (destruição) ---" << std::endl;
-    robot.takeDamage(15);
-
-    //std::cout << std::endl;
-    //robot.printAllAttributes();
-
-    std::cout << "\n--- Tentando atacar sem vida ---" << std::endl;
-    robot.attack("Inimigo2");
-
-    std::cout << "\n--- Tentando reparar sem vida ---" << std::endl;
-    robot.beRepaired(5);
+    std::cout << "--- Criando ScavTrap ---" << std::endl;
+    ScavTrap scav("GateMaster");
 
     std::cout << std::endl;
+    scav.printAllAttributes();
+
+    std::cout << "\n--- Testando ataque ---" << std::endl;
+    scav.attack("Intruder");
+
+    std::cout << "\n--- Testando modo Gate Keeper ---" << std::endl;
+    scav.guardGate();
+
+    std::cout << "\n--- Testando dano e reparo ---" << std::endl;
+    scav.takeDamage(30);
+    scav.beRepaired(10);
+
+    std::cout << std::endl;
+    scav.printAllAttributes();
+
+    std::cout << "\n--- Testando esgotar energia com ataques ---" << std::endl;
+    for (int i = 0; i < 50; ++i)
+    {
+        std::cout << "Energy Points: ";
+        scav.printEnergyPoints();
+        scav.attack("Dummy");
+    }
+
+    std::cout << "\n--- Tentando atacar sem energia ---" << std::endl;
+    scav.attack("Dummy");
+
+    std::cout << "\n--- Testando modo Gate Keeper sem energia ---" << std::endl;
+    scav.guardGate();  // Isso não depende da energia, então ainda deve funcionar
+
+    std::cout << std::endl;
+    scav.printAllAttributes();
+
+    std::cout << "\n--- Destruindo ScavTrap ---" << std::endl;
 
     return 0;
 }

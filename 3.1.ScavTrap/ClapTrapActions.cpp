@@ -22,18 +22,25 @@ void    ClapTrap::loseHitPoints(unsigned int damage)
 
 void    ClapTrap::attack(const std::string& target)
 {
+    if (baseAttack() == false)
+        return;
+    std::cout << "ClapTrap " << getName() << " attacks " << target << ", causing " << getAttackDamage() << " points of damage!" << std::endl;
+}
+
+int ClapTrap::baseAttack()
+{
     if (getEnergyPoints() == 0)
     {
         std::cout << "ClapTrap " << getName() << " can not attack, for it is out of energy points!" << std::endl;
-        return;
+        return false;
     }
     else if (getHitPoints() == 0)
     {
         std::cout << "ClapTrap " << getName() << " can not attack, for it has no more life (HP)!" << std::endl;
-        return;
+        return false;
     }
     this->_energyPoints--;
-    std::cout << "ClapTrap " << getName() << " attacks " << target << ", causing " << getAttackDamage() << " points of damage!" << std::endl;
+    return true;
 }
 
 void    ClapTrap::takeDamage(unsigned int amount)
