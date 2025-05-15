@@ -15,43 +15,26 @@
 
 int main(void)
 {
-    std::cout << "--- Criando FragTrap ---" << std::endl;
-    FragTrap Frag("Marvin");
+    std::cout << "=== Construção de DiamondTrap ===" << std::endl;
+	DiamondTrap dt1("Ruby");
+
+	std::cout << "\n=== Teste de ataque ===" << std::endl;
+	dt1.attack("an Evil Target");
+
+	std::cout << "\n=== Teste do whoAmI ===" << std::endl;
+	dt1.whoAmI();
 
     std::cout << std::endl;
-    Frag.printAllAttributes();
+	dt1.printAllAttributes();
 
-    std::cout << "\n--- Testando ataque ---" << std::endl;
-    Frag.attack("Intruder");
+	std::cout << "\n=== Teste de cópia (copy constructor) ===" << std::endl;
+	DiamondTrap dt2(dt1);
 
-    std::cout << "\n--- Testando pedido de high five ---" << std::endl;
-    Frag.highFivesGuys();
+	std::cout << "\n=== Teste de atribuição (operator=) ===" << std::endl;
+	DiamondTrap dt3;
+	dt3 = dt1;
 
-    std::cout << "\n--- Testando dano e reparo ---" << std::endl;
-    Frag.takeDamage(30);
-    Frag.beRepaired(10);
-
-    std::cout << std::endl;
-    Frag.printAllAttributes();
-
-    std::cout << "\n--- Testando esgotar energia com ataques ---" << std::endl;
-    for (int i = 0; i < 50; ++i)
-    {
-        std::cout << "Energy Points: ";
-        Frag.printEnergyPoints();
-        Frag.attack("Dummy");
-    }
-
-    std::cout << "\n--- Tentando atacar sem energia ---" << std::endl;
-    Frag.attack("Dummy");
-
-    std::cout << "\n--- Testando pedido de high five sem energia ---" << std::endl;
-    Frag.highFivesGuys();  // Isso não depende da energia, então ainda deve funcionar
-
-    std::cout << std::endl;
-    Frag.printAllAttributes();
-
-    std::cout << "\n--- Destruindo FragTrap ---" << std::endl;
+	std::cout << "\n=== Teste de destrutores no final ===" << std::endl;
 
     return 0;
 }

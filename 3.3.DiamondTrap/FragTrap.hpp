@@ -15,7 +15,7 @@
 
 #include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap
+class FragTrap : public virtual ClapTrap
 {
 private:
 public:
@@ -24,9 +24,9 @@ public:
 	FragTrap(const FragTrap& other);
 	FragTrap& operator=(const FragTrap& other);
 	~FragTrap();
-	void highFivesGuys(void);
-	void	setHitPoints();
-	void	setEnergyPoints();
-	void	setAttackDamage();
+	void 			highFivesGuys(void);
+	void virtual	setHitPoints();
+	void			setEnergyPoints();
+	void virtual	setAttackDamage();
 };
 #endif

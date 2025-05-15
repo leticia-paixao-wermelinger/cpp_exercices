@@ -16,7 +16,8 @@ CPP = c++
 
 42CPP = g++
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
+# https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 
 SRCS = \
 main.cpp \

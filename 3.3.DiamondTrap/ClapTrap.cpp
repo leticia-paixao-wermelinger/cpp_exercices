@@ -30,15 +30,15 @@ ClapTrap::ClapTrap( const std::string& name )
     std::cout << "ClapTrap " << getName() << " has been created" << std::endl;
 }
 
+ClapTrap::~ClapTrap( void )
+{
+    std::cout << "ClapTrap " << getName() << " has been destroyed." << std::endl;
+}
+
 ClapTrap::ClapTrap( const ClapTrap& other )
 {
     *this = other;
     std::cout << "ClapTrap " << other.getName() << " has been copied with the copy constructor." << std::endl;
-}
-
-ClapTrap::~ClapTrap( void )
-{
-    std::cout << "ClapTrap " << getName() << " has been destroyed." << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=( ClapTrap const & rhs)
