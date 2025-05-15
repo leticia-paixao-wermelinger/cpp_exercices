@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ClapTrap
+NAME = ScavTrap
 
 CPP = c++
 
@@ -23,7 +23,8 @@ main.cpp \
 ClapTrap.cpp \
 ClapTrapActions.cpp \
 ClapTrapGettersAndSetters.cpp \
-ClapTrapPrints.cpp
+ClapTrapPrints.cpp \
+ScavTrap.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 

@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef FIXED_HPP
+# define FIXED_HPP
+
 #include <ostream>
 
 class	Fixed
@@ -51,3 +54,4 @@ class	Fixed
 		static const int		_FractionalBits = 8;
 		static const int		_FractionalBitsShift = 1 << _FractionalBits;
 };
+#endif

@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 20:48:08 by lpaixao-          #+#    #+#             */
-/*   Updated: 2025/05/14 20:48:09 by lpaixao-         ###   ########.fr       */
+/*   Created: 2025/05/14 11:43:13 by lpaixao-          #+#    #+#             */
+/*   Updated: 2025/05/14 11:43:14 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-# define FIXED_HPP
+#ifndef SCAVTRAP_HPP
+# define SCAVTRAP_HPP
 
-class	Fixed
+#include "ClapTrap.hpp"
+
+class ScavTrap : public ClapTrap
 {
-	public:
-		Fixed();
-		Fixed( Fixed const & src );
-		~Fixed();
-		Fixed &	operator=( Fixed const & rhs );
-		void	setRawBits( int const raw );
-		int		getRawBits( void ) const;
-	private:
-		int					_rawBits;
-		static const int	_fractionalBits = 8;
+public:
+	ScavTrap();
+	ScavTrap(const std::string& name);
+	ScavTrap(const ScavTrap& other);
+	ScavTrap& operator=(const ScavTrap& other);
+	~ScavTrap();
+	void	guardGate();
+	void	attack(const std::string& target);
+	void	setHitPoints();
+	void	setEnergyPoints();
+	void	setAttackDamage();
 };
 #endif

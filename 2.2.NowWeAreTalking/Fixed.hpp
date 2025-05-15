@@ -6,9 +6,12 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:13:36 by lpaixao-          #+#    #+#             */
-/*   Updated: 2025/04/23 16:13:38 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2025/05/14 20:56:17 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef FIXED_HPP
+# define FIXED_HPP
 
 #include <ostream>
 
@@ -51,3 +54,4 @@ class	Fixed
 		static const int		_FractionalBits = 8;
 		static const int		_FractionalBitsShift = 1 << _FractionalBits;
 };
+#endif

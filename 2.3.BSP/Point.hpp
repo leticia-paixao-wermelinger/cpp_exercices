@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef POINT_HPP
+# define POINT_HPP
+
 #include "Fixed.hpp"
 #include <string>
 
@@ -31,3 +34,4 @@ public:
 	Fixed const	getx() const;
 	Fixed const	gety() const;
 };
+#endif
