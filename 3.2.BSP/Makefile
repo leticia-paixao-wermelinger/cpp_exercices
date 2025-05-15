@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = NWAT
+NAME = BSP
 
 CPP = c++
 
@@ -18,7 +18,14 @@ CPP = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = main.cpp Fixed.cpp FixedRelationalOps.cpp FixedArithmeticOps.cpp FixedMinMaxMethods.cpp
+SRCS = \
+main.cpp \
+Fixed.cpp \
+FixedRelationalOps.cpp \
+FixedArithmeticOps.cpp \
+FixedMinMaxMethods.cpp \
+Point.cpp \
+bsp.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 
