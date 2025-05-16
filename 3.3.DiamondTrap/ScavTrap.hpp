@@ -25,6 +25,8 @@ public:
 	~ScavTrap();
 	void			guardGate();
 	void virtual	attack(const std::string& target);
+	void virtual	setAllAttributes(const std::string& name);
+	void			setAllAttributes();
 	void			setHitPoints();
 	void virtual	setEnergyPoints();
 	void			setAttackDamage();

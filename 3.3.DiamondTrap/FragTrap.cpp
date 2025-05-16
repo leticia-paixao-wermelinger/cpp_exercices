@@ -14,17 +14,13 @@
 
 FragTrap::FragTrap() : ClapTrap()
 {
-	this->setHitPoints();
-	this->setEnergyPoints();
-	this->setAttackDamage();
+	this->setAllAttributes();
 	std::cout << "The standard FragTrap has been initiated" << std::endl;
 }
 
 FragTrap::FragTrap(const std::string& name) : ClapTrap(name)
 {
-	this->setHitPoints();
-	this->setEnergyPoints();
-	this->setAttackDamage();
+	this->setAllAttributes();
 	std::cout << "FragTrap " << getName() << " has been initiated" << std::endl;
 }
 
@@ -42,11 +38,24 @@ FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other)
 FragTrap& FragTrap::operator=(const FragTrap& other)
 {
 	if (this != &other)
-	{
-		ClapTrap::operator=(other);
-	}
+		this->setAllAttributes(other.getName());
 	std::cout << "FragTrap " << getName() << " has been assigned" << std::endl;
 	return *this;
+}
+
+void	FragTrap::setAllAttributes(const std::string& name)
+{
+	setName(name);
+	this->setHitPoints();
+	this->setEnergyPoints();
+	this->setAttackDamage();
+}
+
+void	FragTrap::setAllAttributes()
+{
+	this->setHitPoints();
+	this->setEnergyPoints();
+	this->setAttackDamage();
 }
 
 void FragTrap::setHitPoints()

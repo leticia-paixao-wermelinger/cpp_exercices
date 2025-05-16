@@ -14,27 +14,17 @@
 
 DiamondTrap::DiamondTrap() : FragTrap(), ScavTrap()
 {
-	this->_name = "Default";
-	ClapTrap::_name = "Default_clap_name";
-	setHitPoints();
-	setEnergyPoints();
-	setAttackDamage();
-//	FragTrap::setHitPoints();
-//	ScavTrap::setEnergyPoints();
-//	FragTrap::setAttackDamage();
+//	this->_name = "Default";
+//	ClapTrap::_name = "Default_clap_name";
+	this->setAllAttributes("Default");
 	std::cout << "The standard DiamondTrap has been initiated" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const std::string& name) : FragTrap(name), ScavTrap(name)
 {
-	this->_name = name;
-	ClapTrap::_name = name + "_clap_name";
-	setHitPoints();
-	setEnergyPoints();
-	setAttackDamage();
-//	FragTrap::setHitPoints();
-//	ScavTrap::setEnergyPoints();
-//	FragTrap::setAttackDamage();
+//	this->_name = name;
+//	ClapTrap::_name = name + "_clap_name";
+	this->setAllAttributes(name);
 	std::cout << "DiamondTrap " << name << " has been initiated" << std::endl;
 }
 DiamondTrap::~DiamondTrap()
@@ -51,10 +41,7 @@ DiamondTrap::DiamondTrap(const DiamondTrap& other) : ClapTrap(other), FragTrap(o
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
 {
 	if (this != &other)
-	{
-		FragTrap::operator=(other);
-		ScavTrap::operator=(other);
-	}
+		this->setAllAttributes(other.getName());
 	std::cout << "DiamondTrap " << this->_name << " has been assigned" << std::endl;
 	return *this;
 }
@@ -64,6 +51,22 @@ void	DiamondTrap::whoAmI()
 	std::cout << "Who am I?" << std::endl;
 	std::cout << "I'm " << this->_name << " in my DiamondTrap form..." << std::endl;
 	std::cout << "And I'm " << ClapTrap::_name << " in my ClapTrap form." << std::endl;
+}
+
+void	DiamondTrap::setAllAttributes(const std::string& name)
+{
+	this->_name = name;
+	ClapTrap::_name = name + "_clap_name";
+	setHitPoints();
+	setEnergyPoints();
+	setAttackDamage();
+}
+
+void	DiamondTrap::setAllAttributes()
+{
+	this->setHitPoints();
+	this->setEnergyPoints();
+	this->setAttackDamage();
 }
 
 void	DiamondTrap::setHitPoints() // FragTrap
@@ -84,7 +87,9 @@ void	DiamondTrap::setAttackDamage() // FragTrap
 void	DiamondTrap::attack(const std::string& target)
 {
 	ScavTrap::attack(target);
-//	if (baseAttack() == false)
-//		return ;
-//	std::cout << "DiamondTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
+}
+
+std::string	DiamondTrap::getName() const
+{
+	return this->_name;
 }

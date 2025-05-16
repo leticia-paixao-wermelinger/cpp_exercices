@@ -32,6 +32,21 @@ void ClapTrap::setAttackDamage( void )
     this->_attackDamage = 0;
 }
 
+void ClapTrap::setAllAttributes(const std::string& name)
+{
+    this->setName(name);
+    this->setHitPoints();
+    this->setEnergyPoints();
+    this->setAttackDamage();
+}
+
+void ClapTrap::setAllAttributes()
+{
+    this->setHitPoints();
+    this->setEnergyPoints();
+    this->setAttackDamage();
+}
+
 std::string ClapTrap::getName( void ) const
 {
     return this->_name;

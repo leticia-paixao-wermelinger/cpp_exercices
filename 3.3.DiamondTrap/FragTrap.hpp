@@ -25,6 +25,8 @@ public:
 	FragTrap& operator=(const FragTrap& other);
 	~FragTrap();
 	void 			highFivesGuys(void);
+	void virtual	setAllAttributes(const std::string& name);
+	void			setAllAttributes();
 	void virtual	setHitPoints();
 	void			setEnergyPoints();
 	void virtual	setAttackDamage();

@@ -14,17 +14,13 @@
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-	this->setHitPoints();
-	this->setEnergyPoints();
-	this->setAttackDamage();
+	this->setAllAttributes();
 	std::cout << "The standard ScavTrap has been initiated" << std::endl;
 }
 
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 {
-	this->setHitPoints();
-	this->setEnergyPoints();
-	this->setAttackDamage();
+	this->setAllAttributes();
 	std::cout << "ScavTrap " << getName() << " has been initiated" << std::endl;
 }
 
@@ -42,11 +38,24 @@ ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
 ScavTrap& ScavTrap::operator=(const ScavTrap& other)
 {
 	if (this != &other)
-	{
-		ClapTrap::operator=(other);
-	}
+		this->setAllAttributes(other.getName());
 	std::cout << "ScavTrap " << getName() << " has been assigned" << std::endl;
 	return *this;
+}
+
+void	ScavTrap::setAllAttributes(const std::string& name)
+{
+	setName(name);
+	this->setHitPoints();
+	this->setEnergyPoints();
+	this->setAttackDamage();
+}
+
+void	ScavTrap::setAllAttributes()
+{
+	this->setHitPoints();
+	this->setEnergyPoints();
+	this->setAttackDamage();
 }
 
 void ScavTrap::setHitPoints()

@@ -14,19 +14,13 @@
 
 ClapTrap::ClapTrap( void )
 {
-    setName("default");
-    setHitPoints();
-    setEnergyPoints();
-    setAttackDamage();
+    setAllAttributes("default");
     std::cout << "ClapTrap " << getName() << " has been created with default name." << std::endl;
 }
 
 ClapTrap::ClapTrap( const std::string& name )
 {
-    setName(name);
-    setHitPoints();
-    setEnergyPoints();
-    setAttackDamage();
+    setAllAttributes(name);
     std::cout << "ClapTrap " << getName() << " has been created" << std::endl;
 }
 
@@ -44,12 +38,7 @@ ClapTrap::ClapTrap( const ClapTrap& other )
 ClapTrap& ClapTrap::operator=( ClapTrap const & rhs)
 {
     if (this!= &rhs)
-    {
-        setName(rhs.getName());
-        setHitPoints();
-        setEnergyPoints();
-        setAttackDamage();
-    }
+        setAllAttributes(rhs.getName());
     std::cout << "ClapTrap " << rhs.getName() << " has been assigned with the assignment operator." << std::endl;
     return *this;
 }
