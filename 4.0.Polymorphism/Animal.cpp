@@ -10,4 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Animal.hpp"
+#include <iostream>
 
+Animal::Animal() : _type("Animal") {
+	std::cout << "Animal default constructor called" << std::endl;
+}
+
+Animal::Animal(std::string type)
+{
+	setType(type);
+	std::cout << "Animal constructor called for " << type << std::endl;
+}
+
+Animal::Animal(const Animal &src)
+{
+	*this = src;
+	std::cout << "Animal copy constructor called" << std::endl;
+}
+
+Animal & Animal::operator=(const Animal & src)
+{
+	if (&src != this)
+		setType(src.getType());
+	std::cout << "Animal assignment operator called" << std::endl;
+	return *this;
+}
+
+void	Animal::setType(std::string type)
+{
+	this->_type = type;
+}
+
+std::string	Animal::getType() const
+{
+	return this->_type;
+}
+
+void	Animal::makeSound()
+{
+	std::cout << "Animal makes a sound" << std::endl;
+}
