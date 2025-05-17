@@ -20,6 +20,10 @@ class Dog : public Animal
 private:
 	/* data */
 public:
-	
+	Dog( void );
+	Dog( const Dog & src );
+	~Dog( void );
+	Dog & operator=( const Dog & src );
+	void	makeSound() const;
 };
 #endif
