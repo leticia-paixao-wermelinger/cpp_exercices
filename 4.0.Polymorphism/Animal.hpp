@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#pragma once
 
 #include <iostream>
 
@@ -29,4 +28,3 @@ public:
 	void setType(std::string type);
 	virtual void makeSound() const;
 };
-#endif

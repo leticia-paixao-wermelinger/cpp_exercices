@@ -30,6 +30,7 @@ Animal::Animal(const Animal &src)
 
 Animal::~Animal()
 {
+//	delete
 	std::cout << "Animal destructor called" << std::endl;
 }
 

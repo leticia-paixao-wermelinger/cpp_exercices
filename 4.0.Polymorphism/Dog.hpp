@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_HPP
-# define DOG_HPP
+#pragma once
 
 #include "Animal.hpp"
 
@@ -26,4 +25,3 @@ public:
 	Dog & operator=( const Dog & src );
 	void	makeSound() const;
 };
-#endif

@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#pragma once
 
 #include "Animal.hpp"
 
@@ -24,4 +23,3 @@ class Cat : public Animal
 		Cat & operator=( const Cat & src);
 		void	makeSound() const;
 };
-#endif
