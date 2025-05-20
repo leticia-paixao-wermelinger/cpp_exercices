@@ -43,15 +43,15 @@ class	Fixed
 		static Fixed const & 	min( Fixed const & a, Fixed const & b ); // static min
 		static Fixed & 			max( Fixed & a, Fixed & b ); // static max
 		static Fixed const & 	max( Fixed const & a, Fixed const & b ); // static max
-		friend std::ostream& 	operator<<( std::ostream& out, Fixed const & value ); // operator<< overload
 		void					setRawBits( int const raw );
 		int						getRawBits( void ) const;
 		int						toInt( void ) const;
 		float					toFloat( void ) const;
 		double					toDouble( void ) const;
-	private:
+		private:
 		int						_rawBits;
 		static const int		_FractionalBits = 8;
 		static const int		_FractionalBitsShift = 1 << _FractionalBits;
 };
+std::ostream& 	operator<<( std::ostream& out, Fixed const & value ); // operator<< overload
 #endif
