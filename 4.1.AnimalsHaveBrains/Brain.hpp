@@ -18,9 +18,14 @@ class Brain
 {
 private:
 	std::string _ideas[100];
+	int			_nIdeas;
 public:
 	Brain();
 	~Brain();
 	Brain(const Brain &src);
 	Brain &operator=(const Brain &src);
+	void	newIdea(std::string idea);
+	int		getnIdeas() const;
+	std::string	getIdea(int i);
+	void	changeIdea(int i, std::string modifiedIdea);
 };

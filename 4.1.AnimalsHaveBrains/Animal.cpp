@@ -24,6 +24,7 @@ Animal::Animal(std::string type)
 
 Animal::Animal(const Animal &src)
 {
+	std::cout << "Entrou no construtor de cópia de Animal" << std::endl;
 //	*this = src;
 	this->_type = src._type;
 	std::cout << "Animal copy constructor called" << std::endl;
