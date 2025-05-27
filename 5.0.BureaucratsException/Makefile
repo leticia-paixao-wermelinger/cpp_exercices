@@ -21,7 +21,7 @@ FLAGS = -g -Wall -Wextra -Werror -Wshadow -std=c++98
 
 SRCS = \
 main.cpp \
-
+Bureaucrat.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 

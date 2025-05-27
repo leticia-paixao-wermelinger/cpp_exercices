@@ -14,16 +14,31 @@
 
 #include <iostream>
 
-class Bureaucrat
+enum    grade
 {
-private:
-    const std::string   name;
-    int                 grade;
-public:
-    Bureaucrat();
-    ~Bureaucrat();
-    getName();
-    getGrade();
-    increaseGrade(); // example: from 3 to 2
-    decreaseGrade(); // example: from 3 to 4
+    DEFAULT = 1,
+    TOOLOW,
+    FIT,
+    TOOHIGH
 };
+
+class Bureaucrat //  exception classes do not have to be designed in Orthodox Canonical Form
+{
+    private:
+        const std::string   _name;
+        int                 _grade; // From 150 to 1
+        int                 isInRange(int val);
+        void                createGrade(int grade);
+    public:
+        Bureaucrat();
+        Bureaucrat(std::string name);
+        Bureaucrat(std::string name, int grade);
+        Bureaucrat(int grade);
+        ~Bureaucrat();
+        std::string getName() const;
+        int         getGrade() const;
+        void        increaseGrade(); // example: from 3 to 2
+        void        decreaseGrade(); // example: from 3 to 4
+};
+
+std::ostream& 	operator<<( std::ostream& out, Bureaucrat const & myBureaucrat ); // operator<< overload
