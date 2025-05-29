@@ -42,15 +42,17 @@ class Bureaucrat //  exception classes do not have to be designed in Orthodox Ca
         };
     public:
         Bureaucrat();
+        Bureaucrat(const Bureaucrat & src);
+        Bureaucrat & operator=(const Bureaucrat & src);
+        ~Bureaucrat();
         Bureaucrat(std::string name);
         Bureaucrat(std::string name, int grade);
         Bureaucrat(int grade);
-        // Incluir Orthodox Canonical Form
-        ~Bureaucrat();
         std::string getName() const;
         int         getGrade() const;
         void        increaseGrade(); // example: from 3 to 2
         void        decreaseGrade(); // example: from 3 to 4
+        void        signForm();
 };
 
 std::ostream& 	operator<<( std::ostream& out, Bureaucrat const & myBureaucrat ); // operator<< overload

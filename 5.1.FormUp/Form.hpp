@@ -1,0 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Form.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/29 15:56:57 by lpaixao-          #+#    #+#             */
+/*   Updated: 2025/05/29 15:56:58 by lpaixao-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#pragma once
+
+#include <iostream>
+#include <exception>
+
+class Form
+{
+    private:
+        const std::string   _name;
+        bool                _signed;
+        const int           _gradeToSign;
+        const int           _gradeToExec;
+        class   GradeTooHighException : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
+        class   GradeTooLowException : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
+    public:
+        Form();
+        ~Form();
+        Form(const Form & src);
+        Form & operator=(const Form & src);
+        Form(std:string name);
+        Form(std:string name, int gradeToExec);
+        Form(std:string name, int gradeToSign);
+        Form(std:string name, int gradeToSign, int gradeToExec);
+        Form(int gradeToSign, int gradeToExec);
+        Form(int gradeToExec);
+        Form(int gradeToSign);
+        std::string         getName() const;
+        bool                getSigned() const;
+        int                 getGradeToSign() const;
+        int                 getGradeToExec() const;
+        void                beSigned( Bureaucrat const & B );
+};
+
+std::ostream& 	operator<<( std::ostream& out, Form const & myForm ); // operator<< overload
