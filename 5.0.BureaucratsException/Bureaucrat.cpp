@@ -38,11 +38,13 @@ void    Bureaucrat::createGrade(int grade)
 //    std::cout << "Em createGrande, RangeFit = " << RangeFit << std::endl;
 
     if (RangeFit == TOOHIGH)
-        std::cout << "Vai chamar GradeTooHighException" << std::endl;
+        // std::cout << "Vai chamar GradeTooHighException" << std::endl;
         // GradeTooHighException
+        throw(Bureaucrat::GradeTooHighException());
     else if (RangeFit == TOOLOW)
-        std::cout << "Vai chamar GradeTooLowException" << std::endl;
+        // std::cout << "Vai chamar GradeTooLowException" << std::endl;
         // GradeTooLowException
+        throw(Bureaucrat::GradeTooLowException());
     else
         this->_grade = grade;
 }
@@ -63,7 +65,8 @@ int Bureaucrat::getGrade() const
 void    Bureaucrat::increaseGrade()
 {
     if (getGrade() == 1)
-        std::cout << "Vai chamar GradeTooHighException" << std::endl;
+        throw(Bureaucrat::GradeTooHighException());
+        // std::cout << "Vai chamar GradeTooHighException" << std::endl;
         // GradeTooHighException
     else
         this->_grade--;
@@ -72,7 +75,8 @@ void    Bureaucrat::increaseGrade()
 void    Bureaucrat::decreaseGrade()
 {
     if (getGrade() == 150)
-        std::cout << "Vai chamar GradeTooLowException" << std::endl;
+        throw(Bureaucrat::GradeTooLowException());
+        // std::cout << "Vai chamar GradeTooLowException" << std::endl;
         // GradeTooLowException
     else
         this->_grade++;
@@ -92,4 +96,14 @@ std::ostream& 	operator<<( std::ostream& out, Bureaucrat const & myBureaucrat )
 {
     out << myBureaucrat.getName() << ", bureaucrat grade " << myBureaucrat.getGrade();
     return out;
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+    return "Grade is too high!";
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+    return "Grade is too low!";
 }

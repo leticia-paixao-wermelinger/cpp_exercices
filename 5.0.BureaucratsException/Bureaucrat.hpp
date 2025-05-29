@@ -13,6 +13,7 @@
 #pragma once
 
 #include <iostream>
+#include <exception>
 
 enum    grade
 {
@@ -29,6 +30,16 @@ class Bureaucrat //  exception classes do not have to be designed in Orthodox Ca
         int                 _grade; // From 150 to 1
         int                 isInRange(int val);
         void                createGrade(int grade);
+        class   GradeTooHighException : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
+        class   GradeTooLowException : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
     public:
         Bureaucrat();
         Bureaucrat(std::string name);
