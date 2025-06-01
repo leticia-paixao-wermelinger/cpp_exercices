@@ -43,7 +43,7 @@ void MateriaSource::learnMateria(AMateria* m)
 {
     if (!m)
         return ;
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < MAX_MEMORY; i++)
     {
         if (this->memory[i] == 0)
         {
@@ -55,60 +55,64 @@ void MateriaSource::learnMateria(AMateria* m)
 
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < MAX_MEMORY; i++)
     {
-        if (this->memory[i]->getType() == type)
-        {
+        if (this->memory[i] && this->memory[i]->getType() == type)
             return this->memory[i]->clone();
-        }
     }
-    return 0;
+    return NULL;
 }
 
 /*-------------------------- EXTRA METHODS --------------------------*/
 
 void    MateriaSource::initMemory()
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < MAX_MEMORY; i++)
         this->memory[i] = 0;
 }
 
 void    MateriaSource::cpyMemory(const MateriaSource &src)
 {
-    deleteMaterials();
     initMemory();
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < MAX_MEMORY; i++)
     {
         if (src.getMemory(i))
-        {
-            for (int j = 0; j < 4; j++)
-                learnMateria(src.getMemory(i)->clone());
-//                learnMateria(src.getMemory(j));
-        }
+            learnMateria(src.getMemory(i)->clone());
     }
 }
 
 AMateria*   MateriaSource::getMemory(int idx) const
 {
-    if (idx >= 0 && idx < 4)
+    if (idx >= 0 && idx < MAX_MEMORY)
         return this->memory[idx];
     return 0;
 }
 
 void    MateriaSource::deleteMaterials()
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < MAX_MEMORY; i++)
     {
         if (this->memory[i])
+        {
             delete this->memory[i];
+            this->memory[i] = 0;
+        }
     }
 }
 
 void    MateriaSource::printMemory()
 {
-    for (int i = 0; i < 4; i++)
-        if (this->memory[i])
-            std::cout << "memory[" << i << "] = " << this->memory[i]->getType() << std::endl;
+    for (int i = 0; i < MAX_MEMORY; i++)
+    {
+        if (this->memory[i] && ((this->memory[i]->getType() == "ice") || (this->memory[i]->getType() == "cure")))
+        {
+            std::cout << "memory[" << i << "] = " << this->memory[i]->getType() << " at address " << &this->memory[i] << std::endl;
+        }
+        else if (this->memory[i] && this->memory[i]->getType() == "cure")
+        {
+            std::cout << "memory[" << i << "] = " << this->memory[i]->getType() << " at address " << &this->memory[i] << std::endl;
+        }
         else
             std::cout << "memory[" << i << "] = (empty)" << std::endl;
+    }
 }

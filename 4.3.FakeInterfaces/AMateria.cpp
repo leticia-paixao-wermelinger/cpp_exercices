@@ -46,12 +46,13 @@ std::string const & AMateria::getType() const
 
 /*-------------------------- METHODS FROM AMATERIA --------------------------*/
 
-AMateria* AMateria::clone() const // O que faezr aqui?
+AMateria* AMateria::clone() const
 {
+//    std::cout << "Cloning AMateria" << std::endl;
     return 0;
 }
 
-void AMateria::use(ICharacter& target) // O que fazer aqui?
+void AMateria::use(ICharacter& target)
 {
     std::cout << "Nothing to be used with " << target.getName() << std::endl;
 }

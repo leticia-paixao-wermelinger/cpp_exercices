@@ -14,10 +14,12 @@
 
 #include "ICharacter.hpp"
 
+#define MAX_INVENTORY 4
+
 class Character : public ICharacter
 {
     private:
-        AMateria* inventory[4];
+        AMateria* inventory[MAX_INVENTORY];
         std::string _name;
         void    initInventory();
         void    cpyInventory( const Character & src );
@@ -33,4 +35,5 @@ class Character : public ICharacter
         void unequip(int idx);
         void use(int idx, ICharacter& target);
         AMateria*    getInventory(int idx) const;
+        void    printInventory();
 };

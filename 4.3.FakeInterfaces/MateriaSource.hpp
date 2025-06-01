@@ -14,10 +14,12 @@
 
 #include "IMateriaSource.hpp"
 
+#define MAX_MEMORY 4
+
 class MateriaSource : public IMateriaSource
 {
     private:
-        AMateria*   memory[4];
+        AMateria*   memory[MAX_MEMORY];
         void    initMemory();
         void    deleteMaterials();
         void    cpyMemory(const MateriaSource &src);

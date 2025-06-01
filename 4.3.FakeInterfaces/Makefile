@@ -16,7 +16,7 @@ CPP = c++
 
 42CPP = g++
 
-FLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
+FLAGS = -g -Wall -Wextra -Werror -Wshadow -std=c++98
 # https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 
 SRCS = \
@@ -57,7 +57,7 @@ run: re
 	./$(NAME)
 
 val: re
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 42re: fclean $(42OBJS)
 	$(42CPP) $(FLAGS) $(42OBJS) -o $(NAME)

@@ -12,8 +12,11 @@
 
 #pragma once
 
+#include "Bureaucrat.hpp"
 #include <iostream>
 #include <exception>
+
+#define STDGRADE 1
 
 class Form
 {
@@ -21,7 +24,7 @@ class Form
         const std::string   _name;
         bool                _signed;
         const int           _gradeToSign;
-        const int           _gradeToExec;
+        const int           _gradeToExec; // Para que sevre?
         class   GradeTooHighException : public std::exception
         {
             public:
@@ -37,10 +40,10 @@ class Form
         ~Form();
         Form(const Form & src);
         Form & operator=(const Form & src);
-        Form(std:string name);
-        Form(std:string name, int gradeToExec);
-        Form(std:string name, int gradeToSign);
-        Form(std:string name, int gradeToSign, int gradeToExec);
+        Form(std::string name);
+        Form(std::string name, int gradeToExec);
+        Form(std::string name, int gradeToSign);
+        Form(std::string name, int gradeToSign, int gradeToExec);
         Form(int gradeToSign, int gradeToExec);
         Form(int gradeToExec);
         Form(int gradeToSign);
