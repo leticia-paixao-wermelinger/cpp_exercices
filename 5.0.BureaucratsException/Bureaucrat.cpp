@@ -17,6 +17,21 @@ Bureaucrat::Bureaucrat() : _name("default")
     createGrade(DEFAULT);
 }
 
+Bureaucrat::Bureaucrat(const Bureaucrat & src) : _name(src._name)
+{
+    createGrade(src.getGrade());
+}
+
+Bureaucrat & Bureaucrat::operator=(const Bureaucrat & src)
+{
+    if (this != &src)
+        this->_grade = src.getGrade();
+    return *this;
+}
+
+Bureaucrat::~Bureaucrat()
+{}
+
 Bureaucrat::Bureaucrat(std::string name) : _name(name)
 {
     createGrade(DEFAULT);
@@ -48,9 +63,6 @@ void    Bureaucrat::createGrade(int grade)
     else
         this->_grade = grade;
 }
-
-Bureaucrat::~Bureaucrat()
-{}
 
 std::string Bureaucrat::getName() const
 {
