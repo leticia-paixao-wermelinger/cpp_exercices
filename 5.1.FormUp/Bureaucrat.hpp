@@ -12,8 +12,11 @@
 
 #pragma once
 
+#include "Form.hpp"
 #include <iostream>
 #include <exception>
+
+class Form; // Forward declaration to avoid circular dependency
 
 enum    grade
 {
@@ -52,7 +55,7 @@ class Bureaucrat //  exception classes do not have to be designed in Orthodox Ca
         int         getGrade() const;
         void        increaseGrade(); // example: from 3 to 2
         void        decreaseGrade(); // example: from 3 to 4
-        void        signForm();
+        void        signForm(Form &src);
 };
 
 std::ostream& 	operator<<( std::ostream& out, Bureaucrat const & myBureaucrat ); // operator<< overload

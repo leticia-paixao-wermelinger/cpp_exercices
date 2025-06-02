@@ -16,6 +16,8 @@
 #include <iostream>
 #include <exception>
 
+class Bureaucrat; // Forward declaration to avoid circular dependency
+
 #define STDGRADE 1
 
 class Form
@@ -25,6 +27,7 @@ class Form
         bool                _signed;
         const int           _gradeToSign;
         const int           _gradeToExec; // Para que sevre?
+        int                 validateGrade(int val);
         class   GradeTooHighException : public std::exception
         {
             public:
@@ -41,17 +44,15 @@ class Form
         Form(const Form & src);
         Form & operator=(const Form & src);
         Form(std::string name);
-        Form(std::string name, int gradeToExec);
         Form(std::string name, int gradeToSign);
         Form(std::string name, int gradeToSign, int gradeToExec);
         Form(int gradeToSign, int gradeToExec);
-        Form(int gradeToExec);
         Form(int gradeToSign);
         std::string         getName() const;
         bool                getSigned() const;
         int                 getGradeToSign() const;
         int                 getGradeToExec() const;
-        void                beSigned( Bureaucrat const & B );
+        bool                beSigned( Bureaucrat const & B );
 };
 
 std::ostream& 	operator<<( std::ostream& out, Form const & myForm ); // operator<< overload
