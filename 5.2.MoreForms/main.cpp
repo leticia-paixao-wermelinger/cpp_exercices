@@ -21,18 +21,18 @@ int main()
 {
     try {
         // Teste de criação com notas inválidas
-        AForm invalidAFormHigh("Top Secret", 0, 50); // deve lançar exceção
+        AForm invalidFormHigh("Top Secret", 0, 50); // deve lançar exceção
     } catch (std::exception &e) {
         std::cout << RED << "Exception (grade too high): " << e.what() << COLOR_END << std::endl;
     }
 
     try {
-        AForm invalidAFormLow("Bottom Secret", 151, 50); // deve lançar exceção
+        AForm invalidFormLow("Bottom Secret", 151, 50); // deve lançar exceção
     } catch (std::exception &e) {
         std::cout << RED << "Exception (grade too low): " << e.what() << COLOR_END << std::endl;
     }
 
-    // Criação de burocratas e AFormulários válidos
+    // Criação de burocratas e Formulários válidos
     Bureaucrat alice("Alice", 42);
     Bureaucrat bob("Bob", 150); // menor cargo
     Bureaucrat clara("Clara", 1); // maior cargo
@@ -50,8 +50,8 @@ int main()
     std::cout << AFormB << std::endl;
     std::cout << AFormC << std::endl;
 
-    // Teste de assinatura de AFormulário
-    std::cout << GREEN << "\n--- TENTANDO ASSINAR OS AFormULÁRIOS ---" << COLOR_END << std::endl;
+    // Teste de assinatura de Formulário
+    std::cout << GREEN << "\n--- TENTANDO ASSINAR OS FormULÁRIOS ---" << COLOR_END << std::endl;
     alice.signAForm(AFormA); // deve assinar com sucesso
     bob.signAForm(AFormA);   // deve falhar
     clara.signAForm(AFormC); // deve assinar com sucesso

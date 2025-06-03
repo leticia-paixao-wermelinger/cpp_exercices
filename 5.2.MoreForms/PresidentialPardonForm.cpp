@@ -49,5 +49,5 @@ std::string PresidentialPardonForm::getTarget() const
 void    PresidentialPardonForm::execute(const Bureaucrat &executor) const
 {
     AForm::execute(executor);
-    // Informs that <target> has been pardoned by Zaphod Beeblebrox.
+    std::cout << this->getTarget() << "has been pardoned by Zaphod Beeblebrox." << std::endl;
 }

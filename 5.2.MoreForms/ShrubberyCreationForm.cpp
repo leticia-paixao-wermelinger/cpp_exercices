@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+#include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm(SIGNGRADE, EXECGRADE)
 {
@@ -50,4 +51,22 @@ void    ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
     AForm::execute(executor);
     // Create a file <target>_shrubbery in the working directory and writes ASCII trees inside it.
+    std::fstream fs;
+    fs.open(this->getTarget() + "_shrubbery", std::fstream::in);
+    if (fs.fail())
+    {
+        std::cout << "Unable to open the file" <<  << std::endl;
+    }
+    fs << "          *          " << std::endl;
+    fs << "         ***         " << std::endl;
+    fs << "        *****        " << std::endl;
+    fs << "      *********      " << std::endl;
+    fs << "    *************    " << std::endl;
+    fs << "  *****************  " << std::endl;
+    fs << "*********************" << std::endl;
+    fs << "         ***         " << std::endl;
+    fs << "         ***         " << std::endl;
+    fs << "         ***         " << std::endl;
+    fs << "         ***         " << std::endl;
+    fs << "         ***         " << std::endl;
 }

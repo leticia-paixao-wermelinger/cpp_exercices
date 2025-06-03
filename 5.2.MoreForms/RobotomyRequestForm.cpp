@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
+#include <<cstdlib>
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm(SIGNGRADE, EXECGRADE)
 {
@@ -49,6 +50,9 @@ std::string RobotomyRequestForm::getTarget() const
 void    RobotomyRequestForm::execute(const Bureaucrat &executor) const
 {
     AForm::execute(executor);
-    // Makes some drilling noises, then informs that <target> has been robotomized
-    // successfully 50% of the time. Otherwise, it informs that the robotomy failed.
+    int n = rand();
+    if (n <= RAND_MAX / 2)
+        std::cout << this->getTarget() << " has been robotomized successfully." << std::endl;
+    else
+        std::cout << this->getTarget() << "'s  robotomy failed." << std::endl;
 }
