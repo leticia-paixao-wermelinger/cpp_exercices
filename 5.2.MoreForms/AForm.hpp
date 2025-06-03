@@ -26,7 +26,7 @@ class AForm
         const std::string   _name;
         bool                _signed;
         const int           _gradeToSign;
-        const int           _gradeToExec; // Para que sevre?
+        const int           _gradeToExec;
         int                 validateGrade(int val);
         class   GradeTooHighException : public std::exception
         {
@@ -38,6 +38,13 @@ class AForm
             public:
                 const char* what() const throw();
         };
+        class   FormIsAlreadySigned : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
+    protected:
+        void                execute(const Bureaucrat &executor) const;
     public:
         AForm();
         ~AForm();
@@ -53,6 +60,7 @@ class AForm
         int                 getGradeToSign() const;
         int                 getGradeToExec() const;
         bool                beSigned( Bureaucrat const & B );
+        virtual void        execute(const Bureaucrat &executor) const = 0;
 };
 
 std::ostream& 	operator<<( std::ostream& out, AForm const & myAForm ); // operator<< overload

@@ -11,3 +11,43 @@
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
+
+PresidentialPardonForm::PresidentialPardonForm() : AForm(SIGNGRADE, EXECGRADE)
+{
+    setTarget("default");
+}
+
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : AForm(SIGNGRADE, EXECGRADE)
+{
+    setTarget(target);
+}
+
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src) : AForm(SIGNGRADE, EXECGRADE)
+{
+    *this = src;
+}
+
+PresidentialPardonForm & PresidentialPardonForm::operator=(const PresidentialPardonForm &src)
+{
+    if (&src != this)
+        setTarget(src.getTarget());
+    return *this;
+}
+
+PresidentialPardonForm::~PresidentialPardonForm() {}
+
+void    PresidentialPardonForm::setTarget(const std::string str)
+{
+    this->_target = str;
+}
+
+std::string PresidentialPardonForm::getTarget() const
+{
+    return this->_target;
+}
+
+void    PresidentialPardonForm::execute(const Bureaucrat &executor) const
+{
+    AForm::execute(executor);
+    // Informs that <target> has been pardoned by Zaphod Beeblebrox.
+}

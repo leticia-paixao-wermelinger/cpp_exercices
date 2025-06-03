@@ -12,6 +12,8 @@
 
 #include "AForm.hpp"
 
+/*-------------------------- ORTHODOX CANONICAL FORM --------------------------*/
+
 AForm::AForm() : _name("Default"), _signed(false), _gradeToSign(STDGRADE), _gradeToExec(STDGRADE) {}
 
 AForm::~AForm() {}
@@ -24,6 +26,8 @@ AForm & AForm::operator=(const AForm & src)
 		this->_signed = src.getSigned();
 	return *this;
 }
+
+/*-------------------------- OTHER CONSTRUCTORS --------------------------*/
 
 AForm::AForm(std::string name) : _name(name), _signed(false), _gradeToSign(STDGRADE), _gradeToExec(STDGRADE) {}
 
@@ -38,6 +42,8 @@ AForm::AForm(int gradeToSign, int gradeToExec)
 
 AForm::AForm(int gradeToSign)
 	: _name("Default"), _signed(false), _gradeToSign(validateGrade(gradeToSign)), _gradeToExec(STDGRADE) {}
+
+/*-------------------------- GETTERS --------------------------*/
 
 std::string AForm::getName() const
 {
@@ -59,6 +65,8 @@ int AForm::getGradeToExec() const
 	return _gradeToExec;
 }
 
+/*-------------------------- OTHER METHODS --------------------------*/
+
 bool AForm::beSigned(Bureaucrat const & B)
 {
 	if (this->getSigned() == true)
@@ -72,25 +80,6 @@ bool AForm::beSigned(Bureaucrat const & B)
 	return true;
 }
 
-std::ostream& 	operator<<( std::ostream& out, AForm const & myAForm )
-{
-	out << "AForm Name: " << myAForm.getName() << ", Signed: " << (myAForm.getSigned() ? "Yes" : "No")
-		<< ", Grade to Sign: " << myAForm.getGradeToSign()
-		<< ", Grade to Execute: " << myAForm.getGradeToExec();
-	return out;
-}
-
-const char* AForm::GradeTooHighException::what() const throw()
-{
-    return "Grade to AForm is too high!";
-}
-
-const char* AForm::GradeTooLowException::what() const throw()
-{
-    return "Grade to AForm is too low!";
-}
-
-
 /*
 * O ideal seria que tanto AForm como Bureaucrat utilizassem essa validação de 
 * um mesmo método isInRange, talvez de uma classe base ou utilitário.
@@ -103,4 +92,41 @@ int	AForm::validateGrade(int val)
 	else if (val > 150)
 		throw GradeTooLowException();
 	return val;
+}
+
+void	AForm::execute(const Bureaucrat &executor) const
+{
+	if (this->getSigned() == false)
+        throw(FormIsAlreadySigned());
+    else if (executor.getGrade() <= 0)
+        throw(GradeTooHighException());
+    else if (executor.getGrade() > this->getGradeToExec())
+        throw(GradeTooLowException());
+}
+
+/*-------------------------- EXCEPTION CLASSES --------------------------*/
+
+const char* AForm::GradeTooHighException::what() const throw()
+{
+    return "Grade to AForm is too high!";
+}
+
+const char* AForm::GradeTooLowException::what() const throw()
+{
+    return "Grade to AForm is too low!";
+}
+
+const char* AForm::FormIsAlreadySigned::what() const throw()
+{
+    return "This form has already been signed!";
+}
+
+/*-------------------------- OVERLOAD OPERATOR --------------------------*/
+
+std::ostream& 	operator<<( std::ostream& out, AForm const & myAForm )
+{
+	out << "AForm Name: " << myAForm.getName() << ", Signed: " << (myAForm.getSigned() ? "Yes" : "No")
+		<< ", Grade to Sign: " << myAForm.getGradeToSign()
+		<< ", Grade to Execute: " << myAForm.getGradeToExec();
+	return out;
 }

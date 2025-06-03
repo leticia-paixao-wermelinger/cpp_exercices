@@ -19,16 +19,20 @@
 *  Informs that <target> has been pardoned by Zaphod Beeblebrox.
 */
 
+#define SIGNGRADE 25
+#define EXECGRADE 5PresidentialPardonFor
+
 class PresidentialPardonForm : public AForm
 {
 	private:
 		std::string _target;
+		void		setTarget(const std::string str);
 	public:
 		PresidentialPardonForm();
 		PresidentialPardonForm(const std::string &target);
 		PresidentialPardonForm(const PresidentialPardonForm &src);
 		PresidentialPardonForm &operator=(const PresidentialPardonForm &src);
 		~PresidentialPardonForm();
-
-		void execute(const Bureaucrat &executor) const override;
+		std::string	getTarget() const;
+		void execute(const Bureaucrat &executor) const;
 };

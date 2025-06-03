@@ -56,6 +56,7 @@ class Bureaucrat //  exception classes do not have to be designed in Orthodox Ca
         void        increaseGrade(); // example: from 3 to 2
         void        decreaseGrade(); // example: from 3 to 4
         void        signAForm(AForm &src);
+        void        executeForm(AForm const & form) const;
 };
 
 std::ostream& 	operator<<( std::ostream& out, Bureaucrat const & myBureaucrat ); // operator<< overload
