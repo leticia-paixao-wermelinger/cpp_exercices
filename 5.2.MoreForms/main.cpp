@@ -17,6 +17,24 @@
 #define GREEN "\033[0;32m"
 #define COLOR_END "\033[0m"
 
+/*
+* ShrubberyCreationForm - testar assinar com mais e com menos de 145.
+* ShrubberyCreationForm - testar assinar fora da amplitude de 1 a 150.
+* ShrubberyCreationForm - testar assinar já assinado.
+* ShrubberyCreationForm - testar executar com mais e com menos de 137.
+* ShrubberyCreationForm - testar executar fora da amplitude de 1 a 150.
+* RobotomyRequestForm - testar assinar com mais e com menos de 72.
+* RobotomyRequestForm - testar assinar fora da amplitude de 1 a 150.
+* RobotomyRequestForm - testar assinar já assinado.
+* RobotomyRequestForm - testar executar com mais e com menos de 45.
+* RobotomyRequestForm - testar executar fora da amplitude de 1 a 150.
+* PresidentialPardonForm - testar assinar com mais e com menos de 25.
+* PresidentialPardonForm - testar assinar fora da amplitude de 1 a 150.
+* PresidentialPardonForm - testar assinar já assinado.
+* PresidentialPardonForm - testar executar com mais e com menos de 5.
+* PresidentialPardonForm - testar executar fora da amplitude de 1 a 150.
+*/
+
 int main()
 {
     try {
