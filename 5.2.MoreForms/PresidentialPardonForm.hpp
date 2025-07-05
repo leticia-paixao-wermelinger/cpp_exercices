@@ -20,7 +20,7 @@
 */
 
 #define SIGNGRADE 25
-#define EXECGRADE 5PresidentialPardonFor
+#define EXECGRADE 5
 
 class PresidentialPardonForm : public AForm
 {

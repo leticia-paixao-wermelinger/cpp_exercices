@@ -51,6 +51,7 @@ void    RobotomyRequestForm::execute(const Bureaucrat &executor) const
 {
     AForm::execute(executor);
     int n = rand();
+    std::cout << "Drilling noises..." << std::endl;
     if (n <= RAND_MAX / 2)
         std::cout << this->getTarget() << " has been robotomized successfully." << std::endl;
     else

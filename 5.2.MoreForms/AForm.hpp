@@ -60,7 +60,7 @@ class AForm
         int                 getGradeToSign() const;
         int                 getGradeToExec() const;
         bool                beSigned( Bureaucrat const & B );
-//        virtual void        execute(const Bureaucrat &executor) const;
+        virtual void        execute(const Bureaucrat &executor) const = 0;
 };
 
 std::ostream& 	operator<<( std::ostream& out, AForm const & myAForm ); // operator<< overload
