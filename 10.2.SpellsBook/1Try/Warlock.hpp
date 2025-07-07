@@ -1,11 +1,14 @@
 #pragma once
 
-#include <iostream>
 #include <string>
+#include "ASpell.hpp"
+#include <map>
+#include "SpellBook.hpp"
 
 class Warlock
 {
 	private:
+		SpellBook	mySpellBook;
 		std::string _name;
 		std::string _title;
 		Warlock();
@@ -18,4 +21,7 @@ class Warlock
 		std::string const & getTitle() const;
 		void setTitle(std::string const & title);
 		void introduce() const;
+		void	learnSpell(ASpell *spell);
+		void	forgetSpell(std::string SpellName);
+		void	launchSpell(std::string SpellName, ATarget const & target);
 };
