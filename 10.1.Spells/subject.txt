@@ -1,0 +1,86 @@
+Expected files:
+Warlock.cpp, Warlock.hpp
+ASpell.hpp, ASpell.cpp
+ATarget.hpp, ATarget.cpp
+Fwoosh.hpp, Fwoosh.cpp
+Dummy.hpp, Dummy.cpp
+
+General Requirements:
+This exercise must be completed strictly in C++98.
+You are not allowed to use any C standard library functions (e.g., printf, malloc, free, etc.).
+The use of switch statements is explicitly forbidden.
+
+Abstract Class: ASpell
+Create an abstract base class named ASpell using the Coplien form.
+It must have the following protected attributes:
+     name (a std::string)
+     effects (a std::string)
+You must implement the following const member functions:
+     getName() → returns a copy of the spell's name.
+     getEffects() → returns a copy of the spell's effects.
+A pure virtual function clone() → returns a pointer to ASpell.
+Also implement a constructor that takes two std::string parameters in this order:
+     name
+     effects
+
+Abstract Class: ATarget
+Create another abstract class named ATarget, also in the Coplien form.
+This class must have:
+     One protected attribute: type (a std::string)
+     One getter: getType() → returns a const reference to the type
+     A pure virtual function clone() → returns a pointer to ATarget
+All member functions must be callable on a const object.
+Add the following method:
+     getHitBySpell(const ASpell& spell) → This method displays the following message:
+     <TYPE> has been <EFFECTS>!
+Here, <TYPE> is the result of getType() from the target, and <EFFECTS> is from the getEffects() of the passed spell.
+ASpell’s Launch Method
+Back in the ASpell class, implement a method:
+     void launch(const ATarget& target) const;
+This function simply calls target.getHitBySpell(*this).
+
+Concrete Implementations:
+     Fwoosh
+Inherit from ASpell.
+Constructor should initialize name to "Fwoosh" and effects to "fwooshed".
+Implement the clone() method to return a pointer to a new Fwoosh instance.
+     Dummy
+Inherit from ATarget.
+Constructor should initialize the type to "Target Practice Dummy".
+Implement the clone() method to return a pointer to a new Dummy instance.
+
+Warlock Spell Management:
+Update your Warlock class from the previous module with the following public methods:
+     void learnSpell(ASpell* spell);
+Makes the Warlock learn a spell (deep copy via clone). If the pointer is null, do nothing.
+     void forgetSpell(std::string const &spellName);
+Makes the Warlock forget a spell by name. If the spell is unknown, do nothing.
+     void launchSpell(std::string const &spellName, ATarget const &target);
+Finds the spell by name and uses it on the given target. If the spell is unknown, do nothing.
+You must add a suitable container (e.g., map, vector) to store known spells.
+Choose a structure that allows for efficient name-based lookup and management.
+
+Example Usage:
+
+int main()
+{
+  Warlock richard("Richard", "the Titled");
+
+  Dummy bob;
+  Fwoosh* fwoosh = new Fwoosh();
+
+  richard.learnSpell(fwoosh);
+
+  richard.introduce();
+  richard.launchSpell("Fwoosh", bob);
+
+  richard.forgetSpell("Fwoosh");
+  richard.launchSpell("Fwoosh", bob);
+}
+
+Expected Output:
+
+Richard: This looks like another boring day.
+Richard: I am Richard, the Titled!
+Target Practice Dummy has been fwooshed!
+Richard: My job here is done!

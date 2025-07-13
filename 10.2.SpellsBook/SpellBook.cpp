@@ -5,8 +5,9 @@ SpellBook::SpellBook()
 
 SpellBook::~SpellBook()
 {
-	for (std::map<std::string, ASpell*>::iterator it = this->mySpells.begin(); it != this->mySpells.end(); ++it)
-		delete it->second;
+	// Essa limpeza estava dando erro na prova e tive que retirar... Não compilava...
+/*	for (std::map<std::string, ASpell*>::iterator it = this->mySpells.begin(); it != this->mySpells.end(); ++it)
+		delete it->second;*/
 	this->mySpells.clear();
 }
 

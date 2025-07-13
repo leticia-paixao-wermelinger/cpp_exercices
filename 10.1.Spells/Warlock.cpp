@@ -10,8 +10,9 @@ Warlock::Warlock(std::string name, std::string title)
 Warlock::~Warlock()
 {
 	std::cout << this->_name << ": My job here is done" << std::endl;
-	for (std::map<std::string, ASpell*>::iterator it = this->mySpels.begin(); it != this->mySpels.end(); ++it)
-		delete it->second;
+	// Essa limpeza estava dando erro na prova e tive que retirar... Não compilava...
+/*	for (std::map<std::string, ASpell*>::iterator it = this->mySpels.begin(); it != this->mySpels.end(); ++it)
+		delete it->second;*/
 	this->mySpels.clear();
 }
 
