@@ -1,0 +1,92 @@
+Expected files:
+Warlock.cpp, Warlock.hpp
+ASpell.hpp, ASpell.cpp
+ATarget.hpp, ATarget.cpp
+Fwoosh.hpp, Fwoosh.cpp
+Dummy.hpp, Dummy.cpp
+Fireball.hpp, Fireball.cpp
+Polymorph.hpp, Polymorph.cpp
+BrickWall.hpp, BrickWall.cpp
+SpellBook.hpp, SpellBook.cpp
+TargetGenerator.hpp, TargetGenerator.cpp
+
+General Requirements:
+You must complete this assignment using only C++98.
+The use of C standard library functions (e.g., printf, malloc, free) is strictly prohibited.
+The use of switch statements is explicitly forbidden.
+
+Additional Spells and Targets:
+Extend your magic system with the following two new concrete spells, following the same model as Fwoosh:
+
+Fireball:
+	name: "Fireball"
+	effects: "burnt to a crisp"
+
+Polymorph:
+	name: "Polymorph"
+	effects: "turned into a critter"
+Create a new target type as well:
+
+BrickWall:
+	type: "Inconspicuous Red-brick Wall"
+Each of these classes must implement the appropriate clone() method as required by their respective abstract base classes (ASpell and ATarget).
+
+SpellBook Class:
+Create a class called SpellBook that follows the canonical form (Coplien form).
+The class must not be copy-constructible or copy-assignable.
+The class must support:
+	void learnSpell(ASpell*):
+Adds a copy of the given spell to the spellbook. If null or already known, ignore.
+	void forgetSpell(std::string const &):
+Removes the spell with the given name if it exists.
+	ASpell* createSpell(std::string const &):
+Searches for a spell by name and returns a new copy. If the spell is unknown, return NULL.
+
+Warlock Updates:
+Update your Warlock class so that:
+It holds a SpellBook instance as a member attribute, constructed with the Warlock and destroyed with it.
+	learnSpell() and forgetSpell() now delegate their behavior to the corresponding functions in SpellBook.
+	launchSpell() should call createSpell() from the SpellBook to retrieve the spell before launching it.
+This decouples spell storage and logic from the Warlock directly.
+
+TargetGenerator Class:
+Implement a new class named TargetGenerator, also in canonical form and non-copyable.
+This class should provide the following methods:
+	void learnTargetType(ATarget*):
+Stores a copy of the given target type. If null or already learned, do nothing.
+	void forgetTargetType(std::string const &):
+Removes the target type with the given name if it exists.
+	ATarget* createTarget(std::string const &):
+Returns a new instance of the specified target type. Returns NULL if not found.
+
+Example Test:
+
+int main()
+{
+  Warlock richard("Richard", "foo");
+  richard.setTitle("Hello, I'm Richard the Warlock!");
+
+  BrickWall model1;
+  Polymorph* polymorph = new Polymorph();
+  TargetGenerator tarGen;
+
+  tarGen.learnTargetType(&model1);
+  richard.learnSpell(polymorph);
+
+  Fireball* fireball = new Fireball();
+  richard.learnSpell(fireball);
+
+  ATarget* wall = tarGen.createTarget("Inconspicuous Red-brick Wall");
+
+  richard.introduce();
+  richard.launchSpell("Polymorph", *wall);
+  richard.launchSpell("Fireball", *wall);
+}
+
+Expected Output:
+
+Richard: This looks like another boring day.
+Richard: I am Richard, Hello, I'm Richard the Warlock!!
+Inconspicuous Red-brick Wall has been turned into a critter!
+Inconspicuous Red-brick Wall has been burnt to a crisp!
+Richard: My job here is done!

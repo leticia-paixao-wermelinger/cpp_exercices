@@ -1,0 +1,81 @@
+Expected files:
+Warlock.cpp, Warlock.hpp
+
+General Instructions:
+
+You are required to implement a class called Warlock using C++98.
+You must not use any C standard library functions (e.g., printf, malloc, free, etc.). Stick strictly to C++98 features.
+
+Objective:
+
+Design a Warlock class that follows the Coplien form (i.e., implement the default constructor, copy constructor, copy assignment operator, and destructor).
+
+Class Requirements:
+
+The class must have two private attributes:
+     name (of type std::string)
+title (of type std::string)
+To access these private attributes, implement the following getter methods:
+     getName() → returns a constant reference to the name string
+     getTitle() → returns a constant reference to the title string
+Both getter methods must be callable on a const Warlock object.
+Additionally, create the following setter method:
+     setTitle() → returns void, takes a constant string reference as parameter, and updates the Warlock’s title.
+
+Constructor & Copy Rules:
+You must implement a constructor that takes two parameters (in this order):
+     name (string)
+     title (string)
+The class must not be:
+     instantiated without parameters
+     copy-constructed
+     assigned from another Warlock
+The following code must compile or not compile as follows:
+     Warlock bob;                            // Must NOT compile
+     Warlock bob("Bob", "the magnificent");  // Must compile
+     Warlock jim("Jim", "the nauseating");   // Must compile
+     bob = jim;                              // Must NOT compile
+     Warlock jack(jim);                      // Must NOT compile
+
+Custom Output Behavior:
+Upon construction, the Warlock must print the following line:
+     <NAME>: This looks like another boring day.
+Upon destruction, it must print:
+     <NAME>: My job here is done!
+In both cases, replace <NAME> with the actual value of the Warlock’s name.
+
+Additional Functionality:
+Implement the following method:
+     void introduce() const;
+When called, it must output:
+     <NAME>: I am <NAME>, <TITLE>!
+
+Example Usage:
+Here's an example test in main():
+
+int main()
+{
+  Warlock const richard("Richard", "Mistress of Magma");
+  richard.introduce();
+  std::cout << richard.getName() << " - " << richard.getTitle() << std::endl;
+
+  Warlock* jack = new Warlock("Jack", "the Long");
+  jack->introduce();
+  jack->setTitle("the Mighty");
+  jack->introduce();
+
+  delete jack;
+
+  return 0;
+}
+
+Expected Output:
+
+Richard: This looks like another boring day.
+Richard: I am Richard, Mistress of Magma!
+Richard - Mistress of Magma
+Jack: This looks like another boring day.
+Jack: I am Jack, the Long!
+Jack: I am Jack, the Mighty!
+Jack: My job here is done!
+Richard: My job here is done!
