@@ -43,11 +43,10 @@ class AForm
             public:
                 const char* what() const throw();
         };
-    protected:
-        virtual void                execute(const Bureaucrat &executor) const = 0;
+        virtual void    setAbstract() = 0;
     public:
         AForm();
-        ~AForm();
+        virtual ~AForm();
         AForm(const AForm & src);
         AForm & operator=(const AForm & src);
         AForm(std::string name);
@@ -60,7 +59,7 @@ class AForm
         int                 getGradeToSign() const;
         int                 getGradeToExec() const;
         bool                beSigned( Bureaucrat const & B );
-        virtual void        execute(const Bureaucrat &executor) const = 0;
+        void        execute(const Bureaucrat &executor) const;
 };
 
 std::ostream& 	operator<<( std::ostream& out, AForm const & myAForm ); // operator<< overload

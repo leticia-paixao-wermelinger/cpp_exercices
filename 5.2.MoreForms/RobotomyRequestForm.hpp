@@ -20,14 +20,15 @@
 *  successfully 50% of the time. Otherwise, it informs that the robotomy failed.
 */
 
-#define SIGNGRADE 72
-#define EXECGRADE 45
+#define RR_SIGNGRADE 72
+#define RR_EXECGRADE 45
 
 class RobotomyRequestForm : public AForm
 {
 	private:
 		std::string _target;
 		void		setTarget(const std::string str);
+		void    setAbstract();
 	public:
 		RobotomyRequestForm();
 		RobotomyRequestForm(const std::string &target);

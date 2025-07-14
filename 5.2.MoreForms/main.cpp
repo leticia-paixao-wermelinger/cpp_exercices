@@ -12,6 +12,9 @@
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 #define RED "\033[0;31m"
 #define GREEN "\033[0;32m"
@@ -35,52 +38,159 @@
 * PresidentialPardonForm - testar executar fora da amplitude de 1 a 150.
 */
 
+void testForm(AForm &form, Bureaucrat &signer, Bureaucrat &executor)
+{
+	std::cout << "\n===== Testando " << form.getName() << " =====\n";
+	try {
+		signer.signForm(form);
+	} catch (const std::exception &e) {
+		std::cout << RED << "Erro ao assinar: " << COLOR_END << e.what() << "\n";
+	}
+
+	try {
+		executor.executeForm(form);
+	} catch (const std::exception &e) {
+		std::cout << RED << "Erro ao executar: " << COLOR_END << e.what() << "\n";
+	}
+}
+
+void separator(const std::string &msg)
+{
+	std::cout << "\n=== " << msg << " ===\n";
+}
+
 int main()
 {
-    try {
-        // Teste de criação com notas inválidas
-        AForm invalidFormHigh("Top Secret", 0, 50); // deve lançar exceção
-    } catch (std::exception &e) {
-        std::cout << RED << "Exception (grade too high): " << e.what() << COLOR_END << std::endl;
-    }
+	// ShrubberyCreationForm tests
+	separator("Shrubbery - Assinar com grade suficiente (<= 145)");
+	{
+		Bureaucrat bob("Bob", 100);
+		ShrubberyCreationForm form("Home");
+		testForm(form, bob, bob);
+	}
 
-    try {
-        AForm invalidFormLow("Bottom Secret", 151, 50); // deve lançar exceção
-    } catch (std::exception &e) {
-        std::cout << RED << "Exception (grade too low): " << e.what() << COLOR_END << std::endl;
-    }
+	separator("Shrubbery - Assinar com grade insuficiente (> 145)");
+	{
+		Bureaucrat joe("Joe", 146);
+		ShrubberyCreationForm form("Yard");
+		testForm(form, joe, joe);
+	}
 
-    // Criação de burocratas e Formulários válidos
-    Bureaucrat alice("Alice", 42);
-    Bureaucrat bob("Bob", 150); // menor cargo
-    Bureaucrat clara("Clara", 1); // maior cargo
+	separator("Shrubbery - Assinar com grade fora do intervalo (<1)");
+	try {
+		Bureaucrat invalid("Invalid", 0);
+	} catch (const std::exception &e) {
+		std::cout << "Erro ao criar Bureaucrat: " << e.what() << "\n";
+	}
 
-    AForm AFormA("AFormA", 50, 20);
-    AForm AFormB("AFormB", 140, 100);
-    AForm AFormC("AFormC", 1, 1);
+	separator("Shrubbery - Assinar com grade fora do intervalo (>150)");
+	try {
+		Bureaucrat invalid("Invalid", 151);
+	} catch (const std::exception &e) {
+		std::cout << "Erro ao criar Bureaucrat: " << e.what() << "\n";
+	}
 
-    std::cout << GREEN << "\n--- ESTADO INICIAL ---" << COLOR_END << std::endl;
-    std::cout << alice << std::endl;
-    std::cout << bob << std::endl;
-    std::cout << clara << std::endl;
+	separator("Shrubbery - Assinar já assinado");
+	{
+		Bureaucrat bob("Bob", 100);
+		ShrubberyCreationForm form("Garden");
+		testForm(form, bob, bob); // Assina e executa uma vez
+		testForm(form, bob, bob); // Tenta assinar e executar de novo
+	}
 
-    std::cout << AFormA << std::endl;
-    std::cout << AFormB << std::endl;
-    std::cout << AFormC << std::endl;
+	separator("Shrubbery - Executar com grade suficiente (<= 137)");
+	{
+		Bureaucrat exec("Exec", 130);
+		ShrubberyCreationForm form("Park");
+		form.beSigned(exec);
+		testForm(form, exec, exec);
+	}
 
-    // Teste de assinatura de Formulário
-    std::cout << GREEN << "\n--- TENTANDO ASSINAR OS FormULÁRIOS ---" << COLOR_END << std::endl;
-    alice.signAForm(AFormA); // deve assinar com sucesso
-    bob.signAForm(AFormA);   // deve falhar
-    clara.signAForm(AFormC); // deve assinar com sucesso
-    bob.signAForm(AFormB);   // deve assinar com sucesso (grau 150 é suficiente para assinar grau 140?)
+	separator("Shrubbery - Executar com grade insuficiente (> 137)");
+	{
+		Bureaucrat lowExec("LowExec", 140);
+		ShrubberyCreationForm form("Park");
+		form.beSigned(lowExec);
+		testForm(form, lowExec, lowExec);
+	}
 
-    // Tentar assinar um AFormulário já assinado
-    alice.signAForm(AFormA); // deve inAFormar que já está assinado
+	// RobotomyRequestForm tests
+	separator("Robotomy - Assinar com grade suficiente (<= 72)");
+	{
+		Bureaucrat roboSigner("Dr. Bot", 70);
+		RobotomyRequestForm form("Target1");
+		testForm(form, roboSigner, roboSigner);
+	}
 
-    std::cout << GREEN << "\n--- ESTADO FINAL DOS AFormULÁRIOS ---" << COLOR_END << std::endl;
-    std::cout << AFormA << std::endl;
-    std::cout << AFormB << std::endl;
-    std::cout << AFormC << std::endl;
+	separator("Robotomy - Assinar com grade insuficiente (> 72)");
+	{
+		Bureaucrat lowSigner("LowBot", 100);
+		RobotomyRequestForm form("Target2");
+		testForm(form, lowSigner, lowSigner);
+	}
+
+	separator("Robotomy - Assinar já assinado");
+	{
+		Bureaucrat bot("Bot", 50);
+		RobotomyRequestForm form("Target3");
+		testForm(form, bot, bot);
+		testForm(form, bot, bot);
+	}
+
+	separator("Robotomy - Executar com grade suficiente (<= 45)");
+	{
+		Bureaucrat exec("ExecBot", 40);
+		RobotomyRequestForm form("Target4");
+		form.beSigned(exec);
+		testForm(form, exec, exec);
+	}
+
+	separator("Robotomy - Executar com grade insuficiente (> 45)");
+	{
+		Bureaucrat exec("LowExecBot", 100);
+		RobotomyRequestForm form("Target5");
+		form.beSigned(exec);
+		testForm(form, exec, exec);
+	}
+
+	// PresidentialPardonForm tests
+	separator("Presidential - Assinar com grade suficiente (<= 25)");
+	{
+		Bureaucrat pres("Pres", 10);
+		PresidentialPardonForm form("Alice");
+		testForm(form, pres, pres);
+	}
+
+	separator("Presidential - Assinar com grade insuficiente (> 25)");
+	{
+		Bureaucrat lowPres("LowPres", 30);
+		PresidentialPardonForm form("Bob");
+		testForm(form, lowPres, lowPres);
+	}
+
+	separator("Presidential - Assinar já assinado");
+	{
+		Bureaucrat pres("Pres", 5);
+		PresidentialPardonForm form("Charlie");
+		testForm(form, pres, pres);
+		testForm(form, pres, pres);
+	}
+
+	separator("Presidential - Executar com grade suficiente (<= 5)");
+	{
+		Bureaucrat exec("President", 1);
+		PresidentialPardonForm form("Dana");
+		form.beSigned(exec);
+		testForm(form, exec, exec);
+	}
+
+	separator("Presidential - Executar com grade insuficiente (> 5)");
+	{
+		Bureaucrat exec("Vice", 10);
+		PresidentialPardonForm form("Eve");
+		form.beSigned(exec);
+		testForm(form, exec, exec);
+	}
+
     return 0;
 }

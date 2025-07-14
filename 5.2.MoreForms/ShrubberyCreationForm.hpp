@@ -20,14 +20,15 @@
 *  inside it.
 */
 
-#define SIGNGRADE 145
-#define EXECGRADE 137
+#define SC_SIGNGRADE 145
+#define SC_EXECGRADE 137
 
 class ShrubberyCreationForm : public AForm
 {
 	private:
 		std::string _target;
 		void		setTarget(const std::string str);
+		void    setAbstract();
 	public:
 		ShrubberyCreationForm();
 		ShrubberyCreationForm(const std::string &target);

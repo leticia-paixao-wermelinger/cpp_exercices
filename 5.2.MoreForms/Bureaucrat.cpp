@@ -105,7 +105,7 @@ int    Bureaucrat::isInRange(int val)
 
 /*-------------------------- OTHER METHODS --------------------------*/
 
-void   Bureaucrat::signAForm(AForm &src)
+void   Bureaucrat::signForm(AForm &src)
 {
     try
     {

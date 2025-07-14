@@ -11,19 +11,19 @@
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
-#include <<cstdlib>
+#include <cstdlib>
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm(SIGNGRADE, EXECGRADE)
+RobotomyRequestForm::RobotomyRequestForm() : AForm(RR_SIGNGRADE, RR_EXECGRADE)
 {
     setTarget("default");
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm(SIGNGRADE, EXECGRADE)
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm(RR_SIGNGRADE, RR_EXECGRADE)
 {
     setTarget(target);
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src) : AForm(SIGNGRADE, EXECGRADE)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src) : AForm(RR_SIGNGRADE, RR_EXECGRADE)
 {
     *this = src;
 }
@@ -56,4 +56,10 @@ void    RobotomyRequestForm::execute(const Bureaucrat &executor) const
         std::cout << this->getTarget() << " has been robotomized successfully." << std::endl;
     else
         std::cout << this->getTarget() << "'s  robotomy failed." << std::endl;
+}
+
+
+void    RobotomyRequestForm::setAbstract()
+{
+    std::cout << "RobotomyRequestForm não é uma classe abstrata" << std::endl;
 }

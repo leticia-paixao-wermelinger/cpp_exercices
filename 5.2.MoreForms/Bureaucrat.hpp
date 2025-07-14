@@ -55,7 +55,7 @@ class Bureaucrat //  exception classes do not have to be designed in Orthodox Ca
         int         getGrade() const;
         void        increaseGrade(); // example: from 3 to 2
         void        decreaseGrade(); // example: from 3 to 4
-        void        signAForm(AForm &src);
+        void        signForm(AForm &src);
         void        executeForm(AForm const & form) const;
 };
 

@@ -13,17 +13,17 @@
 #include "ShrubberyCreationForm.hpp"
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm(SIGNGRADE, EXECGRADE)
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm(SC_SIGNGRADE, SC_EXECGRADE)
 {
     setTarget("default");
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm(SIGNGRADE, EXECGRADE)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm(SC_SIGNGRADE, SC_EXECGRADE)
 {
     setTarget(target);
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : AForm(SIGNGRADE, EXECGRADE)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : AForm(SC_SIGNGRADE, SC_EXECGRADE)
 {
     *this = src;
 }
@@ -50,12 +50,13 @@ std::string ShrubberyCreationForm::getTarget() const
 void    ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
     AForm::execute(executor);
-    // Create a file <target>_shrubbery in the working directory and writes ASCII trees inside it.
+    std::string fileName = this->getTarget() + "_shrubbery";
+    const char *fileNamePtr = fileName.std::string::c_str();
     std::fstream fs;
-    fs.open(this->getTarget() + "_shrubbery", std::fstream::in);
+    fs.open(fileNamePtr, std::fstream::in);
     if (fs.fail())
     {
-        std::cout << "Unable to open the file" <<  << std::endl;
+        std::cout << "Unable to open the file" << fileName << std::endl;
     }
     fs << "          *          " << std::endl;
     fs << "         ***         " << std::endl;
@@ -69,4 +70,9 @@ void    ShrubberyCreationForm::execute(const Bureaucrat &executor) const
     fs << "         ***         " << std::endl;
     fs << "         ***         " << std::endl;
     fs << "         ***         " << std::endl;
+}
+
+void    ShrubberyCreationForm::setAbstract()
+{
+    std::cout << "ShrubberyCreationForm não é uma classe abstrata" << std::endl;
 }
