@@ -81,7 +81,7 @@ bool AForm::beSigned(Bureaucrat const & B)
 }
 
 /*
-* O ideal seria que tanto AForm como Bureaucrat utilizassem essa validação de 
+* O ideal seria que tanto AForm como Bureaucrat utilizassem essa validação de
 * um mesmo método isInRange, talvez de uma classe base ou utilitário.
 * Da AForma que está, para atende ro exercício, não está muito limpo...
 */
@@ -97,11 +97,25 @@ int	AForm::validateGrade(int val)
 void	AForm::execute(const Bureaucrat &executor) const
 {
 	if (this->getSigned() == false)
+	{
+		unableToExec();
         throw(FormIsAlreadySigned());
+	}
     else if (executor.getGrade() <= 0)
+	{
+		unableToExec();
         throw(GradeTooHighException());
+	}
     else if (executor.getGrade() > this->getGradeToExec())
+	{
+		unableToExec();
         throw(GradeTooLowException());
+	}
+}
+
+void	AForm::unableToExec() const
+{
+	std::cout << "Unable to execute form " << this->_name << " form because: ";
 }
 
 /*-------------------------- EXCEPTION CLASSES --------------------------*/

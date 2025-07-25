@@ -12,17 +12,17 @@
 
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm(PP_SIGNGRADE, PP_EXECGRADE)
+PresidentialPardonForm::PresidentialPardonForm() : AForm("residential", PP_SIGNGRADE, PP_EXECGRADE)
 {
     setTarget("default");
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : AForm(PP_SIGNGRADE, PP_EXECGRADE)
+PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : AForm("residential", PP_SIGNGRADE, PP_EXECGRADE)
 {
     setTarget(target);
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src) : AForm(PP_SIGNGRADE, PP_EXECGRADE)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src) : AForm("residential", PP_SIGNGRADE, PP_EXECGRADE)
 {
     *this = src;
 }

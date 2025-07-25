@@ -13,17 +13,17 @@
 #include "ShrubberyCreationForm.hpp"
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm(SC_SIGNGRADE, SC_EXECGRADE)
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Shrubbery", SC_SIGNGRADE, SC_EXECGRADE)
 {
     setTarget("default");
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm(SC_SIGNGRADE, SC_EXECGRADE)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm("Shrubbery", SC_SIGNGRADE, SC_EXECGRADE)
 {
     setTarget(target);
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : AForm(SC_SIGNGRADE, SC_EXECGRADE)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &src) : AForm("Shrubbery", SC_SIGNGRADE, SC_EXECGRADE)
 {
     *this = src;
 }

@@ -28,6 +28,7 @@ class AForm
         const int           _gradeToSign;
         const int           _gradeToExec;
         int                 validateGrade(int val);
+        void                unableToExec() const;
         class   GradeTooHighException : public std::exception
         {
             public:

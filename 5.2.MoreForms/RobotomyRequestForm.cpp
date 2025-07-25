@@ -13,17 +13,17 @@
 #include "RobotomyRequestForm.hpp"
 #include <cstdlib>
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm(RR_SIGNGRADE, RR_EXECGRADE)
+RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy", RR_SIGNGRADE, RR_EXECGRADE)
 {
     setTarget("default");
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm(RR_SIGNGRADE, RR_EXECGRADE)
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("Robotomy", RR_SIGNGRADE, RR_EXECGRADE)
 {
     setTarget(target);
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src) : AForm(RR_SIGNGRADE, RR_EXECGRADE)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &src) : AForm("Robotomy", RR_SIGNGRADE, RR_EXECGRADE)
 {
     *this = src;
 }

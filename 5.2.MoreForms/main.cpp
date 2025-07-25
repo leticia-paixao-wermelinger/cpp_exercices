@@ -41,6 +41,7 @@
 void testForm(AForm &form, Bureaucrat &signer, Bureaucrat &executor)
 {
 	std::cout << "\n===== Testando " << form.getName() << " =====\n";
+	std::cout << "form signed = " << form.getSigned() << std::endl;
 	try {
 		signer.signForm(form);
 	} catch (const std::exception &e) {
@@ -61,6 +62,7 @@ void separator(const std::string &msg)
 
 int main()
 {
+	/*
 	// ShrubberyCreationForm tests
 	separator("Shrubbery - Assinar com grade suficiente (<= 145)");
 	{
@@ -89,7 +91,7 @@ int main()
 	} catch (const std::exception &e) {
 		std::cout << "Erro ao criar Bureaucrat: " << e.what() << "\n";
 	}
-
+	*/
 	separator("Shrubbery - Assinar já assinado");
 	{
 		Bureaucrat bob("Bob", 100);
@@ -102,7 +104,11 @@ int main()
 	{
 		Bureaucrat exec("Exec", 130);
 		ShrubberyCreationForm form("Park");
-		form.beSigned(exec);
+		try {
+			form.beSigned(exec);
+		} catch (const std::exception &e) {
+			std::cout << RED << "Erro ao assinar: " << COLOR_END << e.what() << "\n";
+		}
 		testForm(form, exec, exec);
 	}
 
@@ -110,7 +116,11 @@ int main()
 	{
 		Bureaucrat lowExec("LowExec", 140);
 		ShrubberyCreationForm form("Park");
-		form.beSigned(lowExec);
+		try {
+			form.beSigned(lowExec);
+		} catch (const std::exception &e) {
+			std::cout << RED << "Erro ao assinar: " << COLOR_END << e.what() << "\n";
+		}
 		testForm(form, lowExec, lowExec);
 	}
 
@@ -141,7 +151,11 @@ int main()
 	{
 		Bureaucrat exec("ExecBot", 40);
 		RobotomyRequestForm form("Target4");
-		form.beSigned(exec);
+		try {
+			form.beSigned(exec);
+		} catch (const std::exception &e) {
+			std::cout << RED << "Erro ao assinar: " << COLOR_END << e.what() << "\n";
+		}
 		testForm(form, exec, exec);
 	}
 
@@ -149,7 +163,11 @@ int main()
 	{
 		Bureaucrat exec("LowExecBot", 100);
 		RobotomyRequestForm form("Target5");
-		form.beSigned(exec);
+		try {
+			form.beSigned(exec);
+		} catch (const std::exception &e) {
+			std::cout << RED << "Erro ao assinar: " << COLOR_END << e.what() << "\n";
+		}
 		testForm(form, exec, exec);
 	}
 
@@ -180,7 +198,11 @@ int main()
 	{
 		Bureaucrat exec("President", 1);
 		PresidentialPardonForm form("Dana");
-		form.beSigned(exec);
+		try {
+			form.beSigned(exec);
+		} catch (const std::exception &e) {
+			std::cout << RED << "Erro ao assinar: " << COLOR_END << e.what() << "\n";
+		}
 		testForm(form, exec, exec);
 	}
 
@@ -188,7 +210,11 @@ int main()
 	{
 		Bureaucrat exec("Vice", 10);
 		PresidentialPardonForm form("Eve");
-		form.beSigned(exec);
+		try {
+			form.beSigned(exec);
+		} catch (const std::exception &e) {
+			std::cout << RED << "Erro ao assinar: " << COLOR_END << e.what() << "\n";
+		}
 		testForm(form, exec, exec);
 	}
 
