@@ -96,10 +96,11 @@ int	AForm::validateGrade(int val)
 
 void	AForm::execute(const Bureaucrat &executor) const
 {
+	std::cout << "execute de AForm" << std::endl;
 	if (this->getSigned() == false)
 	{
 		unableToExec();
-        throw(FormIsAlreadySigned());
+        throw(FormIsNotSigned());
 	}
     else if (executor.getGrade() <= 0)
 	{
@@ -133,6 +134,11 @@ const char* AForm::GradeTooLowException::what() const throw()
 const char* AForm::FormIsAlreadySigned::what() const throw()
 {
     return "This form has already been signed!";
+}
+
+const char* AForm::FormIsNotSigned::what() const throw()
+{
+    return "This form hasn't been signed yet!";
 }
 
 /*-------------------------- OVERLOAD OPERATOR --------------------------*/

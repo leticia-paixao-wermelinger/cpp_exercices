@@ -47,29 +47,50 @@ std::string ShrubberyCreationForm::getTarget() const
     return this->_target;
 }
 
-void    ShrubberyCreationForm::execute(const Bureaucrat &executor) const
+#define RED "\033[0;31m"
+#define GREEN "\033[0;32m"
+#define COLOR_END "\033[0m"
+
+void    ShrubberyCreationForm::execute(const Bureaucrat &executor) const // não está chegando aqui!
 {
-    AForm::execute(executor);
-    std::string fileName = this->getTarget() + "_shrubbery";
-    const char *fileNamePtr = fileName.std::string::c_str();
-    std::fstream fs;
-    fs.open(fileNamePtr, std::fstream::in);
-    if (fs.fail())
+    std::cout << "Entrou no executor de Shrubbery" << std::endl;
+    try
+    {
+        AForm::execute(executor);
+    }
+    catch (const std::exception &e)
+    {
+        return ;
+    }
+    std::cout << RED << "Vai tentar criar o arquivo" << std::endl;
+    std::string fileName = this->getTarget() + "_shrubbery.txt";
+    std::cout << "nome do arquivo = " << fileName << std::endl;
+    const char *fileNamePtr = fileName.c_str();
+    std::cout << "ponteiro do nome = " << fileNamePtr << std::endl;
+    std::ofstream outputFile(fileNamePtr);
+    //std::fstream fs;
+    //fs.open(fileNamePtr, std::fstream::in | std::fstream::out | std::fstream::trunc);
+    if (outputFile.is_open())
+    {
+        std::cout << "criou o arquivo e vai escrever nele" << COLOR_END << std::endl;
+        outputFile << "          *          " << std::endl;
+        outputFile << "         ***         " << std::endl;
+        outputFile << "        *****        " << std::endl;
+        outputFile << "      *********      " << std::endl;
+        outputFile << "    *************    " << std::endl;
+        outputFile << "  *****************  " << std::endl;
+        outputFile << "*********************" << std::endl;
+        outputFile << "         ***         " << std::endl;
+        outputFile << "         ***         " << std::endl;
+        outputFile << "         ***         " << std::endl;
+        outputFile << "         ***         " << std::endl;
+        outputFile << "         ***         " << std::endl;
+    }
+    else
     {
         std::cout << "Unable to open the file" << fileName << std::endl;
+        return ;
     }
-    fs << "          *          " << std::endl;
-    fs << "         ***         " << std::endl;
-    fs << "        *****        " << std::endl;
-    fs << "      *********      " << std::endl;
-    fs << "    *************    " << std::endl;
-    fs << "  *****************  " << std::endl;
-    fs << "*********************" << std::endl;
-    fs << "         ***         " << std::endl;
-    fs << "         ***         " << std::endl;
-    fs << "         ***         " << std::endl;
-    fs << "         ***         " << std::endl;
-    fs << "         ***         " << std::endl;
 }
 
 void    ShrubberyCreationForm::setAbstract()

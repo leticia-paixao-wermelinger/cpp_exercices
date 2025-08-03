@@ -44,6 +44,11 @@ class AForm
             public:
                 const char* what() const throw();
         };
+        class   FormIsNotSigned : public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
         virtual void    setAbstract() = 0;
     public:
         AForm();
@@ -60,7 +65,7 @@ class AForm
         int                 getGradeToSign() const;
         int                 getGradeToExec() const;
         bool                beSigned( Bureaucrat const & B );
-        void        execute(const Bureaucrat &executor) const;
+        virtual void        execute(const Bureaucrat &executor) const;
 };
 
 std::ostream& 	operator<<( std::ostream& out, AForm const & myAForm ); // operator<< overload

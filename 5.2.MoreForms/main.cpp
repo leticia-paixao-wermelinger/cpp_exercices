@@ -45,13 +45,15 @@ void testForm(AForm &form, Bureaucrat &signer, Bureaucrat &executor)
 	try {
 		signer.signForm(form);
 	} catch (const std::exception &e) {
-		std::cout << RED << "Erro ao assinar: " << COLOR_END << e.what() << "\n";
+		std::cout << "Erro ao assinar: " << e.what() << "\n";
+//		return ;
 	}
 
 	try {
 		executor.executeForm(form);
 	} catch (const std::exception &e) {
-		std::cout << RED << "Erro ao executar: " << COLOR_END << e.what() << "\n";
+		std::cout << "Erro ao executar: " << e.what() << "\n";
+//		return ;
 	}
 }
 
