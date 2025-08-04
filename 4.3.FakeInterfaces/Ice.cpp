@@ -39,6 +39,7 @@ Ice::~Ice()
 
 AMateria* Ice::clone() const
 {
+//    std::cout << "Cloning Ice" << std::endl;
     return new Ice(*this);
 }
 

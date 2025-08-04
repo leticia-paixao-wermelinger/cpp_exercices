@@ -60,7 +60,7 @@ void Character::equip(AMateria* m)
 {
     if (!m)
         return ;
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < MAX_INVENTORY; i++)
     {
         if (this->inventory[i] == 0)
         {
@@ -72,7 +72,7 @@ void Character::equip(AMateria* m)
 
 void Character::unequip(int idx)
 {
-    if (this->inventory[idx])
+    if (idx >= 0 && idx < MAX_INVENTORY && this->inventory[idx])
     {
         this->inventory[idx] = 0;
     }
@@ -94,7 +94,7 @@ void Character::use(int idx, ICharacter& target)
 
 void    Character::initInventory()
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < MAX_INVENTORY; i++)
         this->inventory[i] = 0;
 }
 
@@ -109,7 +109,7 @@ void    Character::cpyInventory( const Character & src )
 {
     deleteMaterials();
     initInventory();
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < MAX_INVENTORY; i++)
     {
         if (src.getInventory(i))
             equip(src.getInventory(i));
@@ -118,12 +118,23 @@ void    Character::cpyInventory( const Character & src )
 
 void    Character::deleteMaterials()
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < MAX_INVENTORY; i++)
     {
-        if (this->inventory[i] != 0)
+        if (this->inventory[i] && this->inventory[i] != 0)
         {
             delete this->inventory[i];
             this->inventory[i] = 0;
         }
     }
+}
+
+void    Character::printInventory()
+{
+    for (int i = 0; i < MAX_INVENTORY; i++)
+        if (this->inventory[i] && this->inventory[i] != 0)
+            std::cout << "inventory[" << i << "] = " << this->inventory[i]->getType() << " at address " << &this->inventory[i] << std::endl;
+        else if (this->inventory[i] == 0)
+            std::cout << "inventory[" << i << "] = (empty) at address " << &this->inventory[i] << std::endl;
+        else
+            std::cout << "inventory[" << i << "] = (unidentified)" << std::endl;
 }

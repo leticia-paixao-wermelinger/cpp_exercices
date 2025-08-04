@@ -20,7 +20,7 @@ void	print(std::string str)
 {
 	std::cout << str << std::endl;
 }*/
-/*
+
 int main() // subject
 {
 	IMateriaSource* src = new MateriaSource();
@@ -43,96 +43,121 @@ int main() // subject
 	delete src;
 
 	return 0;
-}*/
-
-int main() {
-	std::cout<< "----------CREATION AND CLONING MATERIAS------------" << std::endl << std::endl;
-	AMateria* ice = new Ice();
-	AMateria* cure = new Cure();
-	AMateria* iceD = new Ice();
-	AMateria* cureD = new Cure();
-
-	std::cout << "Original Ice type: " << ice->getType() << ", Address: " << ice << std::endl;
-	std::cout << "Original Cure type: " << cure->getType() << ", Address: " << cure << std::endl;
-	std::cout << "Original IceD type: " << iceD->getType() << ", Address: " << iceD << std::endl;
-	std::cout << "Original CureD type: " << cureD->getType() << ", Address: " << cureD << std::endl;
-	
-	AMateria* iceClone = ice->clone();
-	AMateria* cureClone = cure->clone();
-	AMateria* iceCloneD = iceD->clone();
-	AMateria* cureCloneD = cureD->clone();
-
-	std::cout << "Cloned Ice type: " << iceClone->getType() << ", Address: " << iceClone << std::endl;
-	std::cout << "Cloned Cure type: " << cureClone->getType() << ", Address: " << cureClone << std::endl;
-	std::cout << "Cloned IceD type: " << iceCloneD->getType() << ", Address: " << iceCloneD << std::endl;
-	std::cout << "Cloned CureD type: " << cureCloneD->getType() << ", Address: " << cureCloneD << std::endl;
-
-	std::cout << std::endl << "----------CHARCTERS CREATION------------" << std::endl << std::endl;
-	Character character("Hero");
-	Character character1("Dragon");
-
-	std::cout << std::endl << "----------EQUIP FUNCTION------------" << std::endl << std::endl;
-	character.equip(ice);
-	character.equip(cure);
-	character1.equip(iceD);
-	character1.equip(cureD);
-	
-	std::cout << std::endl << "----------USE FUNCTION------------" << std::endl << std::endl;
-	ice->use(character1);
-	cureCloneD->use(character);
-	character.use(0, character1);
-	character1.use(1, character);
-
-	std::cout << std::endl << "----------UNEQUIP FUNCTION------------" << std::endl << std::endl;
-	character.unequip(1);
-	character1.unequip(1);
-	
-	std::cout << std::endl << "----------EQUIP CLONED MATERIA FUNCTION------------" << std::endl << std::endl;
-	character.equip(iceClone);
-	character.equip(cureClone);
-	character1.equip(iceCloneD);
-	character1.equip(cureCloneD);
-
-	std::cout << std::endl << "----------IMATERIA CREATION - NEW MATERIAS------------" << std::endl << std::endl;
-	IMateriaSource* source = new MateriaSource();
-	AMateria* iceTest = new Ice();
-	AMateria* cureTest = new Cure();
-	AMateria* iceTest1 = new Ice();
-	AMateria* cureTest1 = new Cure();
-	AMateria* cureTest2 = new Cure();
-	
-	std::cout << std::endl << "----------LEARN FUNCTION------------" << std::endl << std::endl;
-	source->learnMateria(iceTest);
-	source->learnMateria(cureTest);
-	source->learnMateria(iceTest1);
-	source->learnMateria(cureTest1);
-	source->learnMateria(cureTest2);
-	
-	std::cout << std::endl << "----------CREATE FUNCTION------------" << std::endl << std::endl;
-	AMateria* newIce = source->createMateria("ice 🧊");
-	if (newIce) {
-		std::cout << "Created Materia: " << newIce->getType() << std::endl;
-		delete newIce;
-	}
-
-	AMateria* newCure = source->createMateria("cure 💊");
-	if (newCure) {
-		std::cout << "Created Materia: " << newCure->getType() << std::endl;
-		delete newCure;
-	}
-
-	AMateria* random = source->createMateria("fire");
-	if (random) {
-		std::cout << "Created Materia: " << random->getType() << std::endl;
-		delete random;
-	}
-	
-	delete iceTest;
-	delete cureTest;
-	delete iceTest1;
-	delete cureTest1;
-	delete cureTest2;
-	delete source;
-
-	return 0;
 }
+
+/*
+#include <cstdlib>
+void ft_tests()
+{
+	// Constructors
+	std::cout << std::endl;
+	std::cout << "CONSTRUCTORS:" << std::endl;
+	std::cout << "-----------------------" << std::endl;
+	IMateriaSource* src = new MateriaSource();
+	src->learnMateria(new Ice()); // leak
+	src->learnMateria(new Cure()); // leak
+	ICharacter* me = new Character("me");
+	std::cout << std::endl;
+
+	// Create Materia
+	std::cout << "CREATE MATERIA:" << std::endl;
+	std::cout << "-----------------------" << std::endl;
+	AMateria	*tmp;
+	
+	AMateria	*tmp1;
+	AMateria	*tmp2;
+	AMateria	*tmp3;
+	AMateria	*tmp4;
+
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp1 = src->createMateria("cure");
+	me->equip(tmp1);
+	tmp = src->createMateria("fire"); // null
+	me->equip(tmp);
+	std::cout << std::endl;
+
+	// Use on a new character
+	std::cout << "USE ON A NEW CHARACTER:" << std::endl;
+	std::cout << "-----------------------" << std::endl;
+	ICharacter* bob = new Character("bob");
+	me->use(0, *bob);
+	me->use(1, *bob);
+	std::cout << std::endl;
+	me->use(2, *bob); // Use an empty / non existing slot in inventory
+	me->use(-4, *bob);
+	me->use(18, *bob);
+	std::cout << std::endl;
+
+	// Deep copy character
+	std::cout << "DEEP COPY CHARACTER:" << std::endl;
+	std::cout << "-----------------------" << std::endl;
+	Character	*charles = new Character("Charles");
+	tmp2 = src->createMateria("cure");
+	charles->equip(tmp2);
+	tmp3 = src->createMateria("ice");
+	charles->equip(tmp3);
+	tmp = src->createMateria("earth");
+	charles->equip(tmp);
+	Character	*charles_copy = new Character(*charles);
+	std::cout << std::endl;
+
+	// Deep copy vs its source character
+	std::cout << "DEEP COPY VS SOURCE:" << std::endl;
+	std::cout << "-----------------------" << std::endl;
+	charles->unequip(0); // this shows that they have different materia pointers equipped
+	tmp4 = charles_copy->getInventory(1);
+	charles_copy->unequip(1); //this will produce a leak if we don't store the address somewhere else before
+	delete tmp4;
+	tmp = src->createMateria("cure");
+	charles_copy->equip(tmp);
+	tmp = src->createMateria("ice");
+	charles_copy->equip(tmp);
+	std::cout << std::endl;
+
+	charles->use(0, *bob);
+	charles->use(1, *bob);
+	charles->use(2, *bob);
+	charles->use(3, *bob);
+	std::cout << std::endl;
+	charles_copy->use(0, *bob);
+	charles_copy->use(1, *bob);
+	charles_copy->use(2, *bob);
+	charles_copy->use(3, *bob);
+	std::cout << std::endl;
+
+	// Unequip tests:
+	std::cout << "UNEQUIP:" << std::endl;
+	std::cout << "-----------------------" << std::endl;
+	me->unequip(-1); // unequip an empty / non existing slot in inventory
+	me->unequip(18);
+	me->unequip(3);
+	std::cout << std::endl;
+	me->use(1, *charles);
+	me->unequip(1); // Unequip a valid slot in inventory (cure unequipped)
+	me->use(1, *charles); // try to use it
+	std::cout << std::endl;
+
+	// Destructors
+	std::cout << "DESTRUCTORS:" << std::endl;
+	std::cout << "-----------------------" << std::endl;
+	delete bob;
+	delete me;
+	delete src;
+	delete charles;
+	delete charles_copy;
+	delete tmp1;
+	delete tmp2;
+	std::cout << std::endl;
+	//system("leaks ex03");
+}
+
+int main()
+{
+	ft_tests();
+	// Leaks check
+	std::cout << "LEAKS:" << std::endl;
+	std::cout << "-----------------------" << std::endl;
+	system("leaks ex03");
+	return (0);
+}*/

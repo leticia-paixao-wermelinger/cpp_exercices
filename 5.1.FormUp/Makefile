@@ -5,29 +5,23 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/15 18:00:56 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/11/07 20:05:38 by lpaixao-         ###   ########.fr        #
+#    Created: 2025/05/23 14:42:17 by lpaixao-          #+#    #+#              #
+#    Updated: 2025/05/23 14:42:19 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = MaterialGirl
+NAME = FormUp
 
 CPP = c++
 
 42CPP = g++
 
 FLAGS = -g -Wall -Wextra -Werror -Wshadow -std=c++98
-# https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 
 SRCS = \
 main.cpp \
-AMateria.cpp \
-Character.cpp \
-Cure.cpp \
-Ice.cpp \
-ICharacter.cpp \
-IMateriaSource.cpp \
-MateriaSource.cpp
+Bureaucrat.cpp \
+Form.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 
@@ -57,7 +51,7 @@ run: re
 	./$(NAME)
 
 val: re
-	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 42re: fclean $(42OBJS)
 	$(42CPP) $(FLAGS) $(42OBJS) -o $(NAME)
@@ -67,4 +61,4 @@ val: re
 	./$(NAME)
 
 42val: 42re
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME)
