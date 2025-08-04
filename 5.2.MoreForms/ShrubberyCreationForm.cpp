@@ -51,9 +51,8 @@ std::string ShrubberyCreationForm::getTarget() const
 #define GREEN "\033[0;32m"
 #define COLOR_END "\033[0m"
 
-void    ShrubberyCreationForm::execute(const Bureaucrat &executor) const // não está chegando aqui!
+void    ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
-    std::cout << "Entrou no executor de Shrubbery" << std::endl;
     try
     {
         AForm::execute(executor);
@@ -62,29 +61,25 @@ void    ShrubberyCreationForm::execute(const Bureaucrat &executor) const // não
     {
         return ;
     }
-    std::cout << RED << "Vai tentar criar o arquivo" << std::endl;
     std::string fileName = this->getTarget() + "_shrubbery.txt";
-    std::cout << "nome do arquivo = " << fileName << std::endl;
     const char *fileNamePtr = fileName.c_str();
-    std::cout << "ponteiro do nome = " << fileNamePtr << std::endl;
-    std::ofstream outputFile(fileNamePtr);
-    //std::fstream fs;
-    //fs.open(fileNamePtr, std::fstream::in | std::fstream::out | std::fstream::trunc);
-    if (outputFile.is_open())
+    //std::ofstream outputFile(fileNamePtr);
+    std::fstream fs;
+    fs.open(fileNamePtr, std::fstream::in | std::fstream::out | std::fstream::trunc);
+    if (fs.is_open())
     {
-        std::cout << "criou o arquivo e vai escrever nele" << COLOR_END << std::endl;
-        outputFile << "          *          " << std::endl;
-        outputFile << "         ***         " << std::endl;
-        outputFile << "        *****        " << std::endl;
-        outputFile << "      *********      " << std::endl;
-        outputFile << "    *************    " << std::endl;
-        outputFile << "  *****************  " << std::endl;
-        outputFile << "*********************" << std::endl;
-        outputFile << "         ***         " << std::endl;
-        outputFile << "         ***         " << std::endl;
-        outputFile << "         ***         " << std::endl;
-        outputFile << "         ***         " << std::endl;
-        outputFile << "         ***         " << std::endl;
+        fs << "          *          " << std::endl;
+        fs << "         ***         " << std::endl;
+        fs << "        *****        " << std::endl;
+        fs << "      *********      " << std::endl;
+        fs << "    *************    " << std::endl;
+        fs << "  *****************  " << std::endl;
+        fs << "*********************" << std::endl;
+        fs << "         ***         " << std::endl;
+        fs << "         ***         " << std::endl;
+        fs << "         ***         " << std::endl;
+        fs << "         ***         " << std::endl;
+        fs << "         ***         " << std::endl;
     }
     else
     {
