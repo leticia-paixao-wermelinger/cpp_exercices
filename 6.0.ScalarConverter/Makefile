@@ -21,7 +21,7 @@ FLAGS = -g -Wall -Wextra -Werror -Wshadow -std=c++98
 
 SRCS = \
 main.cpp \
-.cpp
+ScalarConverter.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 

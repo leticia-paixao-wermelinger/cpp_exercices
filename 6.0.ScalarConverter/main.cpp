@@ -16,28 +16,31 @@
 #define GREEN "\033[0;32m"
 #define COLOR_END "\033[0m"
 
+#include <iostream>
+
+/*
 int main()
 {
-    std::cout << "empty:" << endl;
+    std::cout << "empty:" << std::endl;
     ScalarConverter::convert("");
-    std::cout << "char:" << endl;
+    std::cout << "char:" << std::endl;
     ScalarConverter::convert("a");
     ScalarConverter::convert("c");
-    std::cout << endl;
-    std::cout << "int:" << endl;
+    std::cout << std::endl;
+    std::cout << "int:" << std::endl;
     ScalarConverter::convert("0");
     ScalarConverter::convert("42");
     ScalarConverter::convert("-42");
-    std::cout << endl;
-    std::cout << "float:" << endl;
+    std::cout << std::endl;
+    std::cout << "float:" << std::endl;
     ScalarConverter::convert("0.0f");
     ScalarConverter::convert("-4.2f");
     ScalarConverter::convert("4.2f");
     ScalarConverter::convert("-inff");
     ScalarConverter::convert("+inff");
     ScalarConverter::convert("nanf");
-    std::cout << endl;
-    std::cout << "double:" << endl;
+    std::cout << std::endl;
+    std::cout << "double:" << std::endl;
     ScalarConverter::convert("42.42");
     ScalarConverter::convert("0.0");
     ScalarConverter::convert("-4.2");
@@ -45,5 +48,34 @@ int main()
     ScalarConverter::convert("-inf");
     ScalarConverter::convert("+inf");
     ScalarConverter::convert("nan");
+    return 0;
+}
+*/
+/*
+// char
+int main()
+{
+    std::cout << "empty:" << std::endl;
+    ScalarConverter::convert("");
+    std::cout << "char:" << std::endl;
+    ScalarConverter::convert("a");
+    ScalarConverter::convert("c");
+    std::cout << std::endl;
+    return 0;
+}*/
+
+int main()
+{
+    std::cout << "5:" << std::endl;
+    ScalarConverter::convert("5");
+    std::cout << "6548:" << std::endl;
+    ScalarConverter::convert("6548");
+    std::cout << "0:" << std::endl;
+    ScalarConverter::convert("0");
+    std::cout << "nan:" << std::endl;
+    ScalarConverter::convert("nan");
+    std::cout << "42.0f:" << std::endl;
+    ScalarConverter::convert("42.0f");
+    std::cout << std::endl;
     return 0;
 }
