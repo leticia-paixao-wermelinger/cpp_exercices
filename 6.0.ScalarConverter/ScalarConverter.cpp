@@ -37,10 +37,10 @@ void ScalarConverter::convert(std::string literal)
 	char character = toChar(integer, literal);
 	printChar(character);
 	printInt(integer);
-	//float floatNbr = toFloat(literal);
-	//printFloat(floatNbr);
-	//double doubleNbr = toDouble(literal);
-	//printDouble(floatNbr);
+	float floatNbr = toFloat(literal);
+	printFloat(floatNbr);
+	double doubleNbr = toDouble(literal);
+	printDouble(floatNbr);
 }
 
 char	ScalarConverter::toChar(int number, std::string literal)
@@ -49,9 +49,9 @@ char	ScalarConverter::toChar(int number, std::string literal)
 	if ((number >= 0 && number <= 32) || (number >= 127))
 	{
 		if (literal == "nan")
-		std::cout << "impossible" << std::endl;
+			std::cout << "impossible" << std::endl;
 		else
-		std::cout << "Non displayable" << std::endl;
+			std::cout << "Non displayable" << std::endl;
 		return 0;
 	}
 	return converted;
@@ -65,15 +65,17 @@ int	ScalarConverter::toInt(std::string literal)
 	return number;
 }
 
-float	ScalarConverter::toFloat()
+float	ScalarConverter::toFloat(std:string literal)
 {
 	float floatNbr;
+
 	std::cout << floatNbr << std::endl;
 }
 
 double	ScalarConverter::toDouble(std:string literal)
 {
 	double number;
+
 	return number;
 }
 

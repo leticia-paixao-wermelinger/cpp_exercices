@@ -24,7 +24,7 @@ class ScalarConverter
 		static char		toChar(int number, std::string literal);
 		static int		toInt(std::string literal);
 		static float	toFloat(std::string literal);
-		//static double	toDouble(std::string literal);
+		static double	toDouble(std::string literal);
 		static void		printChar(char c);
 		static void 	printInt(int number);
 		static void		printFloat(float number);
