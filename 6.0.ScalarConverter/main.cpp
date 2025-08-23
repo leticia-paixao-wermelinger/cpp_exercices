@@ -18,31 +18,32 @@
 
 #include <iostream>
 
-/*
+
 int main()
 {
     std::cout << "empty:" << std::endl;
     ScalarConverter::convert("");
-    std::cout << "char:" << std::endl;
+    std::cout << std::endl << "----> char:" << std::endl;
     ScalarConverter::convert("a");
     ScalarConverter::convert("c");
     std::cout << std::endl;
-    std::cout << "int:" << std::endl;
+    std::cout << std::endl << "----> int:" << std::endl;
     ScalarConverter::convert("0");
     ScalarConverter::convert("42");
     ScalarConverter::convert("-42");
     std::cout << std::endl;
-    std::cout << "float:" << std::endl;
+    std::cout << std::endl << "----> float:" << std::endl;
     ScalarConverter::convert("0.0f");
+    ScalarConverter::convert("0.f");
     ScalarConverter::convert("-4.2f");
     ScalarConverter::convert("4.2f");
     ScalarConverter::convert("-inff");
     ScalarConverter::convert("+inff");
     ScalarConverter::convert("nanf");
     std::cout << std::endl;
-    std::cout << "double:" << std::endl;
+    std::cout << std::endl << "----> double:" << std::endl;
     ScalarConverter::convert("42.42");
-    ScalarConverter::convert("0.0");
+    ScalarConverter::convert("0.0f");
     ScalarConverter::convert("-4.2");
     ScalarConverter::convert("4.2");
     ScalarConverter::convert("-inf");
@@ -50,7 +51,7 @@ int main()
     ScalarConverter::convert("nan");
     return 0;
 }
-*/
+
 /*
 // char
 int main()
@@ -63,7 +64,7 @@ int main()
     std::cout << std::endl;
     return 0;
 }*/
-
+/*
 int main()
 {
     std::cout << "5:" << std::endl;
@@ -78,4 +79,4 @@ int main()
     ScalarConverter::convert("42.0f");
     std::cout << std::endl;
     return 0;
-}
+}*/

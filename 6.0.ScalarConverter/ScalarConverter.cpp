@@ -13,6 +13,8 @@
 #include "ScalarConverter.hpp"
 
 #include <sstream>
+#include <stdlib.h>
+#include <limits>
 
 ScalarConverter::ScalarConverter()
 {}
@@ -33,72 +35,99 @@ ScalarConverter::~ScalarConverter()
 
 void ScalarConverter::convert(std::string literal)
 {
-	int integer = toInt(literal);
-	char character = toChar(integer, literal);
-	printChar(character);
-	printInt(integer);
-	float floatNbr = toFloat(literal);
-	printFloat(floatNbr);
-	double doubleNbr = toDouble(literal);
-	printDouble(floatNbr);
-}
-
-char	ScalarConverter::toChar(int number, std::string literal)
-{
-	char	converted = static_cast<char>(number);
-	if ((number >= 0 && number <= 32) || (number >= 127))
+	if (literal.size() == 0)
 	{
-		if (literal == "nan")
-			std::cout << "impossible" << std::endl;
-		else
-			std::cout << "Non displayable" << std::endl;
-		return 0;
+		printEmpty();
+		return ;
 	}
-	return converted;
+	toChar(literal);
+	toInt(literal);
+	toFloat(literal);
+	toDouble(literal);
 }
 
-int	ScalarConverter::toInt(std::string literal)
+void	ScalarConverter::toChar(std::string literal)
+{
+	int number;
+	std::stringstream ss(literal);
+	ss >> number;
+	
+	//std::cout << "ss.fail() = ", ss.fail();
+	char	converted = static_cast<char>(number);
+	std::cout << "char: ";
+	if ((number <= 32) || (number >= 127))
+	{
+		
+		if (literal == "nan")
+		std::cout << "impossible" << std::endl;
+		else
+		std::cout << "Non displayable" << std::endl;
+		
+		return ;
+	}
+	std::cout << converted << std::endl;
+}
+
+void	ScalarConverter::toInt(std::string literal)
 {
 	std::stringstream ss(literal);
-	int number;
+	long long number;
 	ss >> number;
-	return number;
-}
-
-float	ScalarConverter::toFloat(std:string literal)
-{
-	float floatNbr;
-
-	std::cout << floatNbr << std::endl;
-}
-
-double	ScalarConverter::toDouble(std:string literal)
-{
-	double number;
-
-	return number;
-}
-
-void	ScalarConverter::printChar(char character)
-{
-	std::cout << "char: ";
-	std::cout << character << std::endl;
-}
-
-void	ScalarConverter::printInt(int number)
-{
+	if (number < std::numeric_limits<int>::min() || number > std::numeric_limits<int>::max())
+	{
+		std::cout << "int: nan" << std::endl;
+		return ;
+	}
+	/*
+	if (ss.fail()) {
+		std::cout << "Conversão para int inválida\n";
+	}
+	*/
 	std::cout << "int: ";
 	std::cout << number << std::endl;
 }
 
-void	ScalarConverter::printFloat(float number)
+void	ScalarConverter::toFloat(std::string literal)
 {
+	std::stringstream ss(literal);
+	long double floatNbr;
+	ss >> floatNbr;
+	if (floatNbr < std::numeric_limits<float>::min() || floatNbr > std::numeric_limits<float>::max())
+	{
+		std::cout << "float: nanf" << std::endl;
+		return ;
+	}
+	/*
+	if (ss.fail()) {
+		std::cout << "Conversão para float inválida\n";
+	}*/
+
+	// VALIDAR nanf
 	std::cout << "float: ";
-	std::cout << number << std::endl;
+	std::cout << floatNbr << "f" << std::endl;
 }
 
-void	ScalarConverter::printDouble(double number)
+void	ScalarConverter::toDouble(std::string literal)
 {
+	std::stringstream ss(literal);
+	long double doubleNbr;
+	ss >> doubleNbr;
+	if (doubleNbr < std::numeric_limits<double>::min() || doubleNbr > std::numeric_limits<double>::max())
+	{
+		std::cout << "double: nan" << std::endl;
+		return ;
+	}
+	/*if (ss.fail()) {
+		std::cout << "Conversão para double inválida\n";
+	}*/
 	std::cout << "double: ";
-	std::cout << number << std::endl;
+	std::cout << doubleNbr << std::endl;
+}
+
+void	ScalarConverter::printEmpty()
+{
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: nanf" << std::endl;
+	std::cout << "double: nan" << std::endl;
 }
