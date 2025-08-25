@@ -15,6 +15,7 @@
 #include <sstream>
 #include <stdlib.h>
 #include <limits>
+#include <iomanip> // setprecision
 
 ScalarConverter::ScalarConverter()
 {}
@@ -104,7 +105,7 @@ void	ScalarConverter::toFloat(std::string literal)
 
 	// VALIDAR nanf
 	std::cout << "float: ";
-	std::cout << floatNbr << "f" << std::endl;
+	std::cout << floatNbr << std::fixed << std::setprecision(2) << "f" << std::endl;
 }
 
 void	ScalarConverter::toDouble(std::string literal)
@@ -121,7 +122,7 @@ void	ScalarConverter::toDouble(std::string literal)
 		std::cout << "Conversão para double inválida\n";
 	}*/
 	std::cout << "double: ";
-	std::cout << doubleNbr << std::endl;
+	std::cout << doubleNbr << std::fixed << std::setprecision(2) << std::endl;
 }
 
 void	ScalarConverter::printEmpty()
