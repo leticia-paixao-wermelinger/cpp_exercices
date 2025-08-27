@@ -17,6 +17,14 @@
 #include <limits>
 #include <iomanip> // setprecision
 
+enum	literalType
+{
+	CHAR_TYPE,
+	INT_TYPE,
+	FLOAT_TYPE,
+	DOUBLE_TYPE
+};
+
 ScalarConverter::ScalarConverter()
 {}
 
@@ -36,6 +44,11 @@ ScalarConverter::~ScalarConverter()
 
 void ScalarConverter::convert(std::string literal)
 {
+	checkType(literal);
+	// Verificar o tipo
+	// Dependendo do tipo, chamar uma função para lidar e imprimir tudo de acordo com o tipo inicial!
+	// Se não for de nenhum dos tipos, imprime a função de erro (impossible em tudo)
+	/*
 	if (literal.size() == 0)
 	{
 		printEmpty();
@@ -45,6 +58,13 @@ void ScalarConverter::convert(std::string literal)
 	toInt(literal);
 	toFloat(literal);
 	toDouble(literal);
+	*/
+}
+
+int	ScalarConverter::checkType(std::string literal)
+{
+	int	type;
+	return type;
 }
 
 void	ScalarConverter::toChar(std::string literal)
