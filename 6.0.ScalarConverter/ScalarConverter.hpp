@@ -21,11 +21,15 @@ class ScalarConverter
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter & src);
 		ScalarConverter & operator=(const ScalarConverter & src);
-		static void		toChar(std::string literal);
-		static void		toInt(std::string literal);
-		static void		toFloat(std::string literal);
-		static void		toDouble(std::string literal);
-		static void		printEmpty();
+		static void		isChar(char character);
+		static void		isInt(std::string literal);
+		static void		isFloat(std::string literal);
+		static void		isDouble(std::string literal);
+		static void		printError();
+		static int		checkType(std::string literal);
+		static bool		isNumericException(std::string literal);
+		static bool		strIsAllNumeric(std::string str);
+		static void		printNumericException(std::string literal, int type);
 	public:
 		~ScalarConverter();
 		static void convert(std::string literal);
