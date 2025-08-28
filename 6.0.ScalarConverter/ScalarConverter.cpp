@@ -78,8 +78,9 @@ int	ScalarConverter::checkType(std::string literal)
 		type = DOUBLE_TYPE;
 	else if (literal.length() == 1 && !std::isdigit(literal[0]))
 		type = CHAR_TYPE;
-	else if (literal.length() > 1 && strIsAllNumeric(literal))
+	else if (literal.length() >= 1 && strIsAllNumeric(literal))
 		type = INT_TYPE;
+	//std::cout << "Detected type: " << type << std::endl;
 	return type;
 }
 

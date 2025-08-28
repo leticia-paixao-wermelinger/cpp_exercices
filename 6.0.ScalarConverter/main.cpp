@@ -18,7 +18,7 @@
 
 #include <iostream>
 
-
+/*
 int main()
 {
     std::cout << "empty:" << std::endl;
@@ -70,32 +70,17 @@ int main()
     ScalarConverter::convert("nan");
     return 0;
 }
+*/
 
-/*
-// char
-int main()
+// subject
+int main(int argc, char **argv)
 {
-    std::cout << "empty:" << std::endl;
-    ScalarConverter::convert("");
-    std::cout << "char:" << std::endl;
-    ScalarConverter::convert("a");
-    ScalarConverter::convert("c");
-    std::cout << std::endl;
+    if (argc != 2)
+    {
+        std::cerr << RED << "Error: invalid number of arguments." << COLOR_END << std::endl;
+        std::cerr << "Usage: ./convert <literal_value>" << std::endl;
+        return 1;
+    }
+    ScalarConverter::convert(argv[1]);
     return 0;
-}*/
-/*
-int main()
-{
-    std::cout << "5:" << std::endl;
-    ScalarConverter::convert("5");
-    std::cout << "6548:" << std::endl;
-    ScalarConverter::convert("6548");
-    std::cout << "0:" << std::endl;
-    ScalarConverter::convert("0");
-    std::cout << "nan:" << std::endl;
-    ScalarConverter::convert("nan");
-    std::cout << "42.0f:" << std::endl;
-    ScalarConverter::convert("42.0f");
-    std::cout << std::endl;
-    return 0;
-}*/
+}
