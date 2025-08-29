@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#include "Serializer.hpp"
 
 #define RED "\033[0;31m"
 #define GREEN "\033[0;32m"
@@ -18,84 +18,35 @@
 
 #include <iostream>
 
-
 int main()
 {
-    std::cout << "empty:" << std::endl;
-    ScalarConverter::convert("");
-    std::cout << std::endl << "----> char:" << std::endl;
-    std::cout << "-> a:" << std::endl;
-    ScalarConverter::convert("a");
-    std::cout << "-> c:" << std::endl;
-    ScalarConverter::convert("c");
-    std::cout << std::endl;
-    std::cout << std::endl << "----> int:" << std::endl;
-    std::cout << "-> 0:" << std::endl;
-    ScalarConverter::convert("0");
-    std::cout << "-> 42:" << std::endl;
-    ScalarConverter::convert("42");
-    std::cout << "-> -42:" << std::endl;
-    ScalarConverter::convert("-42");
-    std::cout << std::endl;
-    std::cout << std::endl << "----> float:" << std::endl;
-    std::cout << "-> 0.0f:" << std::endl;
-    ScalarConverter::convert("0.0f");
-    std::cout << "-> 0.f:" << std::endl;
-    ScalarConverter::convert("0.f");
-    std::cout << "-> -4.2f:" << std::endl;
-    ScalarConverter::convert("-4.2f");
-    std::cout << "-> 4.2f:" << std::endl;
-    ScalarConverter::convert("4.2f");
-    std::cout << "-> -inff:" << std::endl;
-    ScalarConverter::convert("-inff");
-    std::cout << "-> +inff:" << std::endl;
-    ScalarConverter::convert("+inff");
-    std::cout << "-> nanf:" << std::endl;
-    ScalarConverter::convert("nanf");
-    std::cout << std::endl;
-    std::cout << std::endl << "----> double:" << std::endl;
-    std::cout << "-> 42.42:" << std::endl;
-    ScalarConverter::convert("42.42");
-    std::cout << "-> 0.0:" << std::endl;
-    ScalarConverter::convert("0.0");
-    std::cout << "-> -4.2:" << std::endl;
-    ScalarConverter::convert("-4.2");
-    std::cout << "-> 4.2:" << std::endl;
-    ScalarConverter::convert("4.2");
-    std::cout << "-> -inf:" << std::endl;
-    ScalarConverter::convert("-inf");
-    std::cout << "-> +inf:" << std::endl;
-    ScalarConverter::convert("+inf");
-    std::cout << "-> nan:" << std::endl;
-    ScalarConverter::convert("nan");
+    Data *data = new Data();
+    data->intValue = 42;
+    data->floatValue = 3.14f;
+    data->doubleValue = 42.42;
+    data->charValue = 'a';
+
+    std::cout << GREEN "Original Data:" COLOR_END << std::endl;
+    std::cout << "Data address: " << data << std::endl;
+    std::cout << "intValue: " << data->intValue << std::endl;
+    std::cout << "floatValue: " << data->floatValue << std::endl;
+    std::cout << "doubleValue: " << data->doubleValue << std::endl;
+    std::cout << "charValue: " << data->charValue << std::endl;
+
+    //uintptr_t raw = NULL;
+    uintptr_t raw = Serializer::serialize(data);
+    std::cout << GREEN "Serialized Data:" COLOR_END << std::endl;
+    std::cout << "raw: " << raw << std::endl;
+
+    Data* deserializedData = Serializer::deserialize(raw);
+    std::cout << GREEN "Deserialized Data:" COLOR_END << std::endl;
+    std::cout << "Deserialized Data address: " << deserializedData << std::endl;
+    std::cout << "intValue: " << deserializedData->intValue << std::endl;
+    std::cout << "floatValue: " << deserializedData->floatValue << std::endl;
+    std::cout << "doubleValue: " << deserializedData->doubleValue << std::endl;
+    std::cout << "charValue: " << deserializedData->charValue << std::endl;
+
+    //delete data;
+    delete deserializedData;
     return 0;
 }
-
-/*
-// char
-int main()
-{
-    std::cout << "empty:" << std::endl;
-    ScalarConverter::convert("");
-    std::cout << "char:" << std::endl;
-    ScalarConverter::convert("a");
-    ScalarConverter::convert("c");
-    std::cout << std::endl;
-    return 0;
-}*/
-/*
-int main()
-{
-    std::cout << "5:" << std::endl;
-    ScalarConverter::convert("5");
-    std::cout << "6548:" << std::endl;
-    ScalarConverter::convert("6548");
-    std::cout << "0:" << std::endl;
-    ScalarConverter::convert("0");
-    std::cout << "nan:" << std::endl;
-    ScalarConverter::convert("nan");
-    std::cout << "42.0f:" << std::endl;
-    ScalarConverter::convert("42.0f");
-    std::cout << std::endl;
-    return 0;
-}*/

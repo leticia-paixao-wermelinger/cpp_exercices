@@ -10,26 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = serializer
+NAME = serialize
 
 CPP = c++
 
 42CPP = g++
 
 FLAGS = -g -Wall -Wextra -Werror -std=c++98
-# https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 
 SRCS = \
 main.cpp \
-ScalarConverter.cpp
+Serializer.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 
 42OBJS = $(SRCS:.cpp=.42o)
-
-#ARG = 0
-#ARG = nan
-ARG = 42.0f
 
 %.o: %.cpp
 	$(CPP) $(FLAGS) -c $< -o $@
@@ -52,17 +47,17 @@ fclean: clean
 re: fclean all
 
 run: re
-	./$(NAME) $(ARG)
+	./$(NAME)
 
 val: re
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(ARG)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 42re: fclean $(42OBJS)
 	$(42CPP) $(FLAGS) $(42OBJS) -o $(NAME)
 	clear
 
 42run: 42re
-	./$(NAME) $(ARG)
+	./$(NAME)
 
 42val: 42re
-	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME) $(ARG)
+	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME)

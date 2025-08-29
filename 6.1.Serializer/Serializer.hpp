@@ -10,32 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Serializer.hpp"
+#pragma once
 
-Serializer::Serializer()
-{}
+#include <iostream>
+#include <stdint.h>
+//#include <cstdint>
 
-Serializer::Serializer(const Serializer & src)
+struct Data
 {
-	(void)src;
-}
+	int         intValue;
+	float       floatValue;
+	double      doubleValue;
+	char        charValue;
+};
 
-Serializer & Serializer::operator=(const Serializer & src)
+class Serializer
 {
-	if (this != &src)
-		*this = src;
-	return *this;
-}
-
-Serializer::~Serializer()
-{}
-
-uintptr_t Serializer::serialize(Data* ptr)
-{
-	return reinterpret_cast<uintptr_t>(ptr);
-}
-
-Data* Serializer::deserialize(uintptr_t raw)
-{
-	return reinterpret_cast<Data*>(raw);
-}
+	private:
+		Serializer();
+		Serializer(const Serializer & src);
+		Serializer & operator=(const Serializer & src);
+	public:
+		~Serializer();
+		static uintptr_t serialize(Data* ptr);
+		static Data* deserialize(uintptr_t raw);
+};
