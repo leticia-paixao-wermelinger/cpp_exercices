@@ -14,9 +14,8 @@
 
 class Base
 {
-	private:
-		/* data */
+	protected:
+		//Base();
 	public:
-		Base();
-		~Base();
+		virtual	~Base() {};
 };
