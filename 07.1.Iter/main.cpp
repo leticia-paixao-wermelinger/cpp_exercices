@@ -28,9 +28,9 @@ int	main( void )
 	iter(simpleString.data(), simpleString.size(), printItem);
 
 	/*
-	Awesome arr[3];
+	Awesome wow;
 	std::cout << "\nTesting with class:" << std::endl;
-	iter(arr, 3, printItem);
+	iter(&wow, 1, printItem);
 	*/
 	return 0;
 }

@@ -34,4 +34,10 @@ class Awesome
 		int get( void ) const { return this->_n; }
 	private:
 		int _n;
-};*/
+};
+
+std::ostream & operator<<(std::ostream &os, const Awesome &wow)
+{
+	os << wow.get();
+	return os;
+}*/
