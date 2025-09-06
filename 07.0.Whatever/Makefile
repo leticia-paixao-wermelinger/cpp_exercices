@@ -19,7 +19,8 @@ CPP = c++
 FLAGS = -g -Wall -Wextra -Werror -std=c++98
 
 SRCS = \
-main.cpp
+subjectMain.cpp
+#main.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 
