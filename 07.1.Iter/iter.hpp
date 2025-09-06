@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,26 +12,26 @@
 
 #pragma once
 
+#include <cstddef>
+
 template <typename T>
-void	swap(T & a, T & b)
+void	iter(T *address, std::size_t length, void (*f)(T &item))
 {
-	T	tmp = a;
-	a = b;
-	b = tmp;
+	while (length--)
+		f(*address++);
 }
 
 template <typename T>
-T	min(T a, T b)
+void	printItem(T &item)
 {
-	if (a < b)
-		return a;
-	return b;
+	std::cout << item << std::endl;
 }
-
-template <typename T>
-T	max(T a, T b)
+/*
+class Awesome
 {
-	if (a > b)
-		return a;
-	return b;
-}
+	public:
+		Awesome( void ) : _n( 42 ) { return; }
+		int get( void ) const { return this->_n; }
+	private:
+		int _n;
+};*/
