@@ -13,6 +13,8 @@
 #pragma once
 
 #include <vector>
+#include <stdexcept>
+#include <algorithm>
 
 class Span
 {
@@ -20,6 +22,7 @@ class Span
 		unsigned int _N;
 		std::vector<int> _numbers;
 		Span();
+		void	validateSpan() const;
 	public:
 		Span(unsigned int N);
 		Span(const Span &other);
