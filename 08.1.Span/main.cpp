@@ -17,11 +17,29 @@
 #include <iostream>
 
 /*
-// teste code with addRange()
+// test code with addRange()
 int main()
 {}
 */
 
+
+// test adding more than the N capacity
+int main()
+{
+	Span sp = Span(5);
+	try {
+		for (int i = 0; i < 7; ++i)
+		{
+			std::cout << "Adding number: " << i * 10 << std::endl;
+			sp.addNumber(i * 10);
+		}
+	} catch (const std::runtime_error &e) {
+		std::cerr << "ERROR: " << e.what() << std::endl;
+	}
+	return 0;
+}
+
+/*
 // test code with more than 10000 numbers
 int main()
 {
@@ -38,7 +56,7 @@ int main()
 
 	return 0;
 }
-
+*/
 /*
 // test code with at least 10000 numbers (preferably more)
 int main()

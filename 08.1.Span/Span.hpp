@@ -15,6 +15,7 @@
 #include <vector>
 #include <stdexcept>
 #include <algorithm>
+#include <iostream>
 
 class Span
 {

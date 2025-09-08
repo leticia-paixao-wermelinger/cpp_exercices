@@ -36,7 +36,8 @@ Span::~Span()
 
 void	Span::addNumber(int number)
 {
-	if (this->_numbers.size() >= _N)
+	//std::cout << "Current size: " << this->_numbers.size() + 1 << " / " << this->_N << std::endl;
+	if (this->_numbers.size() >= _N - 1)
 		throw std::runtime_error("Cannot add more numbers, capacity reached");
 	_numbers.push_back(number);
 }
