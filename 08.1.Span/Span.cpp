@@ -42,9 +42,6 @@ void	Span::addNumber(int number)
 	_numbers.push_back(number);
 }
 
-void	Span::addRange(/*...*/)
-{}
-
 int		Span::shortestSpan() const
 {
 	validateSpan();
@@ -74,4 +71,26 @@ void	Span::validateSpan() const
 		throw std::runtime_error("No numbers stored");
 	if (this->_numbers.size() == 1)
 		throw std::runtime_error("Only one number stored. Impossible to find a span");
+}
+
+void	Span::printNumbers() const
+{
+	if (this->_numbers.size() == 0)
+	{
+		std::cout << "No numbers stored." << std::endl;
+		return ;
+	}
+	std::cout << "Stored numbers: [";
+	for (size_t i = 0; i < _numbers.size(); ++i)
+	{
+		std::cout << _numbers[i];
+		if (i != _numbers.size() - 1)
+			std::cout << ", ";
+	}
+	std::cout << "]" << std::endl;
+}
+
+void	Span::printNumbersSize() const
+{
+	std::cout << "Current size: " << this->_numbers.size() << " / " << this->_N << std::endl;
 }
