@@ -17,10 +17,11 @@
 
 class BitcoinExchange
 {
-    public:
-        std::map<std::string, float> dataBase;
     private:
+        std::map<std::string, float> dataBase;
+    public:
         BitcoinExchange();
-        BitcoinExchange(const );
+        BitcoinExchange(const BitcoinExchange &src);
+        BitcoinExchange &operator=(const BitcoinExchange &src);
         ~BitcoinExchange();
 };

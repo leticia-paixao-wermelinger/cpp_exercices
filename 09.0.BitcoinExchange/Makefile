@@ -19,7 +19,10 @@ CPP = c++
 FLAGS = -g -Wall -Wextra -Werror -std=c++98
 
 SRCS = \
-main.cpp
+main.cpp \
+BitcoinExchange.cpp
+
+FILE = input.txt
 
 OBJS = ${SRCS:.cpp=.o}
 
@@ -46,17 +49,17 @@ fclean: clean
 re: fclean all
 
 run: re
-	./$(NAME)
+	./$(NAME) $(FILE)
 
 val: re
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(FILE)
 
 42re: fclean $(42OBJS)
-	$(42CPP) $(FLAGS) $(42OBJS) -o $(NAME)
+	$(42CPP) $(FLAGS) $(42OBJS) -o $(NAME) $(FILE)
 	clear
 
 42run: 42re
-	./$(NAME)
+	./$(NAME) $(FILE)
 
 42val: 42re
-	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all ./$(NAME) $(FILE)
