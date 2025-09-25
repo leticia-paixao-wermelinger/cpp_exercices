@@ -23,10 +23,11 @@
 bool validDate(std::string date)
 {
     //std::cout << "date: " << date << std::endl;
-    if (date.length() != 10)
+    if (date.length() != 10 || date[4] != '-' || date[7] != '-')
+    {
+        std::cerr << RED << "Error: not a date." << COLOR_END << std::endl;
         return false;
-    if (date[4] != '-' || date[7] != '-')
-        return false;
+    }
     std::string monthStr = date.substr(5, 2);
     std::string dayStr = date.substr(8, 2);
     for (int i = 0; i < 9; i++)
@@ -34,7 +35,10 @@ bool validDate(std::string date)
         if (i == 4 || i == 7)
             continue;
         if (!isdigit(date[i]))
+        {
+            std::cerr << RED << "Error: not a date." << COLOR_END << std::endl;
             return false;
+        }
     }
     int month = atoi(monthStr.c_str());
     int day = atoi(dayStr.c_str());
@@ -45,27 +49,39 @@ bool validDate(std::string date)
 
 bool validValue(std::string value)
 {
-    std::cout << "value: " << value << std::endl;
+    //std::cout << "value: " << value << std::endl;
     int dotCount = 0;
     for (size_t i = 0; i < value.length(); i++)
     {
+        if (i == 0 && (value[i] == '+' || value[i] == '-'))
+            continue;
         if (value[i] == '.')
             dotCount++;
         else if (!isdigit(value[i]))
         {
-            std::cout << "Invalid character in value[" << i << "] = " << value[i] << std::endl;
+            std::cerr << RED << "Error: not a number." << COLOR_END << std::endl;
             return false;
         }
     }
     if (dotCount > 1)
     {
-        std::cout << "Invalid value format: too many dots = " << dotCount << std::endl;
+        std::cerr << RED << "Error: not a number." << COLOR_END << std::endl;
+        return false;
+    }
+    if (value.length() > 4)
+    {
+        std::cerr << RED << "Error: too large a number." << COLOR_END << std::endl;
         return false;
     }
     int val = atoi(value.c_str());
-    if (val < 0 || val > 1000)
+    if (val < 0)
     {
-        std::cout << "Invalid value range: " << val << std::endl;
+        std::cerr << RED << "Error: not a positive number." << COLOR_END << std::endl;
+        return false;
+    }
+    else if (val > 1000)
+    {
+        std::cerr << RED << "Error: too large a number." << COLOR_END << std::endl;
         return false;
     }
     return true;
@@ -74,21 +90,21 @@ bool validValue(std::string value)
 bool lineIsValid(std::string line)
 {
     if (line.find(" | ") == std::string::npos) // std::string::find = member function of std::string
+    {
+        std::cerr << RED << "Error: bad input => " << line << COLOR_END << std::endl;
         return false;
+    }
     //std::cout << "line: " << line << std::endl;
     if (validDate(line.substr(0, 10)) == false)
         return false;
     //std::cout << "Date is valid" << std::endl;
     if (line.length() <= 13)
     {
-        std::cout << "Invalid line length: " << line.length() << std::endl;
+        std::cerr << RED << "Error: bad input => " << line << COLOR_END << std::endl;
         return false;
     }
     else if (validValue(line.substr(13, line.length() - 13)) == false)
-    {
-        std::cout << "Value is not valid" << std::endl;
         return false;
-    }
     return true;
 }
 
@@ -104,18 +120,25 @@ std::map<std::string, float>    openCsv(std::string path)
         while (!fs.eof())
         {
             std::getline(fs, line);
-            if (lineIsValid(line) == false)
+            if (lineIsValid(line) == true)
             {
-                std::cerr << "Invalid File lines" << std::endl;
-                std::cerr << "all lines must be as follows: date | value" << std::endl;
-                std::cerr << "In which date is in the following format: Year-Month-Day" << std::endl;
-                fs.close();
-                return dataBase;
+                //std::cout << GREEN << "Valid line: " << COLOR_END << line << std::endl;
+                // print date
+                std::cout << line.substr(0, 10);
+                // print " => "
+                std::cout << " => ";
+                // print value
+                std::cout << line.substr(13, line.length() - 13);
+                // print " = "
+                std::cout << " = ";
+                // print value * exchange rate
+                std::cout << "valor final" << std::endl;
             }
-            std::cout << GREEN << "Valid line: " << COLOR_END << line << std::endl;
         }
         fs.close();
     }
+    else
+        std::cerr << RED << "Error: could not open file." << COLOR_END << std::endl;
     return dataBase;
 }
 
@@ -123,7 +146,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        std::cerr << RED << "Error: invalid number of arguments." << COLOR_END << std::endl;
+        std::cerr << RED << "Error: could not open file." << COLOR_END << std::endl;
         std::cerr << "Usage: ./btc <file.csv>" << std::endl;
         return 0;
     }
