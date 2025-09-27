@@ -11,18 +11,9 @@
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-#include <iostream>
-#include <fstream>
-
-#define RED "\033[0;31m"
-#define GREEN "\033[0;32m"
-#define COLOR_END "\033[0m"
-
-#include <cstdlib> // atoi
 
 bool validDate(std::string date)
 {
-    //std::cout << "date: " << date << std::endl;
     if (date.length() != 10 || date[4] != '-' || date[7] != '-')
     {
         std::cerr << RED << "Error: not a date." << COLOR_END << std::endl;
@@ -49,7 +40,6 @@ bool validDate(std::string date)
 
 bool validValue(std::string value)
 {
-    //std::cout << "value: " << value << std::endl;
     int dotCount = 0;
     for (size_t i = 0; i < value.length(); i++)
     {
@@ -108,7 +98,7 @@ bool lineIsValid(std::string line)
     return true;
 }
 
-std::map<std::string, float>    openCsv(std::string path)
+std::map<std::string, float>    openTxt(std::string path)
 {
     std::fstream fs;
     // difference between open and ifstream
@@ -122,14 +112,9 @@ std::map<std::string, float>    openCsv(std::string path)
             std::getline(fs, line);
             if (lineIsValid(line) == true)
             {
-                //std::cout << GREEN << "Valid line: " << COLOR_END << line << std::endl;
-                // print date
                 std::cout << line.substr(0, 10);
-                // print " => "
                 std::cout << " => ";
-                // print value
                 std::cout << line.substr(13, line.length() - 13);
-                // print " = "
                 std::cout << " = ";
                 // print value * exchange rate
                 std::cout << "valor final" << std::endl;
@@ -147,11 +132,13 @@ int main(int argc, char *argv[])
     if (argc != 2)
     {
         std::cerr << RED << "Error: could not open file." << COLOR_END << std::endl;
-        std::cerr << "Usage: ./btc <file.csv>" << std::endl;
+        std::cerr << "Usage: ./btc <file.txt>" << std::endl;
         return 0;
     }
-    std::map<std::string, float> dataBase = openCsv(argv[1]);
-    if (dataBase.empty())
+    BitcoinExchange btc;
+    std::map<std::string, float> datesToSearch = openTxt(argv[1]);
+    if (datesToSearch.empty())
         return 0;
+    datesToSearch.clear();
     return 0;
 }
