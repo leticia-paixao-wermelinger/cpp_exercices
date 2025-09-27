@@ -23,10 +23,12 @@ BitcoinExchange::BitcoinExchange()
         while (!fs.eof())
         {
             std::getline(fs, line);
-//			std::cout << "Line: " << line << std::endl;
-//			std::cout << "line lengtn - 1 = " << line.length() - 1 << " que corresponde a " << line[line.length() - 1] << std::endl;
+            if (line.length() == 0)
+                break ;
+			std::cout << "Line: " << line << std::endl;
+			std::cout << "line lengtn - 1 = " << line.length() - 1 << " que corresponde a " << line[line.length() - 1] << std::endl;
 			std::string date = line.substr(0, 10);
-			std::string value = line.substr(11, line.length() - 10);
+			std::string value = line.substr(11, line.length() - 9);
 			std::cout << "Date = " << date << " and value = " << value << std::endl;
             dataBase[date] = atoi(value.c_str());
         }
