@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
+#include <iomanip>
 
 BitcoinExchange::BitcoinExchange()
 {
 	std::fstream fs;
     fs.open("data.csv", std::fstream::in);
     std::string line;
-    this->dataBase = std::map<std::string, float>();
+    this->_dataBase = std::map<std::string, float>();
     if (fs.is_open())
     {
         while (!fs.eof())
@@ -25,17 +26,17 @@ BitcoinExchange::BitcoinExchange()
             std::getline(fs, line);
             if (line.length() == 0)
                 break ;
-			std::cout << "Line: " << line << std::endl;
-			std::cout << "line lengtn - 1 = " << line.length() - 1 << " que corresponde a " << line[line.length() - 1] << std::endl;
+			// std::cout << "Line: " << line << std::endl;
+// 			std::cout << "line lengtn - 1 = " << line.length() - 1 << " que corresponde a " << line[line.length() - 1] << std::endl;
 			std::string date = line.substr(0, 10);
 			std::string value = line.substr(11, line.length() - 9);
-			std::cout << "Date = " << date << " and value = " << value << std::endl;
-            dataBase[date] = atoi(value.c_str());
+			// std::cout << "Date = " << date << " and value = " << value << std::endl;
+            _dataBase[date] = atof(value.c_str());
         }
         fs.close();
     }
     else
-        std::cerr << RED << "Error: could not open database." << COLOR_END << std::endl;
+        std::cerr << RED << "Error: could not open _dataBase." << COLOR_END << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &src)
@@ -47,12 +48,28 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &src)
 {
     if (this != &src)
     {
-        dataBase = src.dataBase;
+        _dataBase = src._dataBase;
     }
     return *this;
 }
 
 BitcoinExchange::~BitcoinExchange()
 {
-	this->dataBase.clear();
+	this->_dataBase.clear();
+}
+
+const std::map<std::string, float>&    BitcoinExchange::getDB()
+{
+    return this->_dataBase;
+}
+
+std::ostream & operator<<(std::ostream &out, BitcoinExchange &btcObj)
+{
+    std::map<std::string, float> db = btcObj.getDB();
+    std::map<std::string, float>::iterator it;
+    for (it = db.begin(); it != db.end(); ++it)
+    {
+        out << "Data: " << it->first << " e valor: " << it->second << std::fixed << std::setprecision(2) << std::endl;
+    }
+    return out;
 }

@@ -112,12 +112,12 @@ std::map<std::string, float>    openTxt(std::string path)
             std::getline(fs, line);
             if (lineIsValid(line) == true)
             {
-                std::cout << line.substr(0, 10);
-                std::cout << " => ";
-                std::cout << line.substr(13, line.length() - 13);
-                std::cout << " = ";
-                // print value * exchange rate
-                std::cout << "valor final" << std::endl;
+                // std::cout << line.substr(0, 10);
+                // std::cout << " => ";
+                // std::cout << line.substr(13, line.length() - 13);
+                // std::cout << " = ";
+                // // print value * exchange rate
+                // std::cout << "valor final" << std::endl;
             }
         }
         fs.close();
@@ -136,6 +136,7 @@ int main(int argc, char *argv[])
         return 0;
     }
     BitcoinExchange btc;
+    // std::cout << btc;
     std::map<std::string, float> datesToSearch = openTxt(argv[1]);
     if (datesToSearch.empty())
         return 0;

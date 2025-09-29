@@ -16,6 +16,7 @@
 #include <map>
 #include <iostream>
 #include <fstream>
+#include <cstring>
 #include <cstdlib> // atoi
 
 #define RED "\033[0;31m"
@@ -25,11 +26,13 @@
 class BitcoinExchange
 {
     private:
-        std::map<std::string, float> dataBase;
+        std::map<std::string, float> _dataBase;
     public:
         BitcoinExchange();
         BitcoinExchange(const BitcoinExchange &src);
         BitcoinExchange &operator=(const BitcoinExchange &src);
         ~BitcoinExchange();
-
+        const std::map<std::string, float>&    getDB();
 };
+
+std::ostream &operator<<(std::ostream &out, BitcoinExchange &btcObj);
