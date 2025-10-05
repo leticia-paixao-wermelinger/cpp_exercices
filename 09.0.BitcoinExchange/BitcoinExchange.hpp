@@ -27,12 +27,15 @@ class BitcoinExchange
 {
     private:
         std::map<std::string, float> _dataBase;
+        std::string    findDate(std::string date);
+        float   getBtcPrice(std::string closestDate);
     public:
         BitcoinExchange();
         BitcoinExchange(const BitcoinExchange &src);
         BitcoinExchange &operator=(const BitcoinExchange &src);
         ~BitcoinExchange();
         const std::map<std::string, float>&    getDB();
+        float    convertValue(std::string date, int value);
 };
 
 std::ostream &operator<<(std::ostream &out, BitcoinExchange &btcObj);

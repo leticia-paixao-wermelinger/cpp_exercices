@@ -58,6 +58,33 @@ BitcoinExchange::~BitcoinExchange()
 	this->_dataBase.clear();
 }
 
+float    BitcoinExchange::convertValue(std::string date, int value)
+{
+    std::string closestDate = findDate(date);
+    float   btcValue = getBtcPrice(closestDate);
+    return btcValue * value; // fixed?
+}
+
+std::string    BitcoinExchange::findDate(std::string date)
+{
+    std::string closestDate;
+    //std::map<std::string, float>::iterator it = 
+    if (this->_dataBase[date])
+        return date;
+    else
+    {
+        // Incluir date no map, salvar a data anterior a essa posição em closestDate, excluir o date incluído.
+    }
+    return closestDate;
+}
+
+float   BitcoinExchange::getBtcPrice(std::string closestDate)
+{
+    float btcValue = 0;
+    (void)closestDate;
+    return btcValue;
+}
+
 const std::map<std::string, float>&    BitcoinExchange::getDB()
 {
     return this->_dataBase;

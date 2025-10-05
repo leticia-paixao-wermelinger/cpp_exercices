@@ -86,7 +86,7 @@ bool lineIsValid(std::string line)
     }
     //std::cout << "line: " << line << std::endl;
     if (validDate(line.substr(0, 10)) == false)
-        return false;
+    return false;
     //std::cout << "Date is valid" << std::endl;
     if (line.length() <= 13)
     {
@@ -94,37 +94,40 @@ bool lineIsValid(std::string line)
         return false;
     }
     else if (validValue(line.substr(13, line.length() - 13)) == false)
-        return false;
+    return false;
     return true;
 }
 
-std::map<std::string, float>    openTxt(std::string path)
+void    execute(std::string path)
 {
     std::fstream fs;
     // difference between open and ifstream
     fs.open(path.c_str(), std::fstream::in);
-    std::string line;
-    std::map<std::string, float>    dataBase;
     if (fs.is_open())
     {
+        BitcoinExchange btc;
+        // std::cout << btc;
+        std::string line;
         while (!fs.eof())
         {
             std::getline(fs, line);
             if (lineIsValid(line) == true)
             {
-                // std::cout << line.substr(0, 10);
-                // std::cout << " => ";
-                // std::cout << line.substr(13, line.length() - 13);
-                // std::cout << " = ";
-                // // print value * exchange rate
-                // std::cout << "valor final" << std::endl;
+                std::string lineDate = line.substr(0, 10);
+                int       lineValue = atoi((line.substr(13, line.length() - 13)).c_str());
+                std::cout << lineDate;
+                std::cout << " => ";
+                std::cout << lineValue;
+                std::cout << " = ";
+                // print value * exchange rate
+                float convertedValue = btc.convertValue(lineDate, lineValue);
+                std::cout << convertedValue << std::endl;
             }
         }
         fs.close();
     }
     else
         std::cerr << RED << "Error: could not open file." << COLOR_END << std::endl;
-    return dataBase;
 }
 
 int main(int argc, char *argv[])
@@ -135,11 +138,6 @@ int main(int argc, char *argv[])
         std::cerr << "Usage: ./btc <file.txt>" << std::endl;
         return 0;
     }
-    BitcoinExchange btc;
-    // std::cout << btc;
-    std::map<std::string, float> datesToSearch = openTxt(argv[1]);
-    if (datesToSearch.empty())
-        return 0;
-    datesToSearch.clear();
+    execute(argv[1]);
     return 0;
 }
