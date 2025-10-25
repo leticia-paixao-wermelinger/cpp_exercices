@@ -123,8 +123,8 @@ void    execute(std::string path)
                 std::cout << " = ";
                 // print value * exchange rate
                 float convertedValue = btc.convertValue(lineDate, lineValue);
-                //std::cout << convertedValue << std::fixed << std::setprecision(2) << std::endl;
-                std::cout << convertedValue << std::fixed << std::setprecision(2) << std::endl;
+                // std::cout << convertedValue << std::fixed << std::setprecision(2) << std::endl;
+                std::cout << convertedValue << std::endl;
             }
         }
         fs.close();

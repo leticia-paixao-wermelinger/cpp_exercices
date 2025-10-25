@@ -22,7 +22,8 @@ SRCS = \
 main.cpp \
 BitcoinExchange.cpp
 
-FILE = input.txt
+#FILE = input.txt
+FILE = another_input.txt
 
 OBJS = ${SRCS:.cpp=.o}
 

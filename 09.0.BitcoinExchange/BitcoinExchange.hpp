@@ -27,12 +27,12 @@ class BitcoinExchange
 {
     private:
         std::map<std::string, float> _dataBase;
-        int firstYear;
-        int firstMonth;
-        int firstDay;
-        int lastYear;
-        int lastMonth;
-        int lastDay;
+        int _firstYear;
+        int _firstMonth;
+        int _firstDay;
+        int _lastYear;
+        int _lastMonth;
+        int _lastDay;
         std::string    findDate(std::string date);
         float   getBtcPrice(std::string closestDate);
         std::string getClosestDate(std::string date);
@@ -44,13 +44,22 @@ class BitcoinExchange
         std::map<std::string, float>::iterator getLastDate();
         bool    beforeFirstDate(std::string date);
         bool    afterLastDate(std::string date);
+        void    initAttributes();
+        void    printAttributes();
     public:
         BitcoinExchange();
         BitcoinExchange(const BitcoinExchange &src);
         BitcoinExchange &operator=(const BitcoinExchange &src);
         ~BitcoinExchange();
         const std::map<std::string, float>&    getDB();
-        float    convertValue(std::string date, int value);
+        float    convertValue(std::string date, float value);
+        std::map<std::string, float>    getDataBase() const;
+        int getFirstYear() const;
+        int getFirstMonth() const;
+        int getFirstDay() const;
+        int getLastYear() const;
+        int getLastMonth() const;
+        int getLastDay() const;
 };
 
 std::ostream &operator<<(std::ostream &out, BitcoinExchange &btcObj);
