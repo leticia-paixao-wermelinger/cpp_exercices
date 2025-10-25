@@ -12,6 +12,8 @@
 
 #include "BitcoinExchange.hpp"
 
+#include <iomanip>
+
 bool validDate(std::string date)
 {
     if (date.length() != 10 || date[4] != '-' || date[7] != '-')
@@ -114,14 +116,15 @@ void    execute(std::string path)
             if (lineIsValid(line) == true)
             {
                 std::string lineDate = line.substr(0, 10);
-                int       lineValue = atoi((line.substr(13, line.length() - 13)).c_str());
+                float       lineValue = atof((line.substr(13, line.length() - 13)).c_str());
                 std::cout << lineDate;
                 std::cout << " => ";
                 std::cout << lineValue;
                 std::cout << " = ";
                 // print value * exchange rate
                 float convertedValue = btc.convertValue(lineDate, lineValue);
-                std::cout << convertedValue << std::endl;
+                //std::cout << convertedValue << std::fixed << std::setprecision(2) << std::endl;
+                std::cout << convertedValue << std::fixed << std::setprecision(2) << std::endl;
             }
         }
         fs.close();
