@@ -21,7 +21,7 @@
 void	ReversePolishNotation(std::string expression)
 {
 	RPN	notation(expression);
-	notation.printExpression();
+	//notation.printExpression();
 	std::cout << notation << std::endl;
 }
 

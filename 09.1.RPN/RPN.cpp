@@ -13,6 +13,7 @@
 #include "RPN.hpp"
 
 #include <sstream>
+#include <stdlib.h>
 
 RPN::RPN()
 {
@@ -25,16 +26,37 @@ RPN::RPN()
 RPN::RPN(std::string expression)
 {
 	std::stringstream	ss(expression);
-	
+	std::string token;
+	int	nbr;
+	int	nCount = 0;
+	//int i = 0;
+
+	while (ss >> token)
+	{
+		nbr = atoi(token.c_str());
+		if (nbr != 0)
+		{
+			nCount++;
+			this->numbers.push_back(nbr);
+		}
+		else if (isOperator(token) == true)
+		{
+			if (nCount < 2)
+				throw(invalidExpression());
+			this->operators.push_back(token[0]);
+		}
+	}
+	if (this->numbers.size() != this->operators.size() + 1)
+		throw(invalidExpression());
 }
 
-RPN::RPN(RPN & const src)
+RPN::RPN(RPN const &src)
 {
 	this->numbers = src.getNbrsList();
 	this->operators = src.getOpsList();
 }
 
-RPN &RPN::operator=(RPN & const src)
+RPN &RPN::operator=(RPN const &src)
 {
 	if (&src != this)
 	{
@@ -48,6 +70,15 @@ RPN::~RPN()
 {
 	this->numbers.clear();
 	this->operators.clear();
+}
+
+bool	RPN::isOperator(std::string opr)
+{
+	if (opr.length() != 1)
+		return false;
+	else if (opr[0] != '-' && opr[0] != '+' && opr[0] != '/' && opr[0] != '*')
+		return false;
+	return true;
 }
 
 std::list<int>	RPN::getNbrsList() const
@@ -124,13 +155,26 @@ int	RPN::calculate()
 	std::list<char>::iterator itOps = operators.begin();
 	std::list<int>::iterator itNumb = numbers.begin();
 	n1 = *itNumb;
-	for (itNumb; itNumb != numbers.end(); itNumb++)
+	while (itNumb != numbers.end())
 	{
+		//std::cout << "n1: " << n1 << std::endl;
+		//std::cout << "*itNumb: " << *itNumb << std::endl;
+		//std::cout << "*itOps: " << *itOps << std::endl;
 		if (itNumb == numbers.begin())
-			break;
+		{
+			itNumb++;
+			continue ;
+		}
 		n1 = makeOperation(n1, *itNumb, *itOps);
 		itOps++;
+		itNumb++;
 	}
+	return n1;
+}
+
+const char* RPN::invalidExpression::what() const throw()
+{
+	return "Error";
 }
 
 std::ostream &operator<<(std::ostream& os, const RPN& obj)

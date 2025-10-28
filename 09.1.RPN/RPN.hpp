@@ -15,6 +15,7 @@
 #include <list>
 #include <iostream>
 #include <ostream>
+#include <exception>
 
 class RPN
 {
@@ -26,11 +27,17 @@ class RPN
 		int	operateSubtraction(int n1, int n2);
 		int	operateDivision(int n1, int n2);
 		int	operateMultiplication(int n1, int n2);
+		bool	isOperator(std::string opr);
+		class invalidExpression : public std::exception
+		{
+			public:
+				const char* what() const throw();
+		};
 	public:
 		RPN();
 		RPN(std::string expression);
-		RPN(RPN & const src);
-		RPN &operator=(RPN & const src);
+		RPN(RPN const & src);
+		RPN &operator=(RPN const &src);
 		~RPN();
 		std::list<int>	getNbrsList() const;
 		std::list<char>	getOpsList() const;
