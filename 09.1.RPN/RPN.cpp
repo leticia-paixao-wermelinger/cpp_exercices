@@ -17,10 +17,9 @@
 
 RPN::RPN()
 {
-	std::list<int> nbr;
+	std::stack<int> nbr;
 	this->numbers = nbr;
-	std::list<char> ops;
-	this->operators = ops;
+	this->result = 0;
 }
 
 RPN::RPN(std::string expression)
@@ -29,48 +28,55 @@ RPN::RPN(std::string expression)
 	std::string token;
 	int	nbr;
 	int	nCount = 0;
-	//int i = 0;
+	int n1, n2;
+
+	this->result = 0;
 
 	while (ss >> token)
 	{
+		//std::cout << "Token: " << token << std::endl;
 		nbr = atoi(token.c_str());
 		if (nbr != 0)
 		{
 			nCount++;
-			this->numbers.push_back(nbr);
+			this->numbers.push(nbr);
 		}
 		else if (isOperator(token) == true)
 		{
 			if (nCount < 2)
 				throw(invalidExpression());
-			this->operators.push_back(token[0]);
+			nCount = nCount - 2;
+			n2 = this->numbers.top();
+			this->numbers.pop();
+			n1 = this->numbers.top();
+			this->numbers.pop();
+			nbr = this->makeOperation(n1, n2, token[0]);
+			this->numbers.push(nbr);
+			nCount++;
 		}
+		//printStack();
 	}
-	if (this->numbers.size() != this->operators.size() + 1)
-		throw(invalidExpression());
+	this->result = this->numbers.top();
 }
 
 RPN::RPN(RPN const &src)
 {
-	this->numbers = src.getNbrsList();
-	this->operators = src.getOpsList();
+	this->numbers = src.getNbrsStack();
+	this->result = src.getResult();
 }
 
 RPN &RPN::operator=(RPN const &src)
 {
 	if (&src != this)
 	{
-		this->numbers = src.getNbrsList();
-		this->operators = src.getOpsList();
+		this->numbers = src.getNbrsStack();
+		this->result = src.getResult();
 	}
 	return *this;
 }
 
 RPN::~RPN()
-{
-	this->numbers.clear();
-	this->operators.clear();
-}
+{}
 
 bool	RPN::isOperator(std::string opr)
 {
@@ -81,29 +87,14 @@ bool	RPN::isOperator(std::string opr)
 	return true;
 }
 
-std::list<int>	RPN::getNbrsList() const
+std::stack<int>	RPN::getNbrsStack() const
 {
 	return this->numbers;
 }
 
-std::list<char>	RPN::getOpsList() const
+int	RPN::getResult() const
 {
-	return this->operators;
-}
-
-void	RPN::printExpression()
-{
-	std::list<char>::iterator itOps = operators.begin();
-	for (std::list<int>::iterator itNumb = numbers.begin(); itNumb != numbers.end(); itNumb++)
-	{
-		std::cout << *itNumb << " ";
-		if (itNumb != numbers.begin())
-		{
-			std::cout << *itOps << " ";
-			itOps++;
-		}
-	}
-	std::cout << std::endl;
+	return this->result;
 }
 
 int	RPN::makeOperation(int n1, int n2, char opr)
@@ -143,33 +134,16 @@ int	RPN::operateMultiplication(int n1, int n2)
 	return n1 * n2;
 }
 
-void	RPN::addOperation(char newOperator, int newNumber)
+void	RPN::printStack() const
 {
-	this->numbers.push_back(newNumber);
-	this->operators.push_back(newOperator);
-}
-
-int	RPN::calculate()
-{
-	int	n1;
-	std::list<char>::iterator itOps = operators.begin();
-	std::list<int>::iterator itNumb = numbers.begin();
-	n1 = *itNumb;
-	while (itNumb != numbers.end())
+	std::stack<int> copy = this->numbers;
+	std::cout << "Stack: ";
+	while (!copy.empty())
 	{
-		//std::cout << "n1: " << n1 << std::endl;
-		//std::cout << "*itNumb: " << *itNumb << std::endl;
-		//std::cout << "*itOps: " << *itOps << std::endl;
-		if (itNumb == numbers.begin())
-		{
-			itNumb++;
-			continue ;
-		}
-		n1 = makeOperation(n1, *itNumb, *itOps);
-		itOps++;
-		itNumb++;
+		std::cout << copy.top() << " ";
+		copy.pop();
 	}
-	return n1;
+	std::cout << std::endl;
 }
 
 const char* RPN::invalidExpression::what() const throw()
@@ -179,7 +153,6 @@ const char* RPN::invalidExpression::what() const throw()
 
 std::ostream &operator<<(std::ostream& os, const RPN& obj)
 {
-	//int	ret = const_cast<int*>(&(obj.calculate()));
-	int ret = const_cast<RPN&>(obj).calculate();
+	int ret = const_cast<RPN&>(obj).getResult();
 	return os << ret;
 }

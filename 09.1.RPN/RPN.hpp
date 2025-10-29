@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include <list>
+#include <stack>
 #include <iostream>
 #include <ostream>
 #include <exception>
@@ -20,8 +20,8 @@
 class RPN
 {
 	private:
-		std::list<int>	numbers;
-		std::list<char>	operators;
+		std::stack<int>	numbers;
+		int	result;
 		int	makeOperation(int n1, int n2, char opr);
 		int	operateSum(int n1, int n2);
 		int	operateSubtraction(int n1, int n2);
@@ -39,11 +39,9 @@ class RPN
 		RPN(RPN const & src);
 		RPN &operator=(RPN const &src);
 		~RPN();
-		std::list<int>	getNbrsList() const;
-		std::list<char>	getOpsList() const;
-		void	printExpression();
-		void	addOperation(char newOperator, int newNumber);
-		int	calculate();
+		std::stack<int>	getNbrsStack() const;
+		int	getResult() const;
+		void	printStack() const;
 };
 
 std::ostream &operator<<(std::ostream& os, const RPN& obj);

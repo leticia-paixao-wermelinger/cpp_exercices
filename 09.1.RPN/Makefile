@@ -22,9 +22,9 @@ SRCS = \
 main.cpp \
 RPN.cpp
 
-#NUMBERS = "8 9 * 9 - 9 - 9 - 4 - 1 +"
+NUMBERS = "8 9 * 9 - 9 - 9 - 4 - 1 +"
 #NUMBERS = "7 7 * 7 -"
-NUMBERS = "1 2 * 2 / 2 * 2 4 - +"
+#NUMBERS = "1 2 * 2 / 2 * 2 4 - +"
 #NUMBERS =  "(1 + 1)"
 
 OBJS = ${SRCS:.cpp=.o}

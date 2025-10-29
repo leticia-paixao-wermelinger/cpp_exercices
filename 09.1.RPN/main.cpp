@@ -20,9 +20,16 @@
 
 void	ReversePolishNotation(std::string expression)
 {
-	RPN	notation(expression);
-	//notation.printExpression();
-	std::cout << notation << std::endl;
+	try
+	{
+		RPN	notation(expression);
+		//notation.printExpression();
+		std::cout << notation << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << RED << e.what() << COLOR_END << std::endl;
+	}
 }
 
 int main(int argc, char *argv[])
