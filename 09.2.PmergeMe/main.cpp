@@ -62,7 +62,9 @@ int main(int argc, char *argv[])
 	try
 	{
 		PmergeMe pmergeMe(vec);
+		//std::vector<int> sortedVec = pmergeMe.sortVector(pmergeMe.getVector());
 		std::cout << "After:	";
+		//pmergeMe.printVector(sortedVec);
 		pmergeMe.printVector();
 		pmergeMe.printVecTime();
 	}

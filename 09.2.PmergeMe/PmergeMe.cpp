@@ -21,11 +21,22 @@ PmergeMe::PmergeMe()
 {
 	this->_vector = std::vector<int>();
 	startVector(this->_vector);
+	this->_deque = std::deque<int>();
+	startDeque(this->_deque);
 }
 
 PmergeMe::PmergeMe(std::vector<int> vec)
 {
 	startVector(vec);
+	this->_deque = std::deque<int>();
+	startDeque(this->_deque);
+}
+
+PmergeMe::PmergeMe(std::deque<int> deq)
+{
+	startDeque(deq);
+	this->_vector = std::vector<int>();
+	startVector(this->_vector);
 }
 
 PmergeMe::PmergeMe(const PmergeMe &other)
@@ -38,7 +49,9 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 	if (this != &other)
 	{
 		this->_vector = other.getVector();
-		this->_sortVectime = other._sortVectime;
+		this->_sortVectime = other.getVecTime();
+		this->_deque = other.getDeque();
+		this->_sortDeqtime = other.getDeqTime();
 	}
 	return *this;
 }
@@ -46,7 +59,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 PmergeMe::~PmergeMe()
 {}
 
-/* -------------------- Time Method -------------------- */
+/* -------------------- Time Methods -------------------- */
 
 long int PmergeMe::setTime() const
 {
@@ -55,7 +68,42 @@ long int PmergeMe::setTime() const
 	return (time.tv_sec * 1000000 + time.tv_usec);
 }
 
+long double PmergeMe::getVecTime() const
+{
+	return this->_sortVectime;
+}
+
+long double PmergeMe::getDeqTime() const
+{
+	return this->_sortDeqtime;
+}
+
 /* -------------------- Deque Methods -------------------- */
+
+void	PmergeMe::startDeque(std::deque<int> deq)
+{
+	long double	timeStart = this->setTime();
+	this->_deque = deq;
+	long double	timeEnd = this->setTime();
+	this->_sortDeqtime = timeEnd - timeStart;
+}
+
+std::deque<int> PmergeMe::getDeque() const
+{
+	return this->_deque;
+}
+
+std::deque<int> PmergeMe::sortDeque(std::deque<int> deq)
+{
+	return deq;
+}
+
+std::deque<int> PmergeMe::mergeDeque(std::deque<int> leftDeq, std::deque<int> rightDeq)
+{
+	(void)leftDeq;
+	(void)rightDeq;
+	return std::deque<int>();
+}
 
 /* -------------------- Vector Methods -------------------- */
 
@@ -63,7 +111,8 @@ void	PmergeMe::startVector(std::vector<int> vec)
 {
 	long double	timeStart = this->setTime();
 	//std::cout << "timeStart = " << timeStart << std::endl;
-	this->_vector = vec;
+	//this->_vector = vec;
+	this->_vector = sortVector(vec);
 	//std::cout << "New object created, with vector: ";
 	//this->printVector();
 	long double	timeEnd = this->setTime();

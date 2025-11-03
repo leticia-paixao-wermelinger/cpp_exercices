@@ -20,31 +20,34 @@ class PmergeMe
 {
 	private:
 		std::vector<int> _vector;
-//		std::deque<int> _deque;
+		std::deque<int> _deque;
 		long double _sortVectime;
-//		long int _sortDeqtime;
+		long double _sortDeqtime;
 		void	startVector(std::vector<int> vec);
-//		void	startDeque(std::deque<int> deq);
+		void	startDeque(std::deque<int> deq);
 		long int setTime() const;
-//		void	sortDeque();
 		std::vector<int> mergeVector(std::vector<int> leftVec, std::vector<int> rightVec);
-		void	printVector(std::vector<int> vec) const;
-	class noDuplicatesAlllowedException : public std::exception
-	{
-		public:
+		std::deque<int>	 mergeDeque(std::deque<int> leftDeq, std::deque<int> rightDeq);
+		class noDuplicatesAlllowedException : public std::exception
+		{
+			public:
 			const char* what() const throw();
-	};
+		};
 	public:
 		PmergeMe();
 		PmergeMe(std::vector<int> vec);
-		//		PmergeMe(std::deque<int> deq);
+		PmergeMe(std::deque<int> deq);
 		PmergeMe(const PmergeMe &other);
 		PmergeMe &operator=(const PmergeMe &other);
 		~PmergeMe();
 		std::vector<int> getVector() const;
-		//		std::deque<int> getDeque() const;
+		std::deque<int> getDeque() const;
 		void	printVector() const;
 		std::vector<int>	sortVector(std::vector<int> vec);
+		std::deque<int>		sortDeque(std::deque<int> deq);
+		void	printVector(std::vector<int> vec) const;
 		void	printVecTime() const;
-		//		void	printDeqTime() const;
+		void	printDeqTime() const;
+		long double	getVecTime() const;
+		long double	getDeqTime() const;
 };
