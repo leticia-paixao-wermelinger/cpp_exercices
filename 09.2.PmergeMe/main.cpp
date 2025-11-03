@@ -57,10 +57,12 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	std::vector<int> vec;
+	std::cout << "Before:	";
 	vec = createVector(argc, argv, vec);
 	try
 	{
 		PmergeMe pmergeMe(vec);
+		std::cout << "After:	";
 		pmergeMe.printVector();
 		pmergeMe.printVecTime();
 	}

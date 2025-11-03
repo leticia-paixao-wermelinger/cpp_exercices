@@ -15,30 +15,22 @@
 #include <sys/time.h>
 #include <iomanip>
 
+/* -------------------- Orthodox Canonical Methods -------------------- */
+
 PmergeMe::PmergeMe()
 {
-	long double	timeStart = this->setTime();
 	this->_vector = std::vector<int>();
-	this->_vector = this->sortVector(this->_vector);
-	long double	timeEnd = this->setTime();
-	this->_sortVectime = timeEnd - timeStart;
+	startVector(this->_vector);
 }
 
 PmergeMe::PmergeMe(std::vector<int> vec)
 {
-	long double	timeStart = this->setTime();
-	//std::cout << "timeStart = " << timeStart << std::endl;
-	this->_vector = vec;
-	//std::cout << "New object created, with vector: ";
-	//this->printVector();
-	long double	timeEnd = this->setTime();
-	//std::cout << "timeEnd = " << timeEnd << std::endl;
-	this->_sortVectime = timeEnd - timeStart;
+	startVector(vec);
 }
 
 PmergeMe::PmergeMe(const PmergeMe &other)
 {
-	this->_vector = other.getVector();
+	*this = other;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &other)
@@ -54,16 +46,34 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 PmergeMe::~PmergeMe()
 {}
 
-std::vector<int> PmergeMe::getVector() const
-{
-	return this->_vector;
-}
+/* -------------------- Time Method -------------------- */
 
 long int PmergeMe::setTime() const
 {
 	struct timeval time;
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000000 + time.tv_usec);
+}
+
+/* -------------------- Deque Methods -------------------- */
+
+/* -------------------- Vector Methods -------------------- */
+
+void	PmergeMe::startVector(std::vector<int> vec)
+{
+	long double	timeStart = this->setTime();
+	//std::cout << "timeStart = " << timeStart << std::endl;
+	this->_vector = vec;
+	//std::cout << "New object created, with vector: ";
+	//this->printVector();
+	long double	timeEnd = this->setTime();
+	//std::cout << "timeEnd = " << timeEnd << std::endl;
+	this->_sortVectime = timeEnd - timeStart;
+}
+
+std::vector<int> PmergeMe::getVector() const
+{
+	return this->_vector;
 }
 
 std::vector<int>	PmergeMe::sortVector(std::vector<int> vec)
@@ -112,6 +122,8 @@ std::vector<int> PmergeMe::mergeVector(std::vector<int> leftVec, std::vector<int
 	return sortedVec;
 }
 
+/* -------------------- Vector Prints -------------------- */
+
 void	PmergeMe::printVector() const
 {
 	for (size_t i = 0; i < this->_vector.size(); i++)
@@ -137,8 +149,9 @@ void	PmergeMe::printVector(std::vector<int> vec) const
 void	PmergeMe::printVecTime() const
 {
 	std::cout << "Time to process a range of " << this->_vector.size() << " elements with std::vector : " << this->_sortVectime << " us" << std::endl;
-	//std::cout << "Time to process a range of " << this->_vector.size() << " elements with std::vector : " << std::fixed << std::setprecision(10) << this->_sortVectime << " us" << std::endl;
 }
+
+/* -------------------- Exceptions -------------------- */
 
 const char* PmergeMe::noDuplicatesAlllowedException::what() const throw()
 {

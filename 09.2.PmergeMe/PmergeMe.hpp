@@ -23,6 +23,8 @@ class PmergeMe
 //		std::deque<int> _deque;
 		long double _sortVectime;
 //		long int _sortDeqtime;
+		void	startVector(std::vector<int> vec);
+//		void	startDeque(std::deque<int> deq);
 		long int setTime() const;
 //		void	sortDeque();
 		std::vector<int> mergeVector(std::vector<int> leftVec, std::vector<int> rightVec);
