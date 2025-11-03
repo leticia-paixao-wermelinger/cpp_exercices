@@ -21,9 +21,9 @@ class PmergeMe
 	private:
 		std::vector<int> _vector;
 //		std::deque<int> _deque;
-//		void	printTimeStart() const;
-//		void	printTimeEnd() const;
-//		double getTime() const;
+		long double _sortVectime;
+//		long int _sortDeqtime;
+		long int setTime() const;
 //		void	sortDeque();
 		std::vector<int> mergeVector(std::vector<int> leftVec, std::vector<int> rightVec);
 		void	printVector(std::vector<int> vec) const;
@@ -43,4 +43,6 @@ class PmergeMe
 		//		std::deque<int> getDeque() const;
 		void	printVector() const;
 		std::vector<int>	sortVector(std::vector<int> vec);
+		void	printVecTime() const;
+		//		void	printDeqTime() const;
 };

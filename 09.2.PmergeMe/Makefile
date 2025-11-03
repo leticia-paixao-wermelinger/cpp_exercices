@@ -22,11 +22,11 @@ SRCS = \
 main.cpp \
 PmergeMe.cpp
 
-#NUMBERS = 3 5 9 7 4
+NUMBERS = 3 5 9 7 4
 #NUMBERS = `shuf -i 1-100000 -n 3000 | tr "\n" " "`
 #NUMBERS = "-1" "2" # Núm negativo
 #NUMBERS = 948951 846 15 8 42 23 4 16 42 108 7 3 5 9 # Duplicata
-NUMBERS = 0
+#NUMBERS = 0
 
 OBJS = ${SRCS:.cpp=.o}
 

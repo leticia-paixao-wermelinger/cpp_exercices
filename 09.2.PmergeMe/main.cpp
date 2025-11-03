@@ -42,7 +42,9 @@ std::vector<int> createVector(int argc, char *str[], std::vector<int> &vec)
 			errorHandler("Error: invalid entry");
 		else if (num == 0 && strcmp(token, "0") == 0)
 			errorHandler("Error: zero is not allowed");
+		std::cerr << num << " ";
 	}
+	std::cerr << std::endl;
 	return vec;
 }
 
@@ -60,6 +62,7 @@ int main(int argc, char *argv[])
 	{
 		PmergeMe pmergeMe(vec);
 		pmergeMe.printVector();
+		pmergeMe.printVecTime();
 	}
 	catch(const std::exception& e)
 	{

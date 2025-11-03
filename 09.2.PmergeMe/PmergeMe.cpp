@@ -12,18 +12,28 @@
 
 #include "PmergeMe.hpp"
 #include <iostream>
+#include <sys/time.h>
+#include <iomanip>
 
 PmergeMe::PmergeMe()
 {
+	long double	timeStart = this->setTime();
 	this->_vector = std::vector<int>();
+	this->_vector = this->sortVector(this->_vector);
+	long double	timeEnd = this->setTime();
+	this->_sortVectime = timeEnd - timeStart;
 }
 
 PmergeMe::PmergeMe(std::vector<int> vec)
 {
+	long double	timeStart = this->setTime();
+	//std::cout << "timeStart = " << timeStart << std::endl;
 	this->_vector = vec;
 	//std::cout << "New object created, with vector: ";
 	//this->printVector();
-	this->_vector = this->sortVector(this->_vector);
+	long double	timeEnd = this->setTime();
+	//std::cout << "timeEnd = " << timeEnd << std::endl;
+	this->_sortVectime = timeEnd - timeStart;
 }
 
 PmergeMe::PmergeMe(const PmergeMe &other)
@@ -36,6 +46,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 	if (this != &other)
 	{
 		this->_vector = other.getVector();
+		this->_sortVectime = other._sortVectime;
 	}
 	return *this;
 }
@@ -47,16 +58,14 @@ std::vector<int> PmergeMe::getVector() const
 {
 	return this->_vector;
 }
-/*
-void	PmergeMe::printTimeStart() const
-{}
 
-void	PmergeMe::printTimeEnd() const
-{}
+long int PmergeMe::setTime() const
+{
+	struct timeval time;
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000000 + time.tv_usec);
+}
 
-double PmergeMe::getTime() const
-{}
-*/
 std::vector<int>	PmergeMe::sortVector(std::vector<int> vec)
 {
 	std::vector<int> subVec1;
@@ -123,6 +132,12 @@ void	PmergeMe::printVector(std::vector<int> vec) const
 			std::cout << " ";
 	}
 	std::cout << std::endl;
+}
+
+void	PmergeMe::printVecTime() const
+{
+	std::cout << "Time to process a range of " << this->_vector.size() << " elements with std::vector : " << this->_sortVectime << " us" << std::endl;
+	//std::cout << "Time to process a range of " << this->_vector.size() << " elements with std::vector : " << std::fixed << std::setprecision(10) << this->_sortVectime << " us" << std::endl;
 }
 
 const char* PmergeMe::noDuplicatesAlllowedException::what() const throw()
