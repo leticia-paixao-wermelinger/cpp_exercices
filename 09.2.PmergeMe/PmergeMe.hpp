@@ -47,6 +47,8 @@ class PmergeMe
 		std::deque<int>		sortDeque(std::deque<int> deq);
 		void	printVector(std::vector<int> vec) const;
 		void	printVecTime() const;
+		void	printDeque() const;
+		void	printDeque(std::deque<int> deq) const;
 		void	printDeqTime() const;
 		long double	getVecTime() const;
 		long double	getDeqTime() const;

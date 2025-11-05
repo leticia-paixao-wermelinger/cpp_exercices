@@ -83,7 +83,7 @@ long double PmergeMe::getDeqTime() const
 void	PmergeMe::startDeque(std::deque<int> deq)
 {
 	long double	timeStart = this->setTime();
-	this->_deque = deq;
+	this->_deque = sortDeque(deq);
 	long double	timeEnd = this->setTime();
 	this->_sortDeqtime = timeEnd - timeStart;
 }
@@ -95,14 +95,42 @@ std::deque<int> PmergeMe::getDeque() const
 
 std::deque<int> PmergeMe::sortDeque(std::deque<int> deq)
 {
-	return deq;
+	std::deque<int> subDeq1;
+	std::deque<int> subDeq2;
+
+	if (deq.size() <= 1)
+		return deq;
+	size_t	mid = deq.size() / 2;
+
+	subDeq1.insert(subDeq1.end(), deq.begin(), deq.begin() + mid);
+	subDeq2.insert(subDeq2.end(), deq.begin() + mid, deq.end());
+	subDeq1 = this->sortDeque(subDeq1);
+	subDeq2 = this->sortDeque(subDeq2);
+	return mergeDeque(subDeq1, subDeq2);
 }
 
 std::deque<int> PmergeMe::mergeDeque(std::deque<int> leftDeq, std::deque<int> rightDeq)
 {
-	(void)leftDeq;
-	(void)rightDeq;
-	return std::deque<int>();
+	std::deque<int>	sortedDeq;
+	size_t	i = 0, j = 0;
+	while (i < leftDeq.size() && j < rightDeq.size())
+	{
+		if (leftDeq[i] == rightDeq[j])
+			throw noDuplicatesAlllowedException();
+		else if (leftDeq[i] < rightDeq[j])
+		{
+			sortedDeq.push_back(leftDeq[i]);
+			i++;
+		}
+		else
+		{
+			sortedDeq.push_back(rightDeq[j]);
+			j++;
+		}
+	}
+	sortedDeq.insert(sortedDeq.end(), leftDeq.begin() + i, leftDeq.end());
+	sortedDeq.insert(sortedDeq.end(), rightDeq.begin() + j, rightDeq.end());
+	return sortedDeq;
 }
 
 /* -------------------- Vector Methods -------------------- */
@@ -110,13 +138,8 @@ std::deque<int> PmergeMe::mergeDeque(std::deque<int> leftDeq, std::deque<int> ri
 void	PmergeMe::startVector(std::vector<int> vec)
 {
 	long double	timeStart = this->setTime();
-	//std::cout << "timeStart = " << timeStart << std::endl;
-	//this->_vector = vec;
 	this->_vector = sortVector(vec);
-	//std::cout << "New object created, with vector: ";
-	//this->printVector();
 	long double	timeEnd = this->setTime();
-	//std::cout << "timeEnd = " << timeEnd << std::endl;
 	this->_sortVectime = timeEnd - timeStart;
 }
 
@@ -198,6 +221,35 @@ void	PmergeMe::printVector(std::vector<int> vec) const
 void	PmergeMe::printVecTime() const
 {
 	std::cout << "Time to process a range of " << this->_vector.size() << " elements with std::vector : " << this->_sortVectime << " us" << std::endl;
+}
+
+/* -------------------- Deque Prints -------------------- */
+
+void	PmergeMe::printDeque() const
+{
+	for (size_t i = 0; i < this->_deque.size(); i++)
+	{
+		std::cout << this->_deque[i];
+		if (i < this->_deque.size() - 1)
+			std::cout << " ";
+	}
+	std::cout << std::endl;
+}
+
+void	PmergeMe::printDeque(std::deque<int> deq) const
+{
+	for (size_t i = 0; i < deq.size(); i++)
+	{
+		std::cout << deq[i];
+		if (i < deq.size() - 1)
+			std::cout << " ";
+	}
+	std::cout << std::endl;
+}
+
+void	PmergeMe::printDeqTime() const
+{
+	std::cout << "Time to process a range of " << this->_deque.size() << " elements with std::deque : " << this->_sortDeqtime << " us" << std::endl;
 }
 
 /* -------------------- Exceptions -------------------- */
