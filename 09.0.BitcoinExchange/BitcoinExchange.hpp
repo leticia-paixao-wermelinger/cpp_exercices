@@ -19,6 +19,10 @@
 #include <cstring>
 #include <cstdlib> // atoi
 
+#define RED "\033[0;31m"
+#define GREEN "\033[0;32m"
+#define COLOR_END "\033[0m"
+
 class BitcoinExchange
 {
     private:

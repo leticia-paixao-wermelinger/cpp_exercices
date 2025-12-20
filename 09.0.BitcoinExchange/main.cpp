@@ -81,7 +81,9 @@ bool validValue(std::string value)
 
 bool lineIsValid(std::string line)
 {
-    if (line.find(" | ") == std::string::npos) // std::string::find = member function of std::string
+    if (line.size() == 0)
+        return false;
+    else if (line.find(" | ") == std::string::npos) // std::string::find = member function of std::string
     {
         std::cerr << RED << "Error: bad input => " << line << COLOR_END << std::endl;
         return false;
