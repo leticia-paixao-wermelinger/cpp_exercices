@@ -28,6 +28,7 @@ class RPN
 		int	operateDivision(int n1, int n2);
 		int	operateMultiplication(int n1, int n2);
 		bool	isOperator(std::string opr);
+		bool	isNumber(std::string token);
 		class invalidExpression : public std::exception
 		{
 			public:
