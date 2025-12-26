@@ -36,8 +36,8 @@ int main(int argc, char *argv[])
 {
 	if (argc != 2)
 	{
-		std::cerr << RED << "Error: could not open file." << COLOR_END << std::endl;
-        std::cerr << "Usage: ./btc <file.txt>" << std::endl;
+		std::cerr << RED << "Error: unable to find expression." << COLOR_END << std::endl;
+        std::cerr << "Usage: ./RPN \"<expression>\"" << std::endl;
 		return 0;
 	}
 	ReversePolishNotation(argv[1]);

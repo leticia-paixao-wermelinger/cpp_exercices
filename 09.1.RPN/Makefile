@@ -22,10 +22,17 @@ SRCS = \
 main.cpp \
 RPN.cpp
 
-NUMBERS = "8 9 * 9 - 9 - 9 - 4 - 1 +"
-#NUMBERS = "7 7 * 7 -"
-#NUMBERS = "1 2 * 2 / 2 * 2 4 - +"
-#NUMBERS =  "(1 + 1)"
+NUMBERS = "8 9 * 9 - 9 - 9 - 4 - 1 +" # 42
+#NUMBERS = "7 7 * 7 -" # 42
+#NUMBERS = "1 2 * 2 / 2 * 2 4 - +" # 0
+#NUMBERS =  "(1 + 1)" # Error
+#NUMBERS = "5 1 2 + 4 * + 3 - 8" # Error
+#NUMBERS = "3 4 + 2 * 0 /" # Error
+#NUMBERS = "0 4 / 2 * 7 /" # 0
+#NUMBERS = "0 0 + 0 - 7 + 1 / 3 -" # 4
+#NUMBERS = "0" # Error
+#NUMBERS = "1 2" # Error
+#NUMBERS = "" # Error
 
 OBJS = ${SRCS:.cpp=.o}
 

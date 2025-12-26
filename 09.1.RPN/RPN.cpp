@@ -15,6 +15,8 @@
 #include <sstream>
 #include <stdlib.h>
 
+// --------------- Orthodox canonical form ---------------
+
 RPN::RPN()
 {
 	std::stack<int> nbr;
@@ -32,11 +34,12 @@ RPN::RPN(std::string expression)
 
 	this->result = 0;
 
+	if (expression.size() < 3)
+		throw(invalidExpression());
 	while (ss >> token)
 	{
-		//std::cout << "Token: " << token << std::endl;
 		nbr = atoi(token.c_str());
-		if (nbr != 0)
+		if (isNumber(token) == true)
 		{
 			nCount++;
 			this->numbers.push(nbr);
@@ -54,8 +57,10 @@ RPN::RPN(std::string expression)
 			this->numbers.push(nbr);
 			nCount++;
 		}
-		//printStack();
 	}
+	if (nCount != 1)
+
+		throw(invalidExpression());
 	this->result = this->numbers.top();
 }
 
@@ -78,6 +83,8 @@ RPN &RPN::operator=(RPN const &src)
 RPN::~RPN()
 {}
 
+// --------------- Validation ---------------
+
 bool	RPN::isOperator(std::string opr)
 {
 	if (opr.length() != 1)
@@ -86,6 +93,15 @@ bool	RPN::isOperator(std::string opr)
 		return false;
 	return true;
 }
+
+bool	RPN::isNumber(std::string token)
+{
+	if (token[0] < '0' || token[0] > '9')
+		return false;
+	return true;
+}
+
+// --------------- Getters / Setters ---------------
 
 std::stack<int>	RPN::getNbrsStack() const
 {
@@ -96,6 +112,8 @@ int	RPN::getResult() const
 {
 	return this->result;
 }
+
+// --------------- Operations ---------------
 
 int	RPN::makeOperation(int n1, int n2, char opr)
 {
@@ -126,6 +144,10 @@ int	RPN::operateSubtraction(int n1, int n2)
 
 int	RPN::operateDivision(int n1, int n2)
 {
+	if (n1 == 0)
+		return 0;
+	else if (n2 == 0)
+		throw(invalidExpression());
 	return n1 / n2;
 }
 
@@ -133,6 +155,8 @@ int	RPN::operateMultiplication(int n1, int n2)
 {
 	return n1 * n2;
 }
+
+// --------------- Debug / Print ---------------
 
 void	RPN::printStack() const
 {
@@ -146,10 +170,14 @@ void	RPN::printStack() const
 	std::cout << std::endl;
 }
 
+// --------------- Exception message ---------------
+
 const char* RPN::invalidExpression::what() const throw()
 {
 	return "Error";
 }
+
+// --------------- Overload operator << ---------------
 
 std::ostream &operator<<(std::ostream& os, const RPN& obj)
 {
