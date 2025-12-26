@@ -60,12 +60,8 @@ bool validValue(std::string value)
         std::cerr << RED << "Error: not a number." << COLOR_END << std::endl;
         return false;
     }
-    if (value.length() > 4)
-    {
-        std::cerr << RED << "Error: too large a number." << COLOR_END << std::endl;
-        return false;
-    }
-    int val = atoi(value.c_str());
+    long int val = atol(value.c_str());
+    std::cout << "Valor = " << val << std::endl;
     if (val < 0)
     {
         std::cerr << RED << "Error: not a positive number." << COLOR_END << std::endl;
@@ -76,6 +72,8 @@ bool validValue(std::string value)
         std::cerr << RED << "Error: too large a number." << COLOR_END << std::endl;
         return false;
     }
+    else if (val == 0 && value != "0")
+        return false;
     return true;
 }
 
